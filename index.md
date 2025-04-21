@@ -96,8 +96,13 @@
 ⚫ H. Li, Y. Xiong and Y. Chen, "Simulation of Complex Meteorological Target Echoes for Airborne Dual-polarization Weather Radar Based …"（IEEE Trans. On GRS（中科院一区 Top） 已出版）
 
 
-⚫ H. Li, Y. Xiong , The Application of Fast Algorithms for Invariant Imbedding T-Matrices in Simulating Precipitation Echoes with Airborne Dual-Polarization Weather Radars（IEEE Trans. On RS，初审中）
+⚫ H. Li, Y. Xiong , The Application of Fast Algorithms for Invariant Imbedding T-Matrices in Simulating Precipitation Echoes with Airborne Dual-Polarization Weather Radars（IEEE Trans. On RS，已出版）
 
+⚫ Y. Xiong ,  AIITC: Adaptive Invariant Imbedding T-Matrix Convergence Algorithm Based on Maximum Differences in Extinction and Scattering Cross-Sections（IEEE Trans. On AP，一审中）
+
+⚫ Y. Xiong ,  Fourier-MLP-Based Implicit Modeling of Continuous Medium Particles for Efficient Scattering Simulation with the IITM Method（EAAI，一审中）
+
+⚫ Y. Xiong, Z. Wu, TransitionMatrices.jl: A High-Efficiency Open-Source Julia Framework for Electromagnetic Scattering and Polarimetric Remote Sensing of Nonspherical Atmospheric Particles（remote sensing of environment，预投）
 
 ⚫ 李海，熊玉，“双连续介质模型与等效介质模型在降水回波仿真中的对比验证”（预投 Remote Sensing）
 
