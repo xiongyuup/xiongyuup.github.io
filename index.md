@@ -15,53 +15,53 @@ layout: default
 ## 🎓 教育背景
 
 - **2025.09 - 至今** 博士在读，电子信息，东南大学  
-- **2022.09 - 2025.07** 硕士研究生，信息与通信工程，中国民航大学  
-- **2018.09 - 2022.06** 本科，电子信息工程，天津城建大学  
+- **2022.09 - 2025.07** 硕士研究生，信息与通信工程，中国民航大学（绩点：3.84/4，年级1/44）  
+- **2018.09 - 2022.06** 本科，电子信息工程，天津城建大学（绩点：1/76）  
 
 ---
 
 ## 🧪 科研经历
 
-### 📌 2022.09 - 2023.06 机载气象雷达目标识别技术研究（工信部项目）
+### 📌 2022.09 - 2023.06 机载气象雷达 xx 和 xxxx 识别技术研究（工信部）
 
-分析气象目标的散射特性，仿真飞机巡航阶段飞行前方冰雹、雨、雪等目标回波数据，利用模糊逻辑等算法进行降水粒子分类和检测，实现航路危险气象的预测和规避。
+分析气象目标的散射特性特征，仿真飞机巡航阶段飞行前方冰雹、雨、雪等气象目标的回波数据，利用模糊逻辑等算法对不同类型降水粒子进行分类和检测，实现航路危险气象的预测和规避。
 
-- 分析并实现气象目标的散射特性计算，利用 WRF 实现气象事件预报模拟仿真；
-- 增加仿真波形，包括线性调频（Chirp）、FMCW、相位编码（CODE）；
-- 研究机载气象雷达原理，构建目标回波仿真系统；
-- 搭建极化雷达回波仿真验证系统和降水分类平台。
+- 分析气象目标的散射特性特征，利用WRF实现气象事件预报模拟仿真；
+- 增加了工程上实际使用的仿真波形，包括线性调频（Chirp）、FMCW、相位编码（CODE）；
+- 研究机载气象雷达原理，构建了机载气象目标回波仿真系统；
+- 搭建了极化雷达回波仿真验证系统和降水粒子分类平台。
 
-### 📌 2022.09 - 至今 与西电合作：降雨电磁散射特性建模与模拟
+### 📌 2022.09 - 2023.10 与西电合作：降雨电磁散射特性建模与模拟
 
-- 针对雨滴、雪、冰雹等粒子的尺寸、形状、取向分布建模；
-- 使用不变嵌入T矩阵方法（IITM）计算散射矩阵，提升大粒子计算精度与效率；
-- 构建高性能Julia工具包 TransitionMatrices.jl（已开源）。
+- 研究不同粒子的尺寸、形状、取向分布对散射特性的影响；
+- 使用不变嵌入T矩阵方法（IITM）模拟实际雷达回波；
+- 开发并开源 TransitionMatrices.jl 高性能建模工具包。
 
-### 📌 2023.03 - 至今 IITM加速与结构预测建模（与AI方向交叉）
+### 📌 2023.03 - 至今 基于AI的双连续介质结构建模与雷达亮温预测研究
 
-- 提出基于Fourier特征嵌入的MLP模型对非球形粒子介质分布建模；
-- 利用3D U-Net 和 Patch-Based Transformer预测双连续介质结构；
-- 实现气象场中雷达亮温仿真与微波反演分析。
+- 提出基于Fourier特征嵌入的MLP结构进行介质结构建模；
+- 构建Patch-Based Transformer 和 3D U-Net网络预测双连续介质结构；
+- 实现亮温预测、粒子类型分类以及双极化雷达变量模拟。
+
+### 📌 2024.06 - 今 少脉冲数下基于CS-GBDT的双极化气象雷达降水粒子分类研究
+
+- 针对雷达多普勒、极化参数特性，研究目标分类方法与不确定性评估；
+- 提出少脉冲数条件下的粒子分类新方法，提升弱目标识别能力；
+- 构建Cholesky回波生成与稀疏域恢复算法，显著增强仿真真实性与鲁棒性。
 
 ---
 
 ## 🏆 科研成果（按时间排序）
 
-- 📄 **IEEE Transactions on Geoscience and Remote Sensing**：  
-  *Simulation of Complex Meteorological Target Echoes for Airborne Dual-Polarization Weather Radar Based on IITM*, 2024，已出版
+- 📄 H. Li, Y. Xiong & J. Chen, *Simulation of Complex Meteorological Target Echoes for Airborne Dual-Polarization Weather Radar Based on IITM*, **IEEE Trans. On GRS**, 2024（中科院一区Top）✅
 
-- 📄 **IEEE Transactions on Radar Systems**：  
-  *Fast Algorithms for Invariant Imbedding T-Matrix Method for Electromagnetic Scattering Simulation*, 2024，已出版
+- 📄 H. Li, Y. Xiong, *The Application of Fast Algorithms for Invariant Imbedding T-Matrices in Simulating Precipitation Echoes with Airborne Dual-Polarization Weather Radars*, **IEEE Trans. On RS**, 2024 ✅
 
-- 📝 **IEEE Transactions on Antennas and Propagation**：  
-  *AIITC Algorithm for Convergence Judgement in Complex Media Scattering*，一审中
+- 📝 H. Li, Y. Xiong, *Comparison and Validation of the Biocontinuous Medium Approximation Model and the Effective Medium Model in Precipitation Echo Simulation*, **IEEE Trans. On GRS**（审中）
 
-- 📝 **Engineering Applications of Artificial Intelligence**：  
-  *Fourier-MLP-Based Implicit Modeling of Continuous Medium Particles for Efficient Scattering Simulation with IITM*，一审中
+- 📝 H. Li, Z. Zhang, Y. Xiong, *The Simulation of Airborne Weather Radar Echoes for Inhomogeneous Ice Crystals Based on the Biocontinuous Medium Approximation*, 2025 IEEE International Conference on Radar（EI收录，已录用）✅
 
-- 📝 **EI会议论文**（第一作者参与）：  
-  *Radar Echo Simulation of Complex Hydrometeor Structures under WRF-based Scenarios*, 2023  
-  *Scattering Feature Analysis of Dual-Polarization Radar for Hydrometeor Classification*, 2023
+- 📝 H. Li, X. An, Z. Li, Y. Xiong, *Introduced Lightning Echo Simulation for the Airborne Weather Radar Based on Dielectric Breakdown Model*, IEEE International Conference on Signal, Information and Data Processing, 2024 ✅
 
 ---
 
