@@ -9,6 +9,7 @@ layout: default
 
 - 🔗 [访问我的CSDN博客](https://your-csdn-link.com)
 - 🔗 [访问我的GitHub主页](https://github.com/xiongyuup)
+- 中国航空学会学生会员，IEEE student member
 
 ---
 
