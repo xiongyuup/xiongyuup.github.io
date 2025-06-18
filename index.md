@@ -38,7 +38,7 @@ layout: default
 - 使用不变嵌入T矩阵方法（IITM）模拟实际雷达回波；
 - 开发并开源 TransitionMatrices.jl 高性能建模工具包。
 
-### 📌 2023.03 - 至今 基于AI的双连续介质结构建模与雷达亮温预测研究
+### 📌 2023.03 - 至今 基于Fourier-MLP的双连续介质结构建模与雷达亮温预测研究
 
 - 提出基于Fourier特征嵌入的MLP结构进行介质结构建模；
 - 构建Patch-Based Transformer 和 3D U-Net网络预测双连续介质结构；
