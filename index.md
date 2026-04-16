@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +25,7 @@
         }
         /* 核心宽度控制，1000px 让文字不会过早换行 */
         .container {
-            max-width: 1000px;
+            max-width: 1500px;
             margin: 0 auto;
             padding: 40px 20px;
         }
