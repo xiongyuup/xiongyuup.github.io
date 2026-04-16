@@ -72,17 +72,18 @@ layout: default
 - 📄 [1] H. Li, **Y. Xiong** and Y. Chen, "Simulation of Complex Meteorological Target Echoes for Airborne Dual-Polarization Weather Radar Based on Invariant Imbedding T-Matrix," in *IEEE Transactions on Geoscience and Remote Sensing*, vol. 62, pp. 1-17, 2024, Art no. 5105817. （已发表，导师一作）✅
 - 📄 [2] H. Li, **Y. Xiong**, B. Zhang and Z. Wu, "Simulation of Precipitation Echoes From Airborne Dual-Polarization Weather Radar Based on a Fast Algorithm for Invariant Imbedding T-Matrix," in *IEEE Transactions on Radar Systems*, vol. 3, pp. 135-154, 2025. （已发表，导师一作）✅
 - 📝 [3] H. Li, B. Zhang, **Y. Xiong** and R. Liang, "Simulation of Airborne Dual-Polarization Weather Radar Echoes from Inhomogeneous Ice-Phase Precipitation Particles Based on Monte Carlo Method," in *IEEE Transactions on Geoscience and Remote Sensing*. （已录用，通信作者，导师一作）
-- 📝 [4] J. Guo, **Y. Xiong**, H. Li, S. Li and X. Ai, "Ground Clutter and Suppressive Interference Mitigation Method Based on SPCJS-PSTAP," . （已录用，通信作者）
+- 📝 [4] J. Guo, **Y. Xiong**, H. Li, S. Li and X. Ai, "Ground Clutter and Suppressive Interference Mitigation Method Based on SPCJS-PSTAP," in [待定]. （已录用，通信作者）
 - 📝 [5] H. Li, B. Zhang, **Y. Xiong**, "The Simulation of Airborne Weather Radar Echoes for Inhomogeneous Ice Crystals Based on the Bicontinuous Medium Approximation," in *2025 IEEE International Geoscience and Remote Sensing Symposium (IGARSS)*. （已录用，导师一作）
 - 📝 [6] H. Li, X. Ai, Z. Liu, **Y. Xiong**, "Intracloud Lightning Echo Simulation for the Airborne Weather Radar Based on Dielectric Breakdown Model," in *IEEE International Conference on Signal, Information and Data Processing 2024*. （已出版，导师一作）
 - 📝 [7] S. Gu, Y. Huang, J. Li, Y. Mao, X. Chen, **Y. Xiong**, Z. Chen and X. Yang, "RFI Mitigation for Spaceborne SAR via Maximizing Dynamic Residual Entropy," in *IEEE Transactions on Image Processing*.
 - 📝 [8] K. Deng, Y. Huang, Z. Chen, L. Zhang, **Y. Xiong** and B. Zhang, "A Hybrid Domain Algorithm for High-Speed High-Squint SAR Imaging with Curved Trajectory via Fifth-Order FNCS Processing," in *IEEE Transactions on Geoscience and Remote Sensing*. （已录用）
 - 📝 [9] **Y. Xiong**, Y. Huang, K. Deng, Y. Mao, J. Li, X. Chen and S. Gu, "MR2S: Integrated RFI Suppression and SAR Imaging via Masked RAW–RC Sparsity," in *IEEE Transactions on Geoscience and Remote Sensing*. （第一作者，导师通信）
+- 📝 [10] **Y. Xiong**, Z. Wu, "TransitionMatrices.jl: An Open-Source IITM-Based Framework for Electromagnetic Scattering Simulation of Nonspherical Atmospheric Particles and Microwave Remote-Sensing Forward Modeling," submitted to *Computer Physics Communications*. （二审中，第一作者，通信作者）
 
 **中文期刊论文**
-- 📝 [10] 李海, 陈禹同, **熊玉**. 机载双极化相控阵气象雷达气象目标回波仿真[J]. *系统工程与电子技术*, 2025, 47(01): 117-125. （已发表，导师一作）
-- 📝 [11] 李海, 张强, 周桉宇, **熊玉**. 卷积神经网络STAP低空风切变风速估计[J]. *电子与信息学报*, 2024, 46(08): 3193-3201. （已发表，导师一作）
-- 📝 [12] 李海, 张富强, **熊玉**. 基于T矩阵的机载双极化气象雷达降雨衰减回波仿真[J]. *火控雷达技术*. （已录用，导师一作）
+- 📝 [11] 李海, 陈禹同, **熊玉**. 机载双极化相控阵气象雷达气象目标回波仿真[J]. *系统工程与电子技术*, 2025, 47(01): 117-125. （已发表，导师一作）
+- 📝 [12] 李海, 张强, 周桉宇, **熊玉**. 卷积神经网络STAP低空风切变风速估计[J]. *电子与信息学报*, 2024, 46(08): 3193-3201. （已发表，导师一作）
+- 📝 [13] 李海, 张富强, **熊玉**. 基于T矩阵的机载双极化气象雷达降雨衰减回波仿真[J]. *火控雷达技术*. （已录用，导师一作）
 
 ---
 
