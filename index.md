@@ -24,10 +24,12 @@
             -webkit-font-smoothing: antialiased;
         }
         /* 核心宽度控制，1000px 让文字不会过早换行 */
+
         .container {
-            max-width: 1500px;
+            width: 90%; /* 直接占据屏幕 90% 的宽度，左右只留极小的边距 */
+            max-width: 1800px; /* 给一个极大的上限，防止在超宽“带鱼屏”上拉得太夸张 */
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 40px 0; /* 上下留 40px，左右由于有 width 控制，设为 0 即可 */
         }
         header {
             text-align: center;
