@@ -1,13 +1,13 @@
+---
 title: "熊玉的个人主页"
 layout: default
 ---
 
 <style>
-  /* 强制调整主内容区域的宽度和边距 */
-  .container, .container-lg, .wrapper, .markdown-body, main {
-    max-width: 1900px !important; /* 你可以把 1100px 调得更大（比如 1200px 或 90%）来加宽网页 */
-    padding-left: 30px !important; /* 缩小左内边距 */
-    padding-right: 30px !important; /* 缩小右内边距 */
+  /* 专门针对 Cayman 主题的网页加宽代码 */
+  .main-content {
+    max-width: 1200px !important; /* 原始宽度大概只有 1000px 左右，你可以把 1200 改得更大 */
+    padding: 2rem 4rem !important; /* 调整内边距，让文字离左右边缘不要太近 */
   }
 </style>
 
