@@ -3,9 +3,9 @@ title: "熊玉的个人主页"
 layout: default
 ---
 
-# 熊玉的个人主页
+# **熊玉**的个人主页
 
-欢迎来到我的主页！**这是xiongyuup的个人主页！！！！！**
+欢迎来到我的主页！**这是 xiongyuup 的个人主页！！！！！**
 
 - 🔗 [访问我的CSDN博客](https://your-csdn-link.com)
 - 🔗 [访问我的GitHub主页](https://github.com/xiongyuup)
@@ -15,7 +15,7 @@ layout: default
 
 ## 🎓 教育背景
 
-- **2025.09 - 至今** 博士在读，电子信息，东南大学  毫米波全国重点实验室
+- **2025.09 - 至今** 博士在读，电子信息，东南大学 毫米波全国重点实验室
 - **2022.09 - 2025.07** 硕士研究生，信息与通信工程，中国民航大学（专业排名：1/44，获国家奖学金）  
 - **2018.09 - 2022.06** 本科，电子信息工程，天津城建大学（绩点：3.84/4，专业排名：1/76，获国家奖学金）  
 
@@ -62,28 +62,27 @@ layout: default
 
 - 完成X波段气象雷达回波仿真，并且根据仿真结果进行灾害性天气检测；
 - 在掌握Linux系统的基础上，负责项目所有环境在麒麟系统上的稳定运行，实现该系统下WRF的运行；
-- 实现基于脉冲协方差矩阵Cholesky的回波仿真方法，完成回波数据中径向速度、谱宽信息的添加；
-
+- 实现基于脉冲协方差矩阵Cholesky的回波仿真方法，完成回波数据中径向速度、谱宽信息的添加。
 
 ---
 
 ## 🏆 科研成果（按时间排序）
 
-- 📄 [1]	H. Li, Y. Xiong and Y. Chen, "Simulation of Complex Meteorological Target Echoes for Airborne Dual-Polarization Weather Radar Based on Invariant Imbedding T -Matrix," in IEEE Transactions on Geoscience and Remote Sensing, vol. 62, pp. 1-17, 2024, Art no. 5105817. （已发表，导师一作）✅
+**英文与国际会议论文**
+- 📄 [1] H. Li, **Y. Xiong** and Y. Chen, "Simulation of Complex Meteorological Target Echoes for Airborne Dual-Polarization Weather Radar Based on Invariant Imbedding T-Matrix," in *IEEE Transactions on Geoscience and Remote Sensing*, vol. 62, pp. 1-17, 2024, Art no. 5105817. （已发表，导师一作）✅
+- 📄 [2] H. Li, **Y. Xiong**, B. Zhang and Z. Wu, "Simulation of Precipitation Echoes From Airborne Dual-Polarization Weather Radar Based on a Fast Algorithm for Invariant Imbedding T-Matrix," in *IEEE Transactions on Radar Systems*, vol. 3, pp. 135-154, 2025. （已发表，导师一作）✅
+- 📝 [3] H. Li, B. Zhang, **Y. Xiong** and R. Liang, "Simulation of Airborne Dual-Polarization Weather Radar Echoes from Inhomogeneous Ice-Phase Precipitation Particles Based on Monte Carlo Method," in *IEEE Transactions on Geoscience and Remote Sensing*. （已录用，通信作者，导师一作）
+- 📝 [4] J. Guo, **Y. Xiong**, H. Li, S. Li and X. Ai, "Ground Clutter and Suppressive Interference Mitigation Method Based on SPCJS-PSTAP," . （已录用，通信作者）
+- 📝 [5] H. Li, B. Zhang, **Y. Xiong**, "The Simulation of Airborne Weather Radar Echoes for Inhomogeneous Ice Crystals Based on the Bicontinuous Medium Approximation," in *2025 IEEE International Geoscience and Remote Sensing Symposium (IGARSS)*. （已录用，导师一作）
+- 📝 [6] H. Li, X. Ai, Z. Liu, **Y. Xiong**, "Intracloud Lightning Echo Simulation for the Airborne Weather Radar Based on Dielectric Breakdown Model," in *IEEE International Conference on Signal, Information and Data Processing 2024*. （已出版，导师一作）
+- 📝 [7] S. Gu, Y. Huang, J. Li, Y. Mao, X. Chen, **Y. Xiong**, Z. Chen and X. Yang, "RFI Mitigation for Spaceborne SAR via Maximizing Dynamic Residual Entropy," in *IEEE Transactions on Image Processing*.
+- 📝 [8] K. Deng, Y. Huang, Z. Chen, L. Zhang, **Y. Xiong** and B. Zhang, "A Hybrid Domain Algorithm for High-Speed High-Squint SAR Imaging with Curved Trajectory via Fifth-Order FNCS Processing," in *IEEE Transactions on Geoscience and Remote Sensing*. （已录用）
+- 📝 [9] **Y. Xiong**, Y. Huang, K. Deng, Y. Mao, J. Li, X. Chen and S. Gu, "MR2S: Integrated RFI Suppression and SAR Imaging via Masked RAW–RC Sparsity," in *IEEE Transactions on Geoscience and Remote Sensing*. （第一作者，导师通信）
 
-- 📄 [2]	H. Li, Y. Xiong, B. Zhang and Z. Wu, "Simulation of Precipitation Echoes From Airborne Dual-Polarization Weather Radar Based on a Fast Algorithm for Invariant Imbedding T-Matrix," in IEEE Transactions on Radar Systems, vol. 3, pp. 135-154, 2025. （已发表，导师一作） ✅
-
-- 📝 [3]	H. Li, B. Zhang, Y. Xiong and R. Liang, "Simulation of Airborne Dual-Polarization Weather Radar Echoes from Inhomogeneous Ice-Phase Precipitation Particles Based on Monte Carlo Method," in IEEE Transactions on Geoscience and Remote Sensing. （一审中，通信作者，导师一作）
-
-- 📝 [4]	李海,陈禹同,熊玉.机载双极化相控阵气象雷达气象目标回波仿真[J].系统工程与电子技术,2025,47(01):117-125. （已发表，导师一作）
-
-- 📝 [5]	李海,张强,周桉宇,熊玉.卷积神经网络STAP低空风切变风速估计[J].电子与信息学报,2024,46(08):3193-3201. （已发表，导师一作）
-
-- 📝 [6]	李海,张富强,熊玉.基于T矩阵的机载双极化气象雷达降雨衰减回波仿真[J].火控雷达技术. （已录用，导师一作）
-
-- 📝 [7]	H. Li, B. Zhang, Y. Xiong , The Simulation of Airborne Weather Radar Echoes for Inhomogeneous Ice Crystals Based on the Bicontinuous Medium Approximation. (2025 IEEE International Geoscience and Remote Sensing Symposium，已录用，导师一作)
-  
-- 📝 [8]	H. Li, X. Ai, Z. Liu, Y. Xiong, Intracloud Lightning Echo Simulation for the Airborne Weather Radar Based on Dielectric Breakdown Model. (IEEE International Conference on Signal, Information and Data Processing 2024，已出版，导师一作)
+**中文期刊论文**
+- 📝 [10] 李海, 陈禹同, **熊玉**. 机载双极化相控阵气象雷达气象目标回波仿真[J]. *系统工程与电子技术*, 2025, 47(01): 117-125. （已发表，导师一作）
+- 📝 [11] 李海, 张强, 周桉宇, **熊玉**. 卷积神经网络STAP低空风切变风速估计[J]. *电子与信息学报*, 2024, 46(08): 3193-3201. （已发表，导师一作）
+- 📝 [12] 李海, 张富强, **熊玉**. 基于T矩阵的机载双极化气象雷达降雨衰减回波仿真[J]. *火控雷达技术*. （已录用，导师一作）
 
 ---
 
@@ -97,4 +96,4 @@ layout: default
 
 ---
 
-> *“这是xiongyuup的个人主页！！！！！”*
+> *“这是 xiongyuup 的个人主页！！！！！”*
