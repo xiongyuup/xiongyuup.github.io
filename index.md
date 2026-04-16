@@ -5,7 +5,7 @@ layout: default
 <style>
   /* 强制调整主内容区域的宽度和边距 */
   .container, .container-lg, .wrapper, .markdown-body, main {
-    max-width: 1100px !important; /* 你可以把 1100px 调得更大（比如 1200px 或 90%）来加宽网页 */
+    max-width: 1900px !important; /* 你可以把 1100px 调得更大（比如 1200px 或 90%）来加宽网页 */
     padding-left: 30px !important; /* 缩小左内边距 */
     padding-right: 30px !important; /* 缩小右内边距 */
   }
