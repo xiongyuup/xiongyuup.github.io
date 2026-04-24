@@ -19,6 +19,13 @@
             box-sizing: border-box;
         }
 
+        html,
+        body {
+            width: 100%;
+            max-width: none;
+            overflow-x: hidden;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
@@ -30,23 +37,25 @@
         }
 
         .container {
-            width: 98%;
-            max-width: 1900px;
-            margin: 0 auto;
-            padding: 28px 8px;
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 24px 10px;
         }
 
         header {
             text-align: center;
-            padding-bottom: 28px;
+            padding: 8px 0 24px;
             border-bottom: 2px solid var(--border-color);
-            margin-bottom: 34px;
+            margin-bottom: 30px;
         }
 
         h1 {
             font-size: 2.55em;
             margin: 0 0 10px;
             color: #1a202c;
+            text-transform: none;
+            letter-spacing: 0;
         }
 
         .subtitle {
@@ -125,7 +134,7 @@
 
         .project-card {
             background: var(--card-bg);
-            padding: 18px 20px;
+            padding: 16px 16px;
             border-radius: 10px;
             border: 1px solid var(--border-color);
             margin-bottom: 18px;
@@ -175,8 +184,8 @@
 
         @media (max-width: 768px) {
             .container {
-                width: 96%;
-                padding: 22px 4px;
+                width: 100%;
+                padding: 18px 8px;
             }
 
             .language-toggle {
@@ -338,9 +347,9 @@
 
     <div id="zh" class="lang-block">
         <header>
-            <h1>熊玉</h1>
+            <h1>Yu Xiong</h1>
             <div class="subtitle">
-                中国航空学会学生会员 | 中国电子学会学生会员 | IEEE Student Member<br>
+                熊玉 | 中国航空学会学生会员 | 中国电子学会学生会员 | IEEE Student Member<br>
                 <strong>这是 xiongyuup 的个人主页！</strong>
             </div>
             <div class="social-links">
@@ -485,7 +494,6 @@
         toggleButton.textContent = isChinese ? 'English' : '中文';
         document.documentElement.lang = isChinese ? 'zh-CN' : 'en';
         document.title = isChinese ? '熊玉 | 个人主页' : 'Yu Xiong | Personal Homepage';
-        localStorage.setItem('homepage-language', lang);
     }
 
     toggleButton.addEventListener('click', () => {
@@ -493,7 +501,8 @@
         setLanguage(currentLang === 'en' ? 'zh' : 'en');
     });
 
-    setLanguage(localStorage.getItem('homepage-language') || 'en');
+    // Default language is always English. Click the button to switch to Chinese on the current page.
+    setLanguage('en');
 </script>
 </body>
 </html>
