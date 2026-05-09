@@ -38,7 +38,7 @@
         /* 调整了页边距和最大宽度，让整体显示更宽，避免文字过早换行 */
         .container {
             width: 100%;
-            max-width: 1100px;
+            max-width: 1800px;
             margin: 0 auto;
             padding: 30px 40px;
         }
