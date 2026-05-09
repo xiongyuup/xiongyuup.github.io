@@ -35,12 +35,12 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* 调整了页边距和最大宽度，让整体显示更宽，避免文字过早换行 */
+        /* 大幅放宽最大宽度限制，让内容充分展开 */
         .container {
             width: 100%;
-            max-width: 1800px;
+            max-width: 1600px; /* 从 1100px 扩大到 1600px，也可按需改为 90% */
             margin: 0 auto;
-            padding: 30px 40px;
+            padding: 30px 3%; /* 减小左右内边距 */
         }
 
         header {
