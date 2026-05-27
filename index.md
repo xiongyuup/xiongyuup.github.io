@@ -240,40 +240,62 @@
             <p class="rank-note">Sorted by the position of Yu Xiong in the author list, not by publication year.</p>
             <h3>English Journal and Conference Papers</h3>
             <ul class="paper-list">
+<ul>
+<ul>
                 <li>[1] <span class="highlight-name">Y. Xiong</span>, Y. Huang, K. Deng, Y. Mao, J. Li, X. Chen and S. Gu, "MR2S: Integrated RFI Suppression and SAR Imaging via Masked RAW–RC Sparsity," in <em>IEEE Transactions on Geoscience and Remote Sensing</em>. <span class="badge">First author; advisor as corresponding author</span></li>
 
                 <li>[2] <span class="highlight-name">Y. Xiong</span>, Y. Huang, Y. Mao, J. Li, K. Deng, X. Chen and S. Gu, "A RFI Suppression and Imaging Approach on Spaceborne SAR via Echo-Image Domain Filtering," submitted to <em>IEEE Transactions on Geoscience and Remote Sensing</em>. <span class="badge">Submitted; first author</span></li>
 
                 <li>[3] <span class="highlight-name">Y. Xiong</span> and Z. Wu, "TransitionMatrices.jl: An Open-Source IITM-Based Framework for Electromagnetic Scattering Simulation of Nonspherical Atmospheric Particles and Microwave Remote-Sensing Forward Modeling," submitted to <em>Computer Physics Communications</em>. <span class="badge">Under second review; first author; corresponding author</span></li>
 
-                <li>[4] H. Li, <span class="highlight-name">Y. Xiong</span> and Y. Chen, "Simulation of Complex Meteorological Target Echoes for Airborne Dual-Polarization Weather Radar Based on Invariant Imbedding T-Matrix," in <em>IEEE Transactions on Geoscience and Remote Sensing</em>, vol. 62, pp. 1-17, 2024, Art no. 5105817. <span class="badge">Published; advisor as first author</span> ✅</li>
+                <li>[4] <span class="highlight-name">Y. Xiong</span>, K. Deng, Y. Mao, J. Li, X. Chen, S. Gu and Y. Huang, "Mask-Guided RAW-RC Coupling for Integrated SAR Imaging and RFI Suppression," submitted to <em>CIE International Conference on Radar</em>. <span class="badge">Submitted; first author</span></li>
 
-                <li>[5] H. Li, <span class="highlight-name">Y. Xiong</span>, B. Zhang and Z. Wu, "Simulation of Precipitation Echoes From Airborne Dual-Polarization Weather Radar Based on a Fast Algorithm for Invariant Imbedding T-Matrix," in <em>IEEE Transactions on Radar Systems</em>, vol. 3, pp. 135-154, 2025. <span class="badge">Published; advisor as first author</span> ✅</li>
+                <li>[5] <span class="highlight-name">Y. Xiong</span>, Y. Huang, S. Gu and Z. Wu, "Error-Propagation-Guided Budget-Aware Adaptive Discretization for IITM Simulations of Inhomogeneous Hydrometeors," submitted to <em>Electromagnetic Science</em>. <span class="badge">Submitted; first author</span></li>
 
-                <li>[6] J. Guo, <span class="highlight-name">Y. Xiong</span>, H. Li, Z. Wu and Z. Sun, "Bicontinuous Medium Particle Modeling Based on Fourier-MLP and Accelerated Computation Method for Invariant Imbedding T-Matrix," in <em>[TBD]</em>. <span class="badge">Submitted; corresponding author</span></li>
+                <li>[6] H. Li, <span class="highlight-name">Y. Xiong</span> and Y. Chen, "Simulation of Complex Meteorological Target Echoes for Airborne Dual-Polarization Weather Radar Based on Invariant Imbedding T-Matrix," in <em>IEEE Transactions on Geoscience and Remote Sensing</em>, vol. 62, pp. 1-17, 2024, Art no. 5105817. <span class="badge">Published; advisor as first author</span> ✅</li>
 
-                <li>[7] J. Guo, <span class="highlight-name">Y. Xiong</span>, H. Li, S. Li and X. Ai, "Ground Clutter and Suppressive Interference Mitigation Method Based on SPCJS-PSTAP," in <em>[TBD]</em>. <span class="badge">Accepted; corresponding author</span></li>
+                <li>[7] H. Li, <span class="highlight-name">Y. Xiong</span>, B. Zhang and Z. Wu, "Simulation of Precipitation Echoes From Airborne Dual-Polarization Weather Radar Based on a Fast Algorithm for Invariant Imbedding T-Matrix," in <em>IEEE Transactions on Radar Systems</em>, vol. 3, pp. 135-154, 2025. <span class="badge">Published; advisor as first author</span> ✅</li>
 
-                <li>[8] H. Li, B. Zhang, <span class="highlight-name">Y. Xiong</span> and R. Liang, "Simulation of Airborne Dual-Polarization Weather Radar Echoes from Inhomogeneous Ice-Phase Precipitation Particles Based on Monte Carlo Method," in <em>IEEE Transactions on Geoscience and Remote Sensing</em>. <span class="badge">Accepted; corresponding author; advisor as first author</span></li>
+                <li>[8] K. Deng, <span class="highlight-name">Y. Xiong</span>, Y. Mao, J. Li, Z. Chen and Y. Huang, "Automotive SAR Image Quality Enhancement via Autofocus and L<sub>1</sub> Regularization," submitted to <em>CIE International Conference on Radar</em>. <span class="badge">Submitted</span></li>
 
-                <li>[9] H. Li, B. Zhang, <span class="highlight-name">Y. Xiong</span>, "The Simulation of Airborne Weather Radar Echoes for Inhomogeneous Ice Crystals Based on the Bicontinuous Medium Approximation," in <em>2025 IEEE International Geoscience and Remote Sensing Symposium (IGARSS)</em>. <span class="badge">Accepted; advisor as first author</span></li>
+                <li>[9] J. Guo, <span class="highlight-name">Y. Xiong</span>, H. Li, Z. Wu and Z. Sun, "Bicontinuous Medium Particle Modeling Based on Fourier-MLP and Accelerated Computation Method for Invariant Imbedding T-Matrix," in <em>[TBD]</em>. <span class="badge">Corresponding author</span></li>
 
-                <li>[10] H. Li, X. Ai, Z. Liu, <span class="highlight-name">Y. Xiong</span>, "Intracloud Lightning Echo Simulation for the Airborne Weather Radar Based on Dielectric Breakdown Model," in <em>IEEE International Conference on Signal, Information and Data Processing 2024</em>. <span class="badge">Published; advisor as first author</span></li>
+                <li>[10] J. Guo, <span class="highlight-name">Y. Xiong</span>, H. Li, S. Li and X. Ai, "Ground Clutter and Suppressive Interference Mitigation Method Based on SPCJS-PSTAP," in <em>[TBD]</em>. <span class="badge">Accepted; corresponding author</span></li>
 
-                <li>[11] K. Deng, Y. Huang, Z. Chen, L. Zhang, <span class="highlight-name">Y. Xiong</span> and B. Zhang, "A Hybrid Domain Algorithm for High-Speed High-Squint SAR Imaging with Curved Trajectory via Fifth-Order FNCS Processing," in <em>IEEE Transactions on Geoscience and Remote Sensing</em>. <span class="badge">Accepted</span></li>
+                <li>[11] H. Li, B. Zhang, <span class="highlight-name">Y. Xiong</span> and R. Liang, "Simulation of Airborne Dual-Polarization Weather Radar Echoes from Inhomogeneous Ice-Phase Precipitation Particles Based on Monte Carlo Method," in <em>IEEE Transactions on Geoscience and Remote Sensing</em>. <span class="badge">Accepted; corresponding author; advisor as first author</span></li>
 
-                <li>[12] S. Gu, Y. Huang, J. Li, Y. Mao, X. Chen, <span class="highlight-name">Y. Xiong</span>, Z. Chen and X. Yang, "RFI Mitigation for Spaceborne SAR via Maximizing Dynamic Residual Entropy," in <em>IEEE Transactions on Image Processing</em>.</li>
+                <li>[12] H. Li, B. Zhang, <span class="highlight-name">Y. Xiong</span>, "The Simulation of Airborne Weather Radar Echoes for Inhomogeneous Ice Crystals Based on the Bicontinuous Medium Approximation," in <em>2025 IEEE International Geoscience and Remote Sensing Symposium (IGARSS)</em>. <span class="badge">Accepted; advisor as first author</span></li>
+
+                <li>[13] H. Li, X. Ai, Z. Liu, <span class="highlight-name">Y. Xiong</span>, "Intracloud Lightning Echo Simulation for the Airborne Weather Radar Based on Dielectric Breakdown Model," in <em>IEEE International Conference on Signal, Information and Data Processing 2024</em>. <span class="badge">Published; advisor as first author</span></li>
+
+                <li>[14] K. Deng, Y. Huang, Z. Chen, L. Zhang, <span class="highlight-name">Y. Xiong</span> and B. Zhang, "A Hybrid Domain Algorithm for High-Speed High-Squint SAR Imaging with Curved Trajectory via Fifth-Order FNCS Processing," in <em>IEEE Transactions on Geoscience and Remote Sensing</em>. <span class="badge">Accepted</span></li>
+
+                <li>[15] S. Gu, Y. Huang, J. Li, Y. Mao, X. Chen, <span class="highlight-name">Y. Xiong</span>, Z. Chen and X. Yang, "RFI Mitigation for Spaceborne SAR via Maximizing Dynamic Residual Entropy," in <em>IEEE Transactions on Image Processing</em>.</li>
             </ul>
 
             <h3>Chinese Journal Papers</h3>
             <ul class="paper-list">
-                <li>[13] J. Guo, <span class="highlight-name">Y. Xiong</span>, H. Li, Z. Wu, Z. Sun. Bicontinuous Medium Particle Modeling Based on Fourier-MLP and Accelerated Computation Method for Invariant Imbedding T-Matrix[J]. <em>[TBD]</em>. <span class="badge">Corresponding author</span></li>
+                <li>[16] J. Guo, <span class="highlight-name">Y. Xiong</span>, H. Li, Z. Wu, Z. Sun, "Bicontinuous Medium Particle Modeling Based on Fourier-MLP and Accelerated Computation Method for Invariant Imbedding T-Matrix," <em>[TBD]</em>. <span class="badge">Corresponding author</span></li>
 
-                <li>[14] H. Li, F. Zhang, <span class="highlight-name">Y. Xiong</span>. Simulation of Rain Attenuation Echoes for Airborne Dual-Polarization Weather Radar Based on the T-Matrix Method[J]. <em>Fire Control Radar Technology</em>. <span class="badge">Accepted; advisor as first author</span></li>
+                <li>[17] H. Li, F. Zhang, <span class="highlight-name">Y. Xiong</span>, "Simulation of Rain Attenuation Echoes for Airborne Dual-Polarization Weather Radar Based on the T-Matrix Method," <em>Fire Control Radar Technology</em>. <span class="badge">Accepted; advisor as first author</span></li>
 
-                <li>[15] H. Li, Y. Chen, <span class="highlight-name">Y. Xiong</span>. Simulation of Meteorological Target Echoes for Airborne Dual-Polarization Phased Array Weather Radar[J]. <em>Systems Engineering and Electronics</em>, 2025, 47(01): 117-125. <span class="badge">Published; advisor as first author</span></li>
+                <li>[18] H. Li, Y. Chen, <span class="highlight-name">Y. Xiong</span>, "Simulation of Meteorological Target Echoes for Airborne Dual-Polarization Phased Array Weather Radar," <em>Systems Engineering and Electronics</em>, 2025, 47(01): 117-125. <span class="badge">Published; advisor as first author</span></li>
 
-                <li>[16] H. Li, Q. Zhang, A. Zhou, <span class="highlight-name">Y. Xiong</span>. Low-Altitude Windshear Wind-Speed Estimation Based on Convolutional Neural Network STAP[J]. <em>Journal of Electronics &amp; Information Technology</em>, 2024, 46(08): 3193-3201. <span class="badge">Published; advisor as first author</span></li>
+                <li>[19] H. Li, Q. Zhang, A. Zhou, <span class="highlight-name">Y. Xiong</span>, "Low-Altitude Windshear Wind-Speed Estimation Based on Convolutional Neural Network STAP," <em>Journal of Electronics &amp; Information Technology</em>, 2024, 46(08): 3193-3201. <span class="badge">Published; advisor as first author</span></li>
+            </ul>
+        </section>
+            </ul>
+
+            <h3>Chinese Journal Papers</h3>
+            <ul class="paper-list">
+                <li>[16] J. Guo, <span class="highlight-name">Y. Xiong</span>, H. Li, Z. Wu, Z. Sun. Bicontinuous Medium Particle Modeling Based on Fourier-MLP and Accelerated Computation Method for Invariant Imbedding T-Matrix[J]. <em>[TBD]</em>. <span class="badge">Corresponding author</span></li>
+
+                <li>[17] H. Li, F. Zhang, <span class="highlight-name">Y. Xiong</span>. Simulation of Rain Attenuation Echoes for Airborne Dual-Polarization Weather Radar Based on the T-Matrix Method[J]. <em>Fire Control Radar Technology</em>. <span class="badge">Accepted; advisor as first author</span></li>
+
+                <li>[18] H. Li, Y. Chen, <span class="highlight-name">Y. Xiong</span>. Simulation of Meteorological Target Echoes for Airborne Dual-Polarization Phased Array Weather Radar[J]. <em>Systems Engineering and Electronics</em>, 2025, 47(01): 117-125. <span class="badge">Published; advisor as first author</span></li>
+
+                <li>[19] H. Li, Q. Zhang, A. Zhou, <span class="highlight-name">Y. Xiong</span>. Low-Altitude Windshear Wind-Speed Estimation Based on Convolutional Neural Network STAP[J]. <em>Journal of Electronics &amp; Information Technology</em>, 2024, 46(08): 3193-3201. <span class="badge">Published; advisor as first author</span></li>
+            </ul>
             </ul>
         </section>
 
@@ -424,40 +446,47 @@
             <p class="rank-note">按熊玉在作者列表中的位置排序，不再按发表时间排序。</p>
             <h3>英文与国际会议论文</h3>
             <ul class="paper-list">
+<ul>
                 <li>[1] <span class="highlight-name">Y. Xiong</span>, Y. Huang, K. Deng, Y. Mao, J. Li, X. Chen and S. Gu, "MR2S: Integrated RFI Suppression and SAR Imaging via Masked RAW–RC Sparsity," in <em>IEEE Transactions on Geoscience and Remote Sensing</em>. <span class="badge">第一作者，导师通信</span></li>
 
                 <li>[2] <span class="highlight-name">Y. Xiong</span>, Y. Huang, Y. Mao, J. Li, K. Deng, X. Chen and S. Gu, "A RFI Suppression and Imaging Approach on Spaceborne SAR via Echo-Image Domain Filtering," submitted to <em>IEEE Transactions on Geoscience and Remote Sensing</em>. <span class="badge">已投递，第一作者</span></li>
 
                 <li>[3] <span class="highlight-name">Y. Xiong</span> and Z. Wu, "TransitionMatrices.jl: An Open-Source IITM-Based Framework for Electromagnetic Scattering Simulation of Nonspherical Atmospheric Particles and Microwave Remote-Sensing Forward Modeling," submitted to <em>Computer Physics Communications</em>. <span class="badge">二审中，第一作者，通信作者</span></li>
 
-                <li>[4] H. Li, <span class="highlight-name">Y. Xiong</span> and Y. Chen, "Simulation of Complex Meteorological Target Echoes for Airborne Dual-Polarization Weather Radar Based on Invariant Imbedding T-Matrix," in <em>IEEE Transactions on Geoscience and Remote Sensing</em>, vol. 62, pp. 1-17, 2024, Art no. 5105817. <span class="badge">已发表，导师一作</span> ✅</li>
+                <li>[4] <span class="highlight-name">Y. Xiong</span>, K. Deng, Y. Mao, J. Li, X. Chen, S. Gu and Y. Huang, "Mask-Guided RAW-RC Coupling for Integrated SAR Imaging and RFI Suppression," submitted to <em>CIE International Conference on Radar</em>. <span class="badge">已投递，第一作者</span></li>
 
-                <li>[5] H. Li, <span class="highlight-name">Y. Xiong</span>, B. Zhang and Z. Wu, "Simulation of Precipitation Echoes From Airborne Dual-Polarization Weather Radar Based on a Fast Algorithm for Invariant Imbedding T-Matrix," in <em>IEEE Transactions on Radar Systems</em>, vol. 3, pp. 135-154, 2025. <span class="badge">已发表，导师一作</span> ✅</li>
+                <li>[5] <span class="highlight-name">Y. Xiong</span>, Y. Huang, S. Gu and Z. Wu, "Error-Propagation-Guided Budget-Aware Adaptive Discretization for IITM Simulations of Inhomogeneous Hydrometeors," submitted to <em>Electromagnetic Science</em>. <span class="badge">已投递，第一作者</span></li>
 
-                <li>[6] J. Guo, <span class="highlight-name">Y. Xiong</span>, H. Li, Z. Wu and Z. Sun, "Bicontinuous Medium Particle Modeling Based on Fourier-MLP and Accelerated Computation Method for Invariant Imbedding T-Matrix," in <em>[待定]</em>. <span class="badge">通信作者</span></li>
+                <li>[6] H. Li, <span class="highlight-name">Y. Xiong</span> and Y. Chen, "Simulation of Complex Meteorological Target Echoes for Airborne Dual-Polarization Weather Radar Based on Invariant Imbedding T-Matrix," in <em>IEEE Transactions on Geoscience and Remote Sensing</em>, vol. 62, pp. 1-17, 2024, Art no. 5105817. <span class="badge">已发表，导师一作</span> ✅</li>
 
-                <li>[7] J. Guo, <span class="highlight-name">Y. Xiong</span>, H. Li, S. Li and X. Ai, "Ground Clutter and Suppressive Interference Mitigation Method Based on SPCJS-PSTAP," in <em>[待定]</em>. <span class="badge">已录用，通信作者</span></li>
+                <li>[7] H. Li, <span class="highlight-name">Y. Xiong</span>, B. Zhang and Z. Wu, "Simulation of Precipitation Echoes From Airborne Dual-Polarization Weather Radar Based on a Fast Algorithm for Invariant Imbedding T-Matrix," in <em>IEEE Transactions on Radar Systems</em>, vol. 3, pp. 135-154, 2025. <span class="badge">已发表，导师一作</span> ✅</li>
 
-                <li>[8] H. Li, B. Zhang, <span class="highlight-name">Y. Xiong</span> and R. Liang, "Simulation of Airborne Dual-Polarization Weather Radar Echoes from Inhomogeneous Ice-Phase Precipitation Particles Based on Monte Carlo Method," in <em>IEEE Transactions on Geoscience and Remote Sensing</em>. <span class="badge">已录用，通信作者，导师一作</span></li>
+                <li>[8] K. Deng, <span class="highlight-name">Y. Xiong</span>, Y. Mao, J. Li, Z. Chen and Y. Huang, "Automotive SAR Image Quality Enhancement via Autofocus and L<sub>1</sub> Regularization," submitted to <em>CIE International Conference on Radar</em>. <span class="badge">已投递</span></li>
 
-                <li>[9] H. Li, B. Zhang, <span class="highlight-name">Y. Xiong</span>, "The Simulation of Airborne Weather Radar Echoes for Inhomogeneous Ice Crystals Based on the Bicontinuous Medium Approximation," in <em>2025 IEEE International Geoscience and Remote Sensing Symposium (IGARSS)</em>. <span class="badge">已录用，导师一作</span></li>
+                <li>[9] J. Guo, <span class="highlight-name">Y. Xiong</span>, H. Li, Z. Wu and Z. Sun, "Bicontinuous Medium Particle Modeling Based on Fourier-MLP and Accelerated Computation Method for Invariant Imbedding T-Matrix," in <em>[待定]</em>. <span class="badge">通信作者</span></li>
 
-                <li>[10] H. Li, X. Ai, Z. Liu, <span class="highlight-name">Y. Xiong</span>, "Intracloud Lightning Echo Simulation for the Airborne Weather Radar Based on Dielectric Breakdown Model," in <em>IEEE International Conference on Signal, Information and Data Processing 2024</em>. <span class="badge">已出版，导师一作</span></li>
+                <li>[10] J. Guo, <span class="highlight-name">Y. Xiong</span>, H. Li, S. Li and X. Ai, "Ground Clutter and Suppressive Interference Mitigation Method Based on SPCJS-PSTAP," in <em>[待定]</em>. <span class="badge">已录用，通信作者</span></li>
 
-                <li>[11] K. Deng, Y. Huang, Z. Chen, L. Zhang, <span class="highlight-name">Y. Xiong</span> and B. Zhang, "A Hybrid Domain Algorithm for High-Speed High-Squint SAR Imaging with Curved Trajectory via Fifth-Order FNCS Processing," in <em>IEEE Transactions on Geoscience and Remote Sensing</em>. <span class="badge">已录用</span></li>
+                <li>[11] H. Li, B. Zhang, <span class="highlight-name">Y. Xiong</span> and R. Liang, "Simulation of Airborne Dual-Polarization Weather Radar Echoes from Inhomogeneous Ice-Phase Precipitation Particles Based on Monte Carlo Method," in <em>IEEE Transactions on Geoscience and Remote Sensing</em>. <span class="badge">已录用，通信作者，导师一作</span></li>
 
-                <li>[12] S. Gu, Y. Huang, J. Li, Y. Mao, X. Chen, <span class="highlight-name">Y. Xiong</span>, Z. Chen and X. Yang, "RFI Mitigation for Spaceborne SAR via Maximizing Dynamic Residual Entropy," in <em>IEEE Transactions on Image Processing</em>.</li>
+                <li>[12] H. Li, B. Zhang, <span class="highlight-name">Y. Xiong</span>, "The Simulation of Airborne Weather Radar Echoes for Inhomogeneous Ice Crystals Based on the Bicontinuous Medium Approximation," in <em>2025 IEEE International Geoscience and Remote Sensing Symposium (IGARSS)</em>. <span class="badge">已录用，导师一作</span></li>
+
+                <li>[13] H. Li, X. Ai, Z. Liu, <span class="highlight-name">Y. Xiong</span>, "Intracloud Lightning Echo Simulation for the Airborne Weather Radar Based on Dielectric Breakdown Model," in <em>IEEE International Conference on Signal, Information and Data Processing 2024</em>. <span class="badge">已出版，导师一作</span></li>
+
+                <li>[14] K. Deng, Y. Huang, Z. Chen, L. Zhang, <span class="highlight-name">Y. Xiong</span> and B. Zhang, "A Hybrid Domain Algorithm for High-Speed High-Squint SAR Imaging with Curved Trajectory via Fifth-Order FNCS Processing," in <em>IEEE Transactions on Geoscience and Remote Sensing</em>. <span class="badge">已录用</span></li>
+
+                <li>[15] S. Gu, Y. Huang, J. Li, Y. Mao, X. Chen, <span class="highlight-name">Y. Xiong</span>, Z. Chen and X. Yang, "RFI Mitigation for Spaceborne SAR via Maximizing Dynamic Residual Entropy," in <em>IEEE Transactions on Image Processing</em>.</li>
             </ul>
 
             <h3>中文期刊论文</h3>
             <ul class="paper-list">
-                <li>[13] 郭景瑞, <span class="highlight-name">熊玉</span>, 李海, 吴自华, 孙志刚. 基于Fourier-MLP的双连续介质粒子建模及不变嵌入T矩阵加速计算方法[J]. <em>待定</em>. <span class="badge">通信作者</span></li>
+                <li>[16] 郭景瑞, <span class="highlight-name">熊玉</span>, 李海, 吴自华, 孙志刚. 基于Fourier-MLP的双连续介质粒子建模及不变嵌入T矩阵加速计算方法[J]. <em>待定</em>. <span class="badge">通信作者</span></li>
 
-                <li>[14] 李海, 张富强, <span class="highlight-name">熊玉</span>. 基于T矩阵的机载双极化气象雷达降雨衰减回波仿真[J]. <em>火控雷达技术</em>. <span class="badge">已录用，导师一作</span></li>
+                <li>[17] 李海, 张富强, <span class="highlight-name">熊玉</span>. 基于T矩阵的机载双极化气象雷达降雨衰减回波仿真[J]. <em>火控雷达技术</em>. <span class="badge">已录用，导师一作</span></li>
 
-                <li>[15] 李海, 陈禹同, <span class="highlight-name">熊玉</span>. 机载双极化相控阵气象雷达气象目标回波仿真[J]. <em>系统工程与电子技术</em>, 2025, 47(01): 117-125. <span class="badge">已发表，导师一作</span></li>
+                <li>[18] 李海, 陈禹同, <span class="highlight-name">熊玉</span>. 机载双极化相控阵气象雷达气象目标回波仿真[J]. <em>系统工程与电子技术</em>, 2025, 47(01): 117-125. <span class="badge">已发表，导师一作</span></li>
 
-                <li>[16] 李海, 张强, 周桉宇, <span class="highlight-name">熊玉</span>. 卷积神经网络STAP低空风切变风速估计[J]. <em>电子与信息学报</em>, 2024, 46(08): 3193-3201. <span class="badge">已发表，导师一作</span></li>
+                <li>[19] 李海, 张强, 周桉宇, <span class="highlight-name">熊玉</span>. 卷积神经网络STAP低空风切变风速估计[J]. <em>电子与信息学报</em>, 2024, 46(08): 3193-3201. <span class="badge">已发表，导师一作</span></li>
             </ul>
         </section>
 
