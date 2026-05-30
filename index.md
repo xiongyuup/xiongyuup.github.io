@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yu Xiong | Radar, SAR, and Electromagnetic Scattering</title>
+    <title>Yu Xiong | Academic Homepage</title>
     <style>
         :root {
-            --ink: #17202a;
-            --muted: #617080;
-            --paper: #f7f4ee;
+            --ink: #14212d;
+            --muted: #5d6976;
+            --soft: #eef3f5;
+            --paper: #f8f6f1;
             --card: #ffffff;
-            --line: #d9dee5;
-            --blue: #285f82;
-            --blue-dark: #13364d;
-            --teal: #4ca58a;
-            --coral: #d56d57;
-            --gold: #c69a3a;
-            --shadow: 0 18px 45px rgba(22, 34, 43, 0.11);
+            --navy: #102a3d;
+            --blue: #255f83;
+            --teal: #3c9a8a;
+            --copper: #bd6f4a;
+            --gold: #c7a04a;
+            --line: rgba(20, 33, 45, 0.13);
+            --shadow: 0 18px 50px rgba(16, 42, 61, 0.13);
+            --wrap: min(1540px, calc(100vw - 56px));
         }
 
         * {
@@ -32,7 +34,7 @@
             color: var(--ink);
             background: var(--paper);
             font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-            line-height: 1.65;
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -46,154 +48,174 @@
             right: 18px;
             z-index: 30;
             min-height: 40px;
-            padding: 0 14px;
-            border: 1px solid rgba(255,255,255,0.35);
+            padding: 0 16px;
+            border: 1px solid rgba(255, 255, 255, 0.42);
             border-radius: 999px;
-            background: rgba(255,255,255,0.92);
-            color: var(--blue-dark);
-            box-shadow: 0 14px 34px rgba(0,0,0,0.18);
+            background: rgba(255, 255, 255, 0.94);
+            color: var(--navy);
+            box-shadow: 0 18px 38px rgba(0,0,0,0.18);
             cursor: pointer;
-            font-weight: 820;
+            font-weight: 800;
         }
 
         .hero {
             position: relative;
-            overflow: hidden;
-            min-height: 86vh;
-            display: grid;
-            align-items: center;
-            background:
-                linear-gradient(115deg, rgba(14, 31, 45, 0.96), rgba(17, 61, 80, 0.82)),
-                radial-gradient(circle at 78% 25%, rgba(76, 165, 138, 0.35), transparent 30%),
-                #142635;
+            min-height: 92vh;
             color: #fff;
+            overflow: hidden;
+            background:
+                linear-gradient(110deg, rgba(10, 24, 36, 0.98), rgba(18, 58, 78, 0.87) 58%, rgba(30, 76, 86, 0.78)),
+                radial-gradient(circle at 78% 32%, rgba(60, 154, 138, 0.34), transparent 32%),
+                #102a3d;
         }
 
         .hero::before {
             content: "";
             position: absolute;
             inset: 0;
-            opacity: 0.22;
+            opacity: 0.2;
             background-image:
-                linear-gradient(rgba(255,255,255,0.09) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.09) 1px, transparent 1px);
-            background-size: 54px 54px;
-            mask-image: linear-gradient(to bottom, #000, transparent 92%);
+                linear-gradient(rgba(255,255,255,0.11) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.11) 1px, transparent 1px);
+            background-size: 58px 58px;
+            mask-image: linear-gradient(to bottom, #000 35%, transparent 100%);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            right: -10vw;
+            bottom: -20vw;
+            width: 60vw;
+            aspect-ratio: 1;
+            border: 1px solid rgba(179, 225, 214, 0.2);
+            border-radius: 50%;
+            box-shadow:
+                0 0 0 70px rgba(179, 225, 214, 0.04),
+                0 0 0 150px rgba(179, 225, 214, 0.035),
+                0 0 0 235px rgba(179, 225, 214, 0.025);
         }
 
         .hero-inner {
             position: relative;
-            width: min(1180px, calc(100% - 40px));
+            z-index: 1;
+            width: var(--wrap);
             margin: 0 auto;
-            padding: 88px 0 64px;
+            min-height: 92vh;
+            padding: 96px 0 52px;
             display: grid;
-            grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.72fr);
-            gap: 54px;
+            grid-template-columns: minmax(0, 1fr) minmax(360px, 0.56fr);
+            gap: 56px;
             align-items: center;
         }
 
         .eyebrow {
-            margin: 0 0 16px;
-            color: #a9dfcf;
+            margin: 0 0 18px;
+            color: #b8e7dc;
             font-size: 0.82rem;
-            font-weight: 760;
-            letter-spacing: 0.18em;
+            font-weight: 850;
+            letter-spacing: 0.17em;
             text-transform: uppercase;
         }
 
         h1 {
             margin: 0;
-            font-size: clamp(3.2rem, 7vw, 6.8rem);
-            line-height: 0.9;
+            font-size: clamp(4.2rem, 10vw, 10.4rem);
+            line-height: 0.85;
             letter-spacing: 0;
         }
 
         .hero-summary {
-            max-width: 760px;
-            margin: 28px 0 0;
+            max-width: 900px;
+            margin: 30px 0 0;
             color: rgba(255,255,255,0.82);
-            font-size: clamp(1.03rem, 2vw, 1.28rem);
+            font-size: clamp(1.04rem, 1.75vw, 1.34rem);
         }
 
         .hero-actions {
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
-            margin-top: 32px;
+            margin-top: 34px;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 44px;
+            min-height: 46px;
             padding: 0 18px;
-            border-radius: 6px;
+            border-radius: 7px;
             border: 1px solid rgba(255,255,255,0.34);
             color: #fff;
             text-decoration: none;
-            font-weight: 740;
-            font-size: 0.96rem;
+            font-weight: 760;
             transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            border-color: rgba(255,255,255,0.72);
+            border-color: rgba(255,255,255,0.78);
             background: rgba(255,255,255,0.1);
         }
 
         .btn.primary {
-            color: #102331;
-            background: #a9dfcf;
-            border-color: #a9dfcf;
+            color: #0e2a39;
+            background: #b8e7dc;
+            border-color: #b8e7dc;
         }
 
-        .radar-card {
+        .hero-panel {
+            min-height: 520px;
             position: relative;
-            min-height: 420px;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.18);
             border-radius: 8px;
-            background:
-                radial-gradient(circle at 50% 50%, rgba(169, 223, 207, 0.14) 0 1px, transparent 1px),
-                linear-gradient(155deg, rgba(255,255,255,0.15), rgba(255,255,255,0.04));
-            background-size: 24px 24px, auto;
-            box-shadow: 0 24px 70px rgba(0,0,0,0.32);
             overflow: hidden;
+            background:
+                radial-gradient(circle at 50% 48%, rgba(184, 231, 220, 0.18) 0 1px, transparent 1px),
+                linear-gradient(150deg, rgba(255,255,255,0.16), rgba(255,255,255,0.04));
+            background-size: 26px 26px, auto;
+            box-shadow: 0 28px 90px rgba(0,0,0,0.36);
         }
 
-        .radar-card::before,
-        .radar-card::after {
+        .hero-panel::before,
+        .hero-panel::after {
             content: "";
             position: absolute;
             left: 50%;
-            top: 50%;
-            border: 1px solid rgba(169, 223, 207, 0.36);
-            border-radius: 50%;
+            top: 44%;
             transform: translate(-50%, -50%);
+            border-radius: 50%;
         }
 
-        .radar-card::before {
-            width: 70%;
+        .hero-panel::before {
+            width: 62%;
             aspect-ratio: 1;
-            box-shadow: 0 0 0 58px rgba(169, 223, 207, 0.06), 0 0 0 118px rgba(169, 223, 207, 0.04);
+            border: 1px solid rgba(184, 231, 220, 0.34);
+            box-shadow:
+                0 0 0 62px rgba(184, 231, 220, 0.055),
+                0 0 0 126px rgba(184, 231, 220, 0.035);
         }
 
-        .radar-card::after {
-            width: 10px;
-            height: 10px;
-            background: #a9dfcf;
-            box-shadow: 82px -108px 0 var(--coral), -118px 72px 0 var(--gold), 128px 90px 0 #fff, -72px -96px 0 var(--teal);
+        .hero-panel::after {
+            width: 11px;
+            height: 11px;
+            background: #b8e7dc;
+            box-shadow:
+                92px -118px 0 var(--copper),
+                -122px 78px 0 var(--gold),
+                142px 96px 0 #fff,
+                -74px -104px 0 var(--teal);
         }
 
         .sweep {
             position: absolute;
             left: 50%;
-            top: 50%;
+            top: 44%;
             width: 46%;
             height: 46%;
             transform-origin: left top;
-            background: linear-gradient(40deg, rgba(169, 223, 207, 0.34), transparent 62%);
+            background: linear-gradient(42deg, rgba(184, 231, 220, 0.35), transparent 64%);
             clip-path: polygon(0 0, 100% 0, 0 100%);
             animation: scan 7s linear infinite;
         }
@@ -202,32 +224,32 @@
             to { transform: rotate(360deg); }
         }
 
-        .metric-strip {
+        .hero-stats {
             position: absolute;
-            left: 22px;
-            right: 22px;
-            bottom: 22px;
+            left: 24px;
+            right: 24px;
+            bottom: 24px;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
         }
 
-        .metric {
-            padding: 14px;
-            border-radius: 6px;
-            background: rgba(11, 26, 38, 0.62);
-            border: 1px solid rgba(255,255,255,0.16);
+        .stat {
+            padding: 16px;
+            border-radius: 7px;
+            background: rgba(9, 24, 36, 0.7);
+            border: 1px solid rgba(255,255,255,0.15);
         }
 
-        .metric strong {
+        .stat strong {
             display: block;
-            font-size: 1.2rem;
-            line-height: 1.1;
+            font-size: 1.28rem;
+            line-height: 1.08;
         }
 
-        .metric span {
+        .stat span {
             display: block;
-            margin-top: 4px;
+            margin-top: 5px;
             color: rgba(255,255,255,0.68);
             font-size: 0.74rem;
             line-height: 1.35;
@@ -236,26 +258,27 @@
         nav {
             position: sticky;
             top: 0;
-            z-index: 10;
-            background: rgba(247, 244, 238, 0.92);
-            border-bottom: 1px solid rgba(23, 32, 42, 0.1);
+            z-index: 20;
+            border-bottom: 1px solid rgba(16, 42, 61, 0.11);
+            background: rgba(248, 246, 241, 0.93);
             backdrop-filter: blur(16px);
         }
 
         .nav-inner {
-            width: min(1180px, calc(100% - 40px));
-            min-height: 58px;
+            width: var(--wrap);
+            min-height: 60px;
             margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 22px;
+            gap: 24px;
         }
 
         .brand {
-            font-weight: 850;
-            color: var(--blue-dark);
+            color: var(--navy);
             text-decoration: none;
+            font-weight: 900;
+            letter-spacing: 0.03em;
         }
 
         .nav-links {
@@ -267,72 +290,90 @@
 
         .nav-links a {
             padding: 8px 10px;
-            border-radius: 6px;
+            border-radius: 7px;
             color: #344454;
             text-decoration: none;
-            font-weight: 720;
             font-size: 0.9rem;
+            font-weight: 760;
         }
 
         .nav-links a:hover {
-            background: #e9e2d5;
+            background: #e9e3d8;
         }
 
-        main {
-            width: min(1180px, calc(100% - 40px));
+        .band {
+            padding: 86px 0;
+        }
+
+        .band.alt {
+            background: #e9eef0;
+        }
+
+        .band.dark {
+            color: #fff;
+            background: #102a3d;
+        }
+
+        .wrap {
+            width: var(--wrap);
             margin: 0 auto;
-            padding: 68px 0 80px;
-        }
-
-        .section {
-            margin-top: 76px;
-        }
-
-        .section:first-child {
-            margin-top: 0;
         }
 
         .section-head {
             display: grid;
-            grid-template-columns: minmax(180px, 0.32fr) minmax(0, 1fr);
-            gap: 34px;
+            grid-template-columns: minmax(180px, 0.28fr) minmax(0, 1fr);
+            gap: 42px;
             align-items: start;
-            margin-bottom: 26px;
+            margin-bottom: 30px;
         }
 
         .kicker {
             margin: 0;
-            color: var(--coral);
+            color: var(--copper);
             font-size: 0.8rem;
-            font-weight: 850;
+            font-weight: 900;
             letter-spacing: 0.15em;
             text-transform: uppercase;
         }
 
+        .band.dark .kicker {
+            color: #b8e7dc;
+        }
+
         h2 {
             margin: 0;
-            color: var(--blue-dark);
-            font-size: clamp(1.85rem, 3vw, 2.7rem);
-            line-height: 1.08;
+            color: var(--navy);
+            font-size: clamp(2rem, 3.1vw, 3.25rem);
+            line-height: 1.06;
             letter-spacing: 0;
         }
 
-        .lead {
-            margin: 12px 0 0;
-            color: var(--muted);
-            max-width: 800px;
+        .band.dark h2 {
+            color: #fff;
         }
 
-        .two-col {
+        .lead {
+            max-width: 980px;
+            margin: 14px 0 0;
+            color: var(--muted);
+            font-size: 1.02rem;
+        }
+
+        .band.dark .lead {
+            color: rgba(255,255,255,0.72);
+        }
+
+        .overview-grid {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
-            gap: 28px;
+            grid-template-columns: 1.2fr 0.8fr 0.8fr;
+            gap: 18px;
         }
 
         .panel,
         .paper,
-        .project {
-            border: 1px solid rgba(23, 32, 42, 0.11);
+        .project,
+        .skill {
+            border: 1px solid var(--line);
             border-radius: 8px;
             background: var(--card);
             box-shadow: var(--shadow);
@@ -345,44 +386,51 @@
         .panel h3,
         .project h3 {
             margin: 0 0 12px;
-            color: var(--blue-dark);
+            color: var(--navy);
             font-size: 1.08rem;
             line-height: 1.35;
         }
 
-        .panel p {
-            margin: 0;
+        .panel p,
+        .panel li,
+        .project p,
+        .project li {
             color: var(--muted);
         }
 
         .timeline {
             display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 18px;
         }
 
-        .time-item {
+        .time-card {
             position: relative;
-            padding-left: 24px;
+            min-height: 170px;
+            padding: 26px;
+            border-radius: 8px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
         }
 
-        .time-item::before {
+        .time-card::before {
             content: "";
             position: absolute;
-            left: 0;
-            top: 0.58em;
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
+            left: 26px;
+            top: 0;
+            width: 42px;
+            height: 4px;
             background: var(--teal);
-            box-shadow: 0 0 0 5px rgba(76, 165, 138, 0.12);
         }
 
-        .time-item strong {
+        .time-card strong {
             display: block;
-            color: var(--blue-dark);
+            color: var(--navy);
+            margin-bottom: 10px;
         }
 
-        .time-item span {
+        .time-card span {
             color: var(--muted);
         }
 
@@ -398,7 +446,7 @@
             min-height: 30px;
             align-items: center;
             padding: 0 10px;
-            border: 1px solid rgba(23, 32, 42, 0.11);
+            border: 1px solid rgba(20, 33, 45, 0.13);
             border-radius: 999px;
             background: #fff;
             color: var(--muted);
@@ -408,6 +456,7 @@
 
         .paper-list {
             display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 14px;
             counter-reset: papers;
         }
@@ -429,19 +478,19 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border-radius: 6px;
-            background: #eef5f2;
-            color: var(--blue-dark);
-            font-size: 0.83rem;
-            font-weight: 860;
+            border-radius: 7px;
+            background: #edf5f3;
+            color: var(--navy);
+            font-size: 0.82rem;
+            font-weight: 900;
         }
 
         .paper-title {
             margin: 0;
-            color: #17202a;
-            font-size: 1.02rem;
-            font-weight: 780;
-            line-height: 1.38;
+            color: var(--ink);
+            font-size: 1.01rem;
+            font-weight: 800;
+            line-height: 1.42;
         }
 
         .authors {
@@ -451,7 +500,7 @@
         }
 
         .venue {
-            margin: 5px 0 0;
+            margin: 6px 0 0;
             color: var(--muted);
             font-size: 0.92rem;
         }
@@ -469,40 +518,48 @@
             min-height: 24px;
             padding: 0 8px;
             border-radius: 999px;
-            background: #f1ece2;
-            color: #5a4931;
+            background: #f1eadf;
+            color: #5d4930;
             font-size: 0.76rem;
-            font-weight: 760;
+            font-weight: 780;
         }
 
         .tag.accent {
-            background: rgba(213, 109, 87, 0.12);
-            color: #8d3c2d;
+            background: rgba(189, 111, 74, 0.13);
+            color: #88442d;
         }
 
         .tag.role {
-            background: rgba(40, 95, 130, 0.12);
+            background: rgba(37, 95, 131, 0.12);
             color: #1b4c6d;
         }
 
         .highlight-name {
-            color: var(--blue-dark);
-            font-weight: 850;
+            color: var(--navy);
+            font-weight: 900;
         }
 
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
         }
 
         .project {
             padding: 22px;
+            min-height: 255px;
         }
 
-        .project p,
-        .project li {
-            color: var(--muted);
+        .project .date {
+            margin: 0 0 12px;
+            color: var(--copper);
+            font-size: 0.86rem;
+            font-weight: 860;
+        }
+
+        .classified {
+            background: linear-gradient(180deg, #ffffff, #f7fbfb);
+            border-color: rgba(37, 95, 131, 0.2);
         }
 
         ul {
@@ -517,21 +574,18 @@
         .skill-grid {
             display: grid;
             grid-template-columns: repeat(5, minmax(0, 1fr));
-            gap: 12px;
+            gap: 14px;
         }
 
         .skill {
-            padding: 16px;
-            min-height: 102px;
-            border-radius: 8px;
-            background: #fff;
-            border: 1px solid rgba(23, 32, 42, 0.11);
+            padding: 18px;
+            min-height: 112px;
         }
 
         .skill strong {
             display: block;
-            margin-bottom: 6px;
-            color: var(--blue-dark);
+            margin-bottom: 7px;
+            color: var(--navy);
         }
 
         .skill span {
@@ -540,34 +594,69 @@
         }
 
         footer {
-            padding: 34px 20px 48px;
+            padding: 42px 20px 54px;
             color: rgba(255,255,255,0.72);
-            background: #152838;
+            background: #0c2030;
             text-align: center;
         }
 
-        @media (max-width: 900px) {
-            .hero {
+        @media (max-width: 1180px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-panel {
+                min-height: 380px;
+            }
+
+            .overview-grid,
+            .timeline,
+            .project-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .skill-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
+            :root {
+                --wrap: min(100vw - 28px, 1540px);
+            }
+
+            .hero,
+            .hero-inner {
                 min-height: auto;
             }
 
-            .hero-inner,
-            .two-col,
-            .section-head {
-                grid-template-columns: 1fr;
-            }
-
             .hero-inner {
-                padding-top: 68px;
+                padding-top: 76px;
             }
 
-            .radar-card {
-                min-height: 340px;
+            h1 {
+                font-size: clamp(3.2rem, 18vw, 5rem);
             }
 
+            .section-head,
+            .overview-grid,
+            .timeline,
+            .paper-list,
             .project-grid,
             .skill-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .paper {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-panel {
+                min-height: 480px;
             }
 
             .nav-inner {
@@ -578,38 +667,6 @@
 
             .nav-links {
                 justify-content: flex-start;
-            }
-        }
-
-        @media (max-width: 560px) {
-            .hero-inner,
-            main,
-            .nav-inner {
-                width: min(100% - 28px, 1180px);
-            }
-
-            h1 {
-                font-size: 3.1rem;
-            }
-
-            .hero-actions {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-            }
-
-            .paper {
-                grid-template-columns: 1fr;
-            }
-
-            .metric-strip {
-                grid-template-columns: 1fr;
-            }
-
-            .radar-card {
-                min-height: 440px;
             }
 
             .language-toggle {
@@ -627,9 +684,7 @@
             <div>
                 <p class="eyebrow" data-i18n="heroEyebrow">Radar Remote Sensing | SAR Imaging | Electromagnetic Scattering</p>
                 <h1>Yu Xiong</h1>
-                <p class="hero-summary" data-i18n="heroSummary">
-                    Ph.D. student at the State Key Laboratory of Millimeter Waves, Southeast University. My work focuses on SAR interference suppression and imaging, airborne weather radar echo simulation, and electromagnetic scattering modeling for complex meteorological targets.
-                </p>
+                <p class="hero-summary" data-i18n="heroSummary">Ph.D. student at the State Key Laboratory of Millimeter Waves, Southeast University. My work focuses on SAR interference suppression and imaging, airborne weather radar echo simulation, and electromagnetic scattering modeling for complex meteorological targets.</p>
                 <div class="hero-actions">
                     <a class="btn primary" href="#publications" data-i18n="heroPublications">Publications</a>
                     <a class="btn" href="#projects" data-i18n="heroProjects">Research Projects</a>
@@ -637,20 +692,20 @@
                 </div>
             </div>
 
-            <div class="radar-card" aria-label="Abstract radar signal visualization">
+            <div class="hero-panel" aria-label="Abstract radar signal visualization">
                 <div class="sweep"></div>
-                <div class="metric-strip">
-                    <div class="metric">
-                        <strong>21+</strong>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <strong>20</strong>
                         <span data-i18n="metricPapers">papers and manuscripts</span>
                     </div>
-                    <div class="metric">
+                    <div class="stat">
+                        <strong>11</strong>
+                        <span data-i18n="metricProjects">research projects</span>
+                    </div>
+                    <div class="stat">
                         <strong>1/44</strong>
                         <span data-i18n="metricRank">master's program rank</span>
-                    </div>
-                    <div class="metric">
-                        <strong>Open</strong>
-                        <span data-i18n="metricOpen">scientific software</span>
                     </div>
                 </div>
             </div>
@@ -670,28 +725,34 @@
         </div>
     </nav>
 
-    <main>
-        <section class="section" id="about">
+    <section class="band" id="about">
+        <div class="wrap">
             <div class="section-head">
                 <p class="kicker" data-i18n="profileKicker">Profile</p>
                 <div>
-                    <h2 data-i18n="profileTitle">Building radar algorithms from physics, data, and deployable software.</h2>
-                    <p class="lead" data-i18n="profileLead">I am a student member of the Chinese Society of Aeronautics and Astronautics, the Chinese Institute of Electronics, and IEEE. My research connects microwave remote sensing, SAR signal processing, and scientific computing.</p>
+                    <h2 data-i18n="profileTitle">Radar algorithms shaped by physics, data, and deployable systems.</h2>
+                    <p class="lead" data-i18n="profileLead">Student member of the Chinese Society of Aeronautics and Astronautics, the Chinese Institute of Electronics, and IEEE. Research interests include microwave remote sensing, SAR signal processing, weather radar simulation, and scientific computing.</p>
                 </div>
             </div>
-            <div class="two-col">
+            <div class="overview-grid">
                 <div class="panel">
                     <h3 data-i18n="transferTitle">Technology Transfer</h3>
                     <p data-i18n="transferText">The self-developed weather radar echo simulation software has been deployed and is running stably at the Zhejiang Meteorological Service Center.</p>
                 </div>
                 <div class="panel">
                     <h3 data-i18n="openTitle">Open Source</h3>
-                    <p data-i18n="openText">Co-developed TransitionMatrices.jl with Dr. Zihua Wu from Peking University, providing open tooling for light scattering and microwave remote-sensing forward modeling.</p>
+                    <p data-i18n="openText">Co-developed TransitionMatrices.jl with Dr. Zihua Wu from Peking University for light scattering and microwave remote-sensing forward modeling.</p>
+                </div>
+                <div class="panel">
+                    <h3 data-i18n="focusTitle">Research Focus</h3>
+                    <p data-i18n="focusText">Integrated SAR imaging and RFI suppression, hydrometeor scattering simulation, and radar echo modeling under complex environments.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="section" id="education">
+    <section class="band alt" id="education">
+        <div class="wrap">
             <div class="section-head">
                 <p class="kicker" data-i18n="educationKicker">Education</p>
                 <div>
@@ -699,114 +760,61 @@
                     <p class="lead" data-i18n="educationLead">A research trajectory across electronic information, information and communication engineering, and radar remote sensing.</p>
                 </div>
             </div>
-            <div class="panel timeline">
-                <div class="time-item">
+            <div class="timeline">
+                <div class="time-card">
                     <strong>Sep. 2025 - Present</strong>
                     <span data-i18n="eduPhd">Ph.D. student in Electronic Information, State Key Laboratory of Millimeter Waves, Southeast University.</span>
                 </div>
-                <div class="time-item">
+                <div class="time-card">
                     <strong>Sep. 2022 - Jul. 2025</strong>
                     <span data-i18n="eduMaster">M.S. in Information and Communication Engineering, Civil Aviation University of China. Ranked 1/44 and awarded the National Scholarship.</span>
                 </div>
-                <div class="time-item">
+                <div class="time-card">
                     <strong>Sep. 2018 - Jun. 2022</strong>
                     <span data-i18n="eduBachelor">B.E. in Electronic Information Engineering, Tianjin Chengjian University. GPA: 3.84/4.00, ranked 1/76, and awarded the National Scholarship.</span>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="section" id="publications">
+    <section class="band" id="publications">
+        <div class="wrap">
             <div class="section-head">
                 <p class="kicker" data-i18n="pubKicker">Publications</p>
                 <div>
                     <h2 data-i18n="pubTitle">Publications</h2>
-                    <p class="lead" data-i18n="pubLead">All listed papers are sorted by Yu Xiong's position in the author list. Papers where Yu Xiong is corresponding author or first author excluding the advisor are specially marked.</p>
+                    <p class="lead" data-i18n="pubLead">Sorted by Yu Xiong's position in the author list. Corresponding-author papers and papers where Yu Xiong is the first author excluding the advisor are marked inline.</p>
                 </div>
             </div>
             <div class="paper-toolbar">
                 <span data-i18n="pubSort">Sorted by author position</span>
-                <span data-i18n="pubRole1">Role tags shown inline</span>
+                <span data-i18n="pubRole">Role tags shown inline</span>
                 <span id="publicationCount"></span>
             </div>
             <div class="paper-list" id="publicationList"></div>
-        </section>
+        </div>
+    </section>
 
-        <section class="section" id="projects">
+    <section class="band alt" id="projects">
+        <div class="wrap">
             <div class="section-head">
                 <p class="kicker" data-i18n="projectsKicker">Research</p>
                 <div>
-                    <h2 data-i18n="projectsTitle">Projects</h2>
-                    <p class="lead" data-i18n="projectsLead">Representative research and engineering experiences across simulation, signal processing, and software deployment.</p>
+                    <h2 data-i18n="projectsTitle">Research Projects</h2>
+                    <p class="lead" data-i18n="projectsLead">Representative research and engineering experiences, including classified projects shown with the original confidential placeholders.</p>
                 </div>
             </div>
-            <div class="project-grid">
-                <article class="project">
-                    <h3 data-i18n="proj1Title">Fourier-MLP-Based Bicontinuous Medium Modeling and Radar Brightness Temperature Prediction</h3>
-                    <p>Mar. 2023 - Present</p>
-                    <ul>
-                        <li data-i18n="proj1A">Proposed an MLP-based medium-structure modeling method with Fourier feature embedding.</li>
-                        <li data-i18n="proj1B">Built Patch-Based Transformer and 3D U-Net networks for bicontinuous medium structure prediction.</li>
-                        <li data-i18n="proj1C">Implemented brightness temperature prediction, particle-type classification, and dual-polarization radar-variable simulation.</li>
-                    </ul>
-                </article>
+            <div class="project-grid" id="projectList"></div>
+        </div>
+    </section>
 
-                <article class="project">
-                    <h3 data-i18n="proj2Title">Airborne Weather Data Processing for Route Optimization under Severe Weather</h3>
-                    <p>Sep. 2022 - Sep. 2024</p>
-                    <ul>
-                        <li data-i18n="proj2A">Implemented airborne polarimetric weather radar data simulation.</li>
-                        <li data-i18n="proj2B">Prepared project reports, technical reports, and acceptance materials.</li>
-                    </ul>
-                </article>
-
-                <article class="project">
-                    <h3 data-i18n="proj3Title">Low-Altitude Windshear Wind-Speed Estimation for a New Radar System</h3>
-                    <p>Sep. 2022 - Sep. 2024</p>
-                    <ul>
-                        <li data-i18n="proj3A">Studied low-altitude windshear and ground-clutter signal characteristics under an airborne array weather radar framework.</li>
-                        <li data-i18n="proj3B">Developed adaptive windshear detection algorithms and wind-speed estimation methods.</li>
-                        <li data-i18n="proj3C">Modeled and simulated ground-clutter echo signals.</li>
-                    </ul>
-                </article>
-
-                <article class="project">
-                    <h3 data-i18n="proj4Title">X-Band Radar Observation Strategy Simulation and Optimization</h3>
-                    <p>Sep. 2022 - Sep. 2024</p>
-                    <ul>
-                        <li data-i18n="proj4A">Completed X-band weather radar echo simulation and severe-weather detection based on simulation results.</li>
-                        <li data-i18n="proj4B">Maintained project environments on Kylin OS and supported stable WRF operation under Linux.</li>
-                        <li data-i18n="proj4C">Implemented echo simulation based on pulse covariance matrices and Cholesky decomposition.</li>
-                    </ul>
-                </article>
-
-                <article class="project">
-                    <h3 data-i18n="proj5Title">Rainfall Electromagnetic Scattering Modeling and Simulation</h3>
-                    <p>Sep. 2022 - Oct. 2023</p>
-                    <ul>
-                        <li data-i18n="proj5A">Studied how particle size, shape, and orientation distribution affect scattering characteristics.</li>
-                        <li data-i18n="proj5B">Used the Invariant Imbedding T-Matrix method to simulate radar echoes.</li>
-                        <li data-i18n="proj5C">Developed and open-sourced TransitionMatrices.jl.</li>
-                    </ul>
-                </article>
-
-                <article class="project">
-                    <h3 data-i18n="proj6Title">Airborne Weather Radar Target Recognition Technology</h3>
-                    <p>Sep. 2022 - Jun. 2023</p>
-                    <ul>
-                        <li data-i18n="proj6A">Analyzed scattering characteristics of meteorological targets and used WRF for weather-event simulation.</li>
-                        <li data-i18n="proj6B">Added practical engineering waveforms, including Chirp, FMCW, and phase-coded waveforms.</li>
-                        <li data-i18n="proj6C">Built a polarimetric radar echo simulation verification system and a hydrometeor classification platform.</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
-
-        <section class="section" id="skills">
+    <section class="band dark" id="skills">
+        <div class="wrap">
             <div class="section-head">
                 <p class="kicker" data-i18n="skillsKicker">Toolbox</p>
                 <div>
                     <h2 data-i18n="skillsTitle">Skills</h2>
-                    <p class="lead" data-i18n="skillsLead">Programming, scientific computing, radar simulation, and embedded hardware experience.</p>
+                    <p class="lead" data-i18n="skillsLead">Programming, scientific computing, radar simulation, embedded hardware, and signal/image processing.</p>
                 </div>
             </div>
             <div class="skill-grid">
@@ -831,37 +839,39 @@
                     <span data-i18n="skill5Text">Wavelet transform, compressed sensing, fuzzy logic, deep learning</span>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <footer>
-        <p data-i18n="footer">Yu Xiong | xiongyuup's personal homepage</p>
+        <p data-i18n="footer">Yu Xiong | xiongyuup's academic homepage</p>
     </footer>
 
     <script>
         const translations = {
             en: {
-                title: "Yu Xiong | Radar, SAR, and Electromagnetic Scattering",
+                title: "Yu Xiong | Academic Homepage",
                 toggle: "中文",
                 heroEyebrow: "Radar Remote Sensing | SAR Imaging | Electromagnetic Scattering",
                 heroSummary: "Ph.D. student at the State Key Laboratory of Millimeter Waves, Southeast University. My work focuses on SAR interference suppression and imaging, airborne weather radar echo simulation, and electromagnetic scattering modeling for complex meteorological targets.",
                 heroPublications: "Publications",
                 heroProjects: "Research Projects",
                 metricPapers: "papers and manuscripts",
+                metricProjects: "research projects",
                 metricRank: "master's program rank",
-                metricOpen: "scientific software",
                 navAbout: "About",
                 navEducation: "Education",
                 navPublications: "Publications",
                 navProjects: "Projects",
                 navSkills: "Skills",
                 profileKicker: "Profile",
-                profileTitle: "Building radar algorithms from physics, data, and deployable software.",
-                profileLead: "I am a student member of the Chinese Society of Aeronautics and Astronautics, the Chinese Institute of Electronics, and IEEE. My research connects microwave remote sensing, SAR signal processing, and scientific computing.",
+                profileTitle: "Radar algorithms shaped by physics, data, and deployable systems.",
+                profileLead: "Student member of the Chinese Society of Aeronautics and Astronautics, the Chinese Institute of Electronics, and IEEE. Research interests include microwave remote sensing, SAR signal processing, weather radar simulation, and scientific computing.",
                 transferTitle: "Technology Transfer",
                 transferText: "The self-developed weather radar echo simulation software has been deployed and is running stably at the Zhejiang Meteorological Service Center.",
                 openTitle: "Open Source",
-                openText: "Co-developed TransitionMatrices.jl with Dr. Zihua Wu from Peking University, providing open tooling for light scattering and microwave remote-sensing forward modeling.",
+                openText: "Co-developed TransitionMatrices.jl with Dr. Zihua Wu from Peking University for light scattering and microwave remote-sensing forward modeling.",
+                focusTitle: "Research Focus",
+                focusText: "Integrated SAR imaging and RFI suppression, hydrometeor scattering simulation, and radar echo modeling under complex environments.",
                 educationKicker: "Education",
                 educationTitle: "Academic Path",
                 educationLead: "A research trajectory across electronic information, information and communication engineering, and radar remote sensing.",
@@ -870,39 +880,16 @@
                 eduBachelor: "B.E. in Electronic Information Engineering, Tianjin Chengjian University. GPA: 3.84/4.00, ranked 1/76, and awarded the National Scholarship.",
                 pubKicker: "Publications",
                 pubTitle: "Publications",
-                pubLead: "All listed papers are sorted by Yu Xiong's position in the author list. Papers where Yu Xiong is corresponding author or first author excluding the advisor are specially marked.",
+                pubLead: "Sorted by Yu Xiong's position in the author list. Corresponding-author papers and papers where Yu Xiong is the first author excluding the advisor are marked inline.",
                 pubSort: "Sorted by author position",
-                pubRole1: "Role tags shown inline",
-                pubCount: "21 entries",
+                pubRole: "Role tags shown inline",
+                pubCount: "20 entries",
                 projectsKicker: "Research",
-                projectsTitle: "Projects",
-                projectsLead: "Representative research and engineering experiences across simulation, signal processing, and software deployment.",
-                proj1Title: "Fourier-MLP-Based Bicontinuous Medium Modeling and Radar Brightness Temperature Prediction",
-                proj1A: "Proposed an MLP-based medium-structure modeling method with Fourier feature embedding.",
-                proj1B: "Built Patch-Based Transformer and 3D U-Net networks for bicontinuous medium structure prediction.",
-                proj1C: "Implemented brightness temperature prediction, particle-type classification, and dual-polarization radar-variable simulation.",
-                proj2Title: "Airborne Weather Data Processing for Route Optimization under Severe Weather",
-                proj2A: "Implemented airborne polarimetric weather radar data simulation.",
-                proj2B: "Prepared project reports, technical reports, and acceptance materials.",
-                proj3Title: "Low-Altitude Windshear Wind-Speed Estimation for a New Radar System",
-                proj3A: "Studied low-altitude windshear and ground-clutter signal characteristics under an airborne array weather radar framework.",
-                proj3B: "Developed adaptive windshear detection algorithms and wind-speed estimation methods.",
-                proj3C: "Modeled and simulated ground-clutter echo signals.",
-                proj4Title: "X-Band Radar Observation Strategy Simulation and Optimization",
-                proj4A: "Completed X-band weather radar echo simulation and severe-weather detection based on simulation results.",
-                proj4B: "Maintained project environments on Kylin OS and supported stable WRF operation under Linux.",
-                proj4C: "Implemented echo simulation based on pulse covariance matrices and Cholesky decomposition.",
-                proj5Title: "Rainfall Electromagnetic Scattering Modeling and Simulation",
-                proj5A: "Studied how particle size, shape, and orientation distribution affect scattering characteristics.",
-                proj5B: "Used the Invariant Imbedding T-Matrix method to simulate radar echoes.",
-                proj5C: "Developed and open-sourced TransitionMatrices.jl.",
-                proj6Title: "Airborne Weather Radar Target Recognition Technology",
-                proj6A: "Analyzed scattering characteristics of meteorological targets and used WRF for weather-event simulation.",
-                proj6B: "Added practical engineering waveforms, including Chirp, FMCW, and phase-coded waveforms.",
-                proj6C: "Built a polarimetric radar echo simulation verification system and a hydrometeor classification platform.",
+                projectsTitle: "Research Projects",
+                projectsLead: "Representative research and engineering experiences, including classified projects shown with the original confidential placeholders.",
                 skillsKicker: "Toolbox",
                 skillsTitle: "Skills",
-                skillsLead: "Programming, scientific computing, radar simulation, and embedded hardware experience.",
+                skillsLead: "Programming, scientific computing, radar simulation, embedded hardware, and signal/image processing.",
                 skill1Title: "Programming",
                 skill2Title: "Platforms",
                 skill2Text: "Linux, Kylin OS, Windows, HPC cluster deployment",
@@ -910,12 +897,11 @@
                 skill4Title: "Hardware",
                 skill5Title: "Processing",
                 skill5Text: "Wavelet transform, compressed sensing, fuzzy logic, deep learning",
-                footer: "Yu Xiong | xiongyuup's personal homepage",
+                footer: "Yu Xiong | xiongyuup's academic homepage",
                 labels: {
                     submitted: "Submitted",
                     published: "Published",
                     accepted: "Accepted",
-                    tbd: "TBD",
                     new: "New",
                     first: "First author",
                     cofirstAdvisor: "First author excluding advisor",
@@ -925,15 +911,15 @@
                 }
             },
             zh: {
-                title: "熊昱 | 个人主页",
+                title: "熊昱 | 学术主页",
                 toggle: "English",
                 heroEyebrow: "雷达遥感 | SAR 成像 | 电磁散射",
                 heroSummary: "东南大学毫米波全国重点实验室电子信息博士研究生。研究方向包括 SAR 抗干扰成像、机载气象雷达回波仿真，以及复杂气象目标的电磁散射建模。",
                 heroPublications: "科研成果",
                 heroProjects: "科研项目",
                 metricPapers: "论文与投稿",
+                metricProjects: "科研项目",
                 metricRank: "硕士专业排名",
-                metricOpen: "开源科研软件",
                 navAbout: "简介",
                 navEducation: "教育经历",
                 navPublications: "科研成果",
@@ -941,11 +927,13 @@
                 navSkills: "专业技能",
                 profileKicker: "个人简介",
                 profileTitle: "面向物理机理、数据建模与工程落地的雷达算法研究。",
-                profileLead: "中国航空学会学生会员、中国电子学会学生会员、IEEE Student Member。研究围绕微波遥感、SAR 信号处理和科学计算展开。",
+                profileLead: "中国航空学会学生会员、中国电子学会学生会员、IEEE Student Member。研究方向包括微波遥感、SAR 信号处理、气象雷达仿真和科学计算。",
                 transferTitle: "成果转化",
                 transferText: "自主研发的气象雷达回波仿真软件已在浙江省气象服务中心部署并稳定运行。",
                 openTitle: "开源贡献",
-                openText: "与北京大学吴自华博士共同开发 TransitionMatrices.jl，为光散射和微波遥感前向建模提供开源工具。",
+                openText: "与北京大学吴自华博士共同开发 TransitionMatrices.jl，用于光散射和微波遥感前向建模。",
+                focusTitle: "研究方向",
+                focusText: "SAR 成像与射频干扰抑制一体化、降水粒子散射仿真、复杂环境下雷达回波建模。",
                 educationKicker: "教育经历",
                 educationTitle: "学术经历",
                 educationLead: "围绕电子信息、信息与通信工程、雷达遥感逐步展开的研究路径。",
@@ -954,39 +942,16 @@
                 eduBachelor: "天津城建大学电子信息工程本科，GPA 3.84/4.00，专业排名 1/76，获国家奖学金。",
                 pubKicker: "科研成果",
                 pubTitle: "科研论文",
-                pubLead: "论文按照熊昱在作者列表中的位置排序。熊昱为通信作者或除导师外第一作者的论文已在右侧标签中特别标注。",
+                pubLead: "论文按照熊昱在作者列表中的位置排序。熊昱为通信作者或除导师外第一作者的论文已在标签中特别标注。",
                 pubSort: "按作者位置排序",
-                pubRole1: "身份标签已标注",
-                pubCount: "共 21 项",
+                pubRole: "身份标签已标注",
+                pubCount: "共 20 项",
                 projectsKicker: "科研经历",
                 projectsTitle: "项目经历",
-                projectsLead: "覆盖仿真建模、信号处理、平台部署与工程验证的代表性研究经历。",
-                proj1Title: "基于 Fourier-MLP 的双连续介质建模与雷达亮温预测",
-                proj1A: "提出基于 Fourier 特征嵌入的 MLP 介质结构建模方法。",
-                proj1B: "构建 Patch-Based Transformer 与 3D U-Net 网络预测双连续介质结构。",
-                proj1C: "实现亮温预测、粒子类型分类以及双极化雷达变量仿真。",
-                proj2Title: "面向恶劣天气航路优化的机载气象数据处理",
-                proj2A: "实现机载极化气象雷达数据仿真。",
-                proj2B: "撰写项目报告、技术报告与验收材料。",
-                proj3Title: "新型雷达低空风切变风速估计",
-                proj3A: "研究机载阵列气象雷达体系下的低空风切变与地杂波信号特性。",
-                proj3B: "开发自适应风切变检测算法与风速估计方法。",
-                proj3C: "完成地杂波回波信号建模与仿真。",
-                proj4Title: "X 波段雷达观测策略仿真与优化",
-                proj4A: "完成 X 波段气象雷达回波仿真，并基于仿真结果开展灾害性天气检测。",
-                proj4B: "维护麒麟系统项目环境，支持 WRF 在 Linux 下稳定运行。",
-                proj4C: "实现基于脉冲协方差矩阵和 Cholesky 分解的回波仿真。",
-                proj5Title: "降雨电磁散射特性建模与仿真",
-                proj5A: "研究粒子尺寸、形状和取向分布对散射特性的影响。",
-                proj5B: "使用不变嵌入 T 矩阵方法模拟雷达回波。",
-                proj5C: "开发并开源 TransitionMatrices.jl。",
-                proj6Title: "机载气象雷达目标识别技术",
-                proj6A: "分析气象目标散射特性，并使用 WRF 完成天气事件仿真。",
-                proj6B: "加入 Chirp、FMCW、相位编码等工程常用仿真波形。",
-                proj6C: "搭建极化雷达回波仿真验证系统与降水粒子分类平台。",
+                projectsLead: "覆盖仿真建模、信号处理、平台部署与工程验证的代表性经历，涉密项目保留原始 XXXX 占位表述。",
                 skillsKicker: "专业能力",
                 skillsTitle: "技能",
-                skillsLead: "涵盖编程、科学计算、雷达仿真和嵌入式硬件。",
+                skillsLead: "涵盖编程、科学计算、雷达仿真、嵌入式硬件与图像/信号处理。",
                 skill1Title: "编程语言",
                 skill2Title: "系统平台",
                 skill2Text: "Linux、麒麟系统、Windows、高性能计算集群部署",
@@ -994,12 +959,11 @@
                 skill4Title: "硬件经验",
                 skill5Title: "信号处理",
                 skill5Text: "小波变换、压缩感知、模糊逻辑、深度学习",
-                footer: "熊昱 | xiongyuup 个人主页",
+                footer: "熊昱 | xiongyuup 学术主页",
                 labels: {
                     submitted: "已投稿",
                     published: "已发表",
                     accepted: "已录用",
-                    tbd: "待定",
                     new: "新增",
                     first: "第一作者",
                     cofirstAdvisor: "除导师外第一作者",
@@ -1068,12 +1032,12 @@
                 position: 2
             },
             {
-                title: "Bicontinuous Medium Particle Modeling Based on Fourier-MLP and Accelerated Computation Method for Invariant Imbedding T-Matrix",
-                zhTitle: "基于 Fourier-MLP 的双连续介质粒子建模及不变嵌入 T 矩阵加速计算方法",
+                title: "基于 Fourier-MLP 的双连续介质粒子建模及不变嵌入 T 矩阵加速计算方法",
+                enTitle: "Bicontinuous Medium Particle Modeling Based on Fourier-MLP and Accelerated Computation Method for Invariant Imbedding T-Matrix",
                 authors: ["J. Guo", "Y. Xiong", "H. Li", "Z. Wu", "Z. Sun"],
-                venue: "Venue to be determined.",
-                zhVenue: "待定。",
-                tags: ["tbd", "corresponding", "international"],
+                venue: "Submitted to Chinese Journal of Computational Physics.",
+                zhVenue: "已投稿《计算物理》。",
+                tags: ["submitted", "corresponding", "chinese"],
                 position: 2
             },
             {
@@ -1082,15 +1046,6 @@
                 venue: "Venue to be determined.",
                 zhVenue: "待定。",
                 tags: ["accepted", "corresponding", "international"],
-                position: 2
-            },
-            {
-                title: "Bicontinuous Medium Particle Modeling Based on Fourier-MLP and Accelerated Computation Method for Invariant Imbedding T-Matrix",
-                zhTitle: "基于 Fourier-MLP 的双连续介质粒子建模及不变嵌入 T 矩阵加速计算方法",
-                authors: ["J. Guo", "Y. Xiong", "H. Li", "Z. Wu", "Z. Sun"],
-                venue: "Chinese journal paper, venue to be determined.",
-                zhVenue: "中文期刊论文，待定。",
-                tags: ["tbd", "corresponding", "chinese"],
                 position: 2
             },
             {
@@ -1173,6 +1128,175 @@
             }
         ];
 
+        const projects = [
+            {
+                date: "XXXX.XX - XXXX.XX",
+                title: "XXXX Radar System Development and Core Algorithm Optimization",
+                zhTitle: "XXXX 雷达系统开发与核心算法优化",
+                bullets: [
+                    "Participated in the core signal processing algorithm design for a classified XXXX project under complex electromagnetic environments.",
+                    "Responsible for XXXX target feature extraction and modeling."
+                ],
+                zhBullets: [
+                    "参与复杂电磁环境下涉密 XXXX 项目的核心信号处理算法设计。",
+                    "负责 XXXX 目标的特征提取与建模仿真工作。"
+                ],
+                classified: true
+            },
+            {
+                date: "XXXX.XX - XXXX.XX",
+                title: "Research on XXXX Target Recognition and Feature Extraction",
+                zhTitle: "XXXX 目标识别与特征提取研究",
+                bullets: [
+                    "Developed distributed processing frameworks and hardware-in-the-loop simulation for XXXX data.",
+                    "Proposed novel XXXX suppression methods to enhance detection performance."
+                ],
+                zhBullets: [
+                    "开发面向 XXXX 数据的分布式处理框架及半实物仿真验证。",
+                    "提出新型 XXXX 抑制方法，有效提升系统检测性能。"
+                ],
+                classified: true
+            },
+            {
+                date: "XXXX.XX - XXXX.XX",
+                title: "XXXX High-Performance Computing and Data Processing Platform",
+                zhTitle: "XXXX 高性能计算与数据处理平台研制",
+                bullets: [
+                    "Led the construction of the XXXX massive data processing platform and optimized the underlying computing architecture.",
+                    "Achieved real-time rendering and processing of XXXX massive echo data."
+                ],
+                zhBullets: [
+                    "主导搭建 XXXX 海量数据处理平台，优化底层计算架构。",
+                    "实现对 XXXX 海量回波数据的实时解算与渲染处理。"
+                ],
+                classified: true
+            },
+            {
+                date: "XXXX.XX - XXXX.XX",
+                title: "XXXX Advanced Signal Processing and Interference Mitigation",
+                zhTitle: "XXXX 先进信号处理与抗干扰技术研究",
+                bullets: [
+                    "Conducted in-depth research on XXXX interference mechanisms and established a complete simulation verification system.",
+                    "Improved the robustness and anti-interference capability of the XXXX system under complex scenarios."
+                ],
+                zhBullets: [
+                    "深入研究 XXXX 干扰机理，并建立完整的仿真验证系统。",
+                    "有效提升 XXXX 系统在复杂场景下的鲁棒性与抗干扰能力。"
+                ],
+                classified: true
+            },
+            {
+                date: "Mar. 2023 - Present",
+                zhDate: "2023.03 - 至今",
+                title: "Fourier-MLP-Based Bicontinuous Medium Modeling and Radar Brightness Temperature Prediction",
+                zhTitle: "基于 Fourier-MLP 的双连续介质结构建模与雷达亮温预测研究",
+                bullets: [
+                    "Proposed an MLP-based medium-structure modeling method with Fourier feature embedding.",
+                    "Constructed Patch-Based Transformer and 3D U-Net networks to predict bicontinuous medium structures.",
+                    "Implemented brightness temperature prediction, particle-type classification, and dual-polarization radar-variable simulation."
+                ],
+                zhBullets: [
+                    "提出基于 Fourier 特征嵌入的 MLP 结构进行介质结构建模。",
+                    "构建 Patch-Based Transformer 和 3D U-Net 网络预测双连续介质结构。",
+                    "实现亮温预测、粒子类型分类以及双极化雷达变量模拟。"
+                ]
+            },
+            {
+                date: "Sep. 2022 - Sep. 2024",
+                zhDate: "2022.09 - 2024.09",
+                title: "Airborne Weather Data Processing for Route Optimization under Severe Weather",
+                zhTitle: "面向恶劣天气下航路优化的机载气象数据处理技术研究",
+                bullets: [
+                    "Implemented airborne polarimetric weather radar data simulation.",
+                    "Prepared project reports, technical reports, and acceptance materials."
+                ],
+                zhBullets: [
+                    "实现机载极化气象雷达数据仿真。",
+                    "撰写项目报告、技术报告以及验收汇报等材料。"
+                ]
+            },
+            {
+                date: "Sep. 2022 - Sep. 2024",
+                zhDate: "2022.09 - 2024.09",
+                title: "High-Safety Design and Low-Altitude Windshear Wind-Speed Estimation for a New Radar System",
+                zhTitle: "高安全性设计方法在新型 XXXX 雷达的应用验证及风切变风速精确估计关键技术研究",
+                bullets: [
+                    "Studied low-altitude windshear and ground-clutter signal characteristics under an airborne array weather radar framework.",
+                    "Developed adaptive low-altitude windshear detection algorithms and wind-speed estimation methods.",
+                    "Modeled and simulated ground-clutter echo signals."
+                ],
+                zhBullets: [
+                    "在机载阵列气象雷达体系下研究低空风切变和地杂波信号特性，实现自适应低空风切变检测算法和风速估计。",
+                    "仿真机载阵列气象雷达低空风切变回波信号，完成 STAP 低空风切变检测算法研究。",
+                    "实现地杂波回波信号建模与仿真。"
+                ]
+            },
+            {
+                date: "Sep. 2022 - Sep. 2024",
+                zhDate: "2022.09 - 2024.09",
+                title: "X-Band Radar Observation Strategy Simulation and Optimization",
+                zhTitle: "X 波段雷达观测策略仿真与优化模块",
+                bullets: [
+                    "Completed X-band weather radar echo simulation and severe-weather detection based on simulation results.",
+                    "Maintained project environments on Kylin OS and supported stable WRF operation under Linux.",
+                    "Implemented echo simulation based on a pulse covariance matrix and Cholesky decomposition, including radial velocity and spectrum width."
+                ],
+                zhBullets: [
+                    "完成 X 波段气象雷达回波仿真，并根据仿真结果进行灾害性天气检测。",
+                    "负责项目环境在麒麟系统上的稳定运行，实现 WRF 在该系统下运行。",
+                    "实现基于脉冲协方差矩阵 Cholesky 分解的回波仿真方法，完成径向速度和谱宽信息添加。"
+                ]
+            },
+            {
+                date: "Sep. 2022 - Oct. 2023",
+                zhDate: "2022.09 - 2023.10",
+                title: "Rainfall Electromagnetic Scattering Modeling and Simulation in Collaboration with Xidian University",
+                zhTitle: "与西电合作：降雨电磁散射特性建模与模拟",
+                bullets: [
+                    "Studied the effects of particle size, shape, and orientation distribution on scattering characteristics.",
+                    "Used the Invariant Imbedding T-Matrix method to simulate actual radar echoes.",
+                    "Developed and open-sourced the high-performance modeling toolkit TransitionMatrices.jl."
+                ],
+                zhBullets: [
+                    "研究不同粒子的尺寸、形状、取向分布对散射特性的影响。",
+                    "使用不变嵌入 T 矩阵方法模拟实际雷达回波。",
+                    "开发并开源 TransitionMatrices.jl 高性能建模工具包。"
+                ]
+            },
+            {
+                date: "Sep. 2022 - Oct. 2023",
+                zhDate: "2022.09 - 2023.10",
+                title: "Logistics Process Data Analysis and IoT Feasibility Study for Cargo Aircraft and Airport Infrastructure",
+                zhTitle: "中国物流流程数据分析与物联网在货运飞机及机场基础设施应用的可行性协同研究",
+                bullets: [
+                    "Participated in a collaborative project with Boeing as the student lead.",
+                    "Coordinated project tasks, wrote IoT-related sections, and investigated IIC, CAN, serial communication, and other bus communication methods."
+                ],
+                zhBullets: [
+                    "参与与波音公司的合作项目，作为学生负责人统筹项目任务。",
+                    "撰写物联网相关章节，深入了解 IIC、CAN、串口等各类总线通信方式。"
+                ]
+            },
+            {
+                date: "Sep. 2022 - Jun. 2023",
+                zhDate: "2022.09 - 2023.06",
+                title: "Airborne Weather Radar Target Recognition Technology",
+                zhTitle: "机载气象雷达 xx 和 xxxx 识别技术研究",
+                bullets: [
+                    "Analyzed scattering characteristics of meteorological targets and used WRF for weather-event simulation.",
+                    "Added practical engineering waveforms, including Chirp, FMCW, and phase-coded waveforms.",
+                    "Studied airborne weather radar principles and built an airborne meteorological target echo simulation system.",
+                    "Built a polarimetric radar echo simulation verification system and a hydrometeor classification platform."
+                ],
+                zhBullets: [
+                    "分析气象目标散射特性，利用 WRF 实现气象事件预报模拟仿真。",
+                    "增加工程实际使用的仿真波形，包括线性调频、调频连续波、相位编码。",
+                    "研究机载气象雷达原理，构建机载气象目标回波仿真系统。",
+                    "搭建极化雷达回波仿真验证系统和降水粒子分类平台。"
+                ]
+            }
+        ];
+
         let currentLang = "en";
 
         function renderText(lang) {
@@ -1191,10 +1315,11 @@
             const labels = translations[lang].labels;
             const list = document.getElementById("publicationList");
             list.innerHTML = publications
+                .slice()
                 .sort((a, b) => a.position - b.position)
                 .map((paper) => {
-                    const title = lang === "zh" && paper.zhTitle ? paper.zhTitle : paper.title;
-                    const venue = lang === "zh" && paper.zhVenue ? paper.zhVenue : paper.venue;
+                    const title = lang === "zh" ? (paper.zhTitle || paper.title) : paper.title;
+                    const venue = lang === "zh" ? (paper.zhVenue || paper.venue) : paper.venue;
                     const authors = paper.authors
                         .map((author) => author === "Y. Xiong" ? `<span class="highlight-name">${author}</span>` : author)
                         .join(", ");
@@ -1215,10 +1340,31 @@
                 .join("");
         }
 
+        function renderProjects(lang) {
+            const list = document.getElementById("projectList");
+            list.innerHTML = projects
+                .map((project) => {
+                    const title = lang === "zh" ? (project.zhTitle || project.title) : project.title;
+                    const date = lang === "zh" ? (project.zhDate || project.date) : project.date;
+                    const bullets = lang === "zh" ? (project.zhBullets || project.bullets) : project.bullets;
+                    return `
+                        <article class="project ${project.classified ? "classified" : ""}">
+                            <p class="date">${date}</p>
+                            <h3>${title}</h3>
+                            <ul>
+                                ${bullets.map((item) => `<li>${item}</li>`).join("")}
+                            </ul>
+                        </article>
+                    `;
+                })
+                .join("");
+        }
+
         function setLanguage(lang) {
             currentLang = lang;
             renderText(lang);
             renderPublications(lang);
+            renderProjects(lang);
         }
 
         document.getElementById("languageToggle").addEventListener("click", () => {
