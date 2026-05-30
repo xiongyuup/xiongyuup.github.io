@@ -43,6 +43,64 @@
             color: inherit;
         }
 
+        .cursor-fx {
+            position: fixed;
+            inset: 0;
+            z-index: 12;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .cursor-glow,
+        .cursor-dot {
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 50%;
+            opacity: 0;
+            transform: translate3d(-50%, -50%, 0);
+            transition: opacity 0.22s ease;
+            will-change: transform, opacity;
+        }
+
+        .cursor-glow {
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(184, 231, 220, 0.22), rgba(47, 129, 120, 0.12) 38%, transparent 70%);
+            mix-blend-mode: screen;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: #b8e7dc;
+            box-shadow: 0 0 18px rgba(184, 231, 220, 0.86);
+        }
+
+        .cursor-ripple {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 1px solid rgba(184, 231, 220, 0.42);
+            border-radius: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            animation: rippleFade 0.9s ease-out forwards;
+        }
+
+        @keyframes rippleFade {
+            to {
+                width: 58px;
+                height: 58px;
+                opacity: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cursor-fx {
+                display: none;
+            }
+        }
+
         .language-toggle {
             position: fixed;
             top: 18px;
@@ -676,17 +734,25 @@
                 top: 12px;
                 right: 12px;
             }
+
+            .cursor-fx {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="cursor-fx" aria-hidden="true">
+        <div class="cursor-glow" id="cursorGlow"></div>
+        <div class="cursor-dot" id="cursorDot"></div>
+    </div>
     <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch language">中文</button>
 
     <section class="hero" id="top">
         <div class="hero-inner">
             <div>
                 <p class="eyebrow" data-i18n="heroEyebrow">Radar Remote Sensing | SAR Imaging | Electromagnetic Scattering</p>
-                <h1>Yu Xiong</h1>
+                <h1 data-i18n="heroName">Yu Xiong</h1>
                 <p class="hero-summary" data-i18n="heroSummary">Ph.D. student at the State Key Laboratory of Millimeter Waves, Southeast University. My work focuses on SAR interference suppression and imaging, airborne weather radar echo simulation, and electromagnetic scattering modeling for complex meteorological targets.</p>
                 <div class="hero-actions">
                     <a class="btn primary" href="#publications" data-i18n="heroPublications">Publications</a>
@@ -854,6 +920,7 @@
             en: {
                 title: "Yu Xiong | Academic Homepage",
                 toggle: "中文",
+                heroName: "Yu Xiong / 熊玉",
                 heroEyebrow: "Radar Remote Sensing | SAR Imaging | Electromagnetic Scattering",
                 heroSummary: "Ph.D. student at the State Key Laboratory of Millimeter Waves, Southeast University. My work focuses on SAR interference suppression and imaging, airborne weather radar echo simulation, and electromagnetic scattering modeling for complex meteorological targets.",
                 heroPublications: "Publications",
@@ -914,8 +981,9 @@
                 }
             },
             zh: {
-                title: "熊昱 | 学术主页",
+                title: "熊玉 | 学术主页",
                 toggle: "English",
+                heroName: "熊玉",
                 heroEyebrow: "雷达遥感 | SAR 成像 | 电磁散射",
                 heroSummary: "东南大学毫米波全国重点实验室电子信息博士研究生。研究方向包括 SAR 抗干扰成像、机载气象雷达回波仿真，以及复杂气象目标的电磁散射建模。",
                 heroPublications: "科研成果",
@@ -945,7 +1013,7 @@
                 eduBachelor: "天津城建大学电子信息工程本科，GPA 3.84/4.00，专业排名 1/76，获国家奖学金。",
                 pubKicker: "科研成果",
                 pubTitle: "科研论文",
-                pubLead: "论文按照熊昱在作者列表中的位置排序。熊昱为通信作者或除导师外第一作者的论文已在标签中特别标注。",
+                pubLead: "论文按照熊玉在作者列表中的位置排序。熊玉为通信作者或除导师外第一作者的论文已在标签中特别标注。",
                 pubSort: "按作者位置排序",
                 pubRole: "身份标签已标注",
                 pubCount: "共 20 项",
@@ -962,7 +1030,7 @@
                 skill4Title: "硬件经验",
                 skill5Title: "信号处理",
                 skill5Text: "小波变换、压缩感知、模糊逻辑、深度学习",
-                footer: "熊昱 | xiongyuup 学术主页",
+                footer: "熊玉 | xiongyuup 学术主页",
                 labels: {
                     submitted: "已投稿",
                     published: "已发表",
@@ -1374,7 +1442,61 @@
             setLanguage(currentLang === "en" ? "zh" : "en");
         });
 
+        function initCursorEffect() {
+            const layer = document.querySelector(".cursor-fx");
+            const glow = document.getElementById("cursorGlow");
+            const dot = document.getElementById("cursorDot");
+            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+            if (!layer || !glow || !dot || reduceMotion || !finePointer) return;
+
+            let targetX = window.innerWidth / 2;
+            let targetY = window.innerHeight / 2;
+            let glowX = targetX;
+            let glowY = targetY;
+            let lastRipple = 0;
+
+            function move() {
+                glowX += (targetX - glowX) * 0.14;
+                glowY += (targetY - glowY) * 0.14;
+                glow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0) translate(-50%, -50%)`;
+                dot.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) translate(-50%, -50%)`;
+                requestAnimationFrame(move);
+            }
+
+            function addRipple(x, y) {
+                const ripple = document.createElement("span");
+                ripple.className = "cursor-ripple";
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                layer.appendChild(ripple);
+                window.setTimeout(() => ripple.remove(), 950);
+            }
+
+            window.addEventListener("pointermove", (event) => {
+                targetX = event.clientX;
+                targetY = event.clientY;
+                glow.style.opacity = "1";
+                dot.style.opacity = "1";
+
+                const now = performance.now();
+                if (now - lastRipple > 120) {
+                    addRipple(targetX, targetY);
+                    lastRipple = now;
+                }
+            }, { passive: true });
+
+            window.addEventListener("pointerleave", () => {
+                glow.style.opacity = "0";
+                dot.style.opacity = "0";
+            });
+
+            move();
+        }
+
         setLanguage("en");
+        initCursorEffect();
     </script>
 </body>
 </html>
