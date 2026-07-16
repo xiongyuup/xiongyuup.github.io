@@ -459,6 +459,14 @@
             color: var(--muted);
         }
 
+        .panel a {
+            color: var(--blue);
+            font-weight: 780;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+        }
+
         .timeline {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -765,7 +773,7 @@
                 <div class="sweep"></div>
                 <div class="hero-stats">
                     <div class="stat">
-                        <strong>20</strong>
+                        <strong>26</strong>
                         <span data-i18n="metricPapers">papers and manuscripts</span>
                     </div>
                     <div class="stat">
@@ -810,7 +818,7 @@
                 </div>
                 <div class="panel">
                     <h3 data-i18n="openTitle">Open Source</h3>
-                    <p data-i18n="openText">Co-developed TransitionMatrices.jl with Dr. Zihua Wu from Peking University for light scattering and microwave remote-sensing forward modeling.</p>
+                    <p data-i18n-html="openText">Co-developed TransitionMatrices.jl with Dr. Zihua Wu from Peking University for light scattering and microwave remote-sensing forward modeling.</p>
                 </div>
                 <div class="panel">
                     <h3 data-i18n="focusTitle">Research Focus</h3>
@@ -897,7 +905,7 @@
                 </div>
                 <div class="skill">
                     <strong data-i18n="skill3Title">Research Tools</strong>
-                    <span>WRF, NCL, TransitionMatrices.jl, MonteCarloRadiativeTransfer.jl</span>
+                    <span>WRF, NCL, TransitionMatrices.jl, ParticleModels.jl, MonteCarloRadiativeTransfer.jl</span>
                 </div>
                 <div class="skill">
                     <strong data-i18n="skill4Title">Hardware</strong>
@@ -939,7 +947,7 @@
                 transferTitle: "Technology Transfer",
                 transferText: "The self-developed weather radar echo simulation software has been deployed and is running stably at the Zhejiang Meteorological Service Center.",
                 openTitle: "Open Source",
-                openText: "Co-developed TransitionMatrices.jl with Dr. Zihua Wu from Peking University for light scattering and microwave remote-sensing forward modeling.",
+                openText: "Co-developed TransitionMatrices.jl and <a href=\"https://github.com/JuliaRemoteSensing/ParticleModels.jl\" target=\"_blank\" rel=\"noopener\">ParticleModels.jl</a> with Dr. Zihua Wu from Peking University. ParticleModels.jl is a complex-shaped particle modeling package with interfaces for ADDA, FDTD, and IITM workflows.",
                 focusTitle: "Research Focus",
                 focusText: "Integrated SAR imaging and RFI suppression, hydrometeor scattering simulation, and radar echo modeling under complex environments.",
                 educationKicker: "Education",
@@ -953,7 +961,7 @@
                 pubLead: "Sorted by Yu Xiong's position in the author list. Corresponding-author papers and papers where Yu Xiong is the first author excluding the advisor are marked inline.",
                 pubSort: "Sorted by author position",
                 pubRole: "Role tags shown inline",
-                pubCount: "20 entries",
+                pubCount: "26 entries",
                 projectsKicker: "Research",
                 projectsTitle: "Research Projects",
                 projectsLead: "Representative research and engineering experiences, including classified projects shown with the original confidential placeholders.",
@@ -970,9 +978,11 @@
                 footer: "Yu Xiong | xiongyuup's academic homepage",
                 labels: {
                     submitted: "Submitted",
+                    underReview: "Under review",
                     published: "Published",
                     accepted: "Accepted",
                     new: "New",
+                    arxiv: "arXiv",
                     first: "First author",
                     cofirstAdvisor: "First author excluding advisor",
                     corresponding: "Corresponding author",
@@ -1002,7 +1012,7 @@
                 transferTitle: "成果转化",
                 transferText: "自主研发的气象雷达回波仿真软件已在浙江省气象服务中心部署并稳定运行。",
                 openTitle: "开源贡献",
-                openText: "与北京大学吴自华博士共同开发 TransitionMatrices.jl，用于光散射和微波遥感前向建模。",
+                openText: "与北京大学吴自华博士共同开发 TransitionMatrices.jl 和 <a href=\"https://github.com/JuliaRemoteSensing/ParticleModels.jl\" target=\"_blank\" rel=\"noopener\">ParticleModels.jl</a>。ParticleModels.jl 是复杂形状粒子建模包，支持 ADDA、FDTD、IITM 三大算法接口。",
                 focusTitle: "研究方向",
                 focusText: "SAR 成像与射频干扰抑制一体化、降水粒子散射仿真、复杂环境下雷达回波建模。",
                 educationKicker: "教育经历",
@@ -1016,7 +1026,7 @@
                 pubLead: "论文按照熊玉在作者列表中的位置排序。熊玉为通信作者或除导师外第一作者的论文已在标签中特别标注。",
                 pubSort: "按作者位置排序",
                 pubRole: "身份标签已标注",
-                pubCount: "共 20 项",
+                pubCount: "共 26 项",
                 projectsKicker: "科研经历",
                 projectsTitle: "项目经历",
                 projectsLead: "覆盖仿真建模、信号处理、平台部署与工程验证的代表性经历，涉密项目保留原始 XXXX 占位表述。",
@@ -1033,9 +1043,11 @@
                 footer: "熊玉 | xiongyuup 学术主页",
                 labels: {
                     submitted: "已投稿",
+                    underReview: "在审",
                     published: "已发表",
                     accepted: "已录用",
                     new: "新增",
+                    arxiv: "arXiv",
                     first: "第一作者",
                     cofirstAdvisor: "除导师外第一作者",
                     corresponding: "通信作者",
@@ -1082,6 +1094,22 @@
                 position: 1
             },
             {
+                title: "Imaging Operator-Aware SAR Image Restoration Method Based on Focus-Defocus Contrast Regularization",
+                authors: ["Y. Xiong", "Y. Huang", "Y. Chen", "Y. Mao", "K. Deng", "S. Gu"],
+                venue: "Under review at IEEE Transactions on Image Processing (TIP).",
+                zhVenue: "IEEE Transactions on Image Processing (TIP) 在审。",
+                tags: ["underReview", "first", "international"],
+                position: 1
+            },
+            {
+                title: "Fast Fourier Azimuthal Spectral Assembly for Invariant-Imbedding T-Matrix Simulations of Inhomogeneous Atmospheric Particles",
+                authors: ["Y. Xiong", "Z. Wu", "J. Guo"],
+                venue: "Under review at IEEE Geoscience and Remote Sensing Letters (GRSL).",
+                zhVenue: "IEEE Geoscience and Remote Sensing Letters (GRSL) 在审。",
+                tags: ["underReview", "first", "international"],
+                position: 1
+            },
+            {
                 title: "Simulation of Complex Meteorological Target Echoes for Airborne Dual-Polarization Weather Radar Based on Invariant Imbedding T-Matrix",
                 authors: ["H. Li", "Y. Xiong", "Y. Chen"],
                 venue: "IEEE Transactions on Geoscience and Remote Sensing, vol. 62, pp. 1-17, 2024, Art no. 5105817.",
@@ -1109,6 +1137,23 @@
                 venue: "Submitted to Chinese Journal of Computational Physics.",
                 zhVenue: "已投稿《计算物理》。",
                 tags: ["submitted", "corresponding", "chinese"],
+                position: 2
+            },
+            {
+                title: "Adaptive Sorting Method for Radar Signals Oriented to RF-Domain Interference Mitigation",
+                zhTitle: "一种面向射频域抗干扰的雷达信号自适应分选方法",
+                authors: ["J. Guo", "Y. Xiong"],
+                venue: "Under review at Modern Radar.",
+                zhVenue: "《现代雷达》在审。",
+                tags: ["underReview", "corresponding", "chinese"],
+                position: 2
+            },
+            {
+                title: "Boundary-Conformal Integration for the Invariant-Imbedding T-Matrix Method: High-Order Convergence for Faceted Particles",
+                authors: ["Z. Wu", "Y. Xiong"],
+                venue: "arXiv:2606.21063; under review.",
+                zhVenue: "arXiv:2606.21063；在审。",
+                tags: ["underReview", "arxiv", "international"],
                 position: 2
             },
             {
@@ -1173,6 +1218,22 @@
                 venue: "Journal of Electronics & Information Technology, 2024, 46(08): 3193-3201.",
                 zhVenue: "《电子与信息学报》，2024，46(08)：3193-3201。",
                 tags: ["published", "chinese"],
+                position: 4
+            },
+            {
+                title: "Robust Time-Frequency DOA Estimation Under Low SNR Condition via Bidirectional Mapping Information",
+                authors: ["S. Gu", "Y. Chen", "Y. Zhang", "Y. Xiong", "J. Guo", "J. Li", "Y. Huang"],
+                venue: "Under review at IEEE Transactions on Aerospace and Electronic Systems (TAES).",
+                zhVenue: "IEEE Transactions on Aerospace and Electronic Systems (TAES) 在审。",
+                tags: ["underReview", "international"],
+                position: 4
+            },
+            {
+                title: "A Sixth-Order Frequency-NCS Algorithm for High-Speed Squint-Forward-Looking SAR Imaging Based on Joint Regularity of POSP and MSR",
+                authors: ["K. Deng", "Y. Huang", "X. Tian", "Y. Xiong", "Z. Chen", "J. Wan"],
+                venue: "Under review at IEEE Transactions on Geoscience and Remote Sensing (TGRS).",
+                zhVenue: "IEEE Transactions on Geoscience and Remote Sensing (TGRS) 在审。",
+                tags: ["underReview", "international"],
                 position: 4
             },
             {
@@ -1378,6 +1439,10 @@
             document.querySelectorAll("[data-i18n]").forEach((node) => {
                 const key = node.getAttribute("data-i18n");
                 if (t[key]) node.textContent = t[key];
+            });
+            document.querySelectorAll("[data-i18n-html]").forEach((node) => {
+                const key = node.getAttribute("data-i18n-html");
+                if (t[key]) node.innerHTML = t[key];
             });
             document.getElementById("publicationCount").textContent = t.pubCount;
         }
