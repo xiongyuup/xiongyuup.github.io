@@ -117,6 +117,45 @@
             font-weight: 800;
         }
 
+        .visitor-counter {
+            position: fixed;
+            top: 68px;
+            right: 18px;
+            z-index: 30;
+            width: 166px;
+            padding: 11px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.36);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--navy);
+            box-shadow: 0 18px 38px rgba(0,0,0,0.12);
+            backdrop-filter: blur(14px);
+            font-size: 0.78rem;
+            line-height: 1.35;
+        }
+
+        .visitor-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .visitor-row + .visitor-row {
+            margin-top: 5px;
+        }
+
+        .visitor-label {
+            color: rgba(16, 42, 61, 0.72);
+            font-weight: 760;
+        }
+
+        .visitor-value {
+            color: var(--navy);
+            font-weight: 900;
+            font-variant-numeric: tabular-nums;
+        }
+
         .hero {
             position: relative;
             min-height: 92vh;
@@ -743,6 +782,14 @@
                 right: 12px;
             }
 
+            .visitor-counter {
+                top: 60px;
+                right: 12px;
+                width: 148px;
+                padding: 9px 10px;
+                font-size: 0.72rem;
+            }
+
             .cursor-fx {
                 display: none;
             }
@@ -755,6 +802,16 @@
         <div class="cursor-dot" id="cursorDot"></div>
     </div>
     <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch language">中文</button>
+    <div class="visitor-counter" aria-label="Visitor statistics">
+        <div class="visitor-row" id="busuanzi_container_site_uv">
+            <span class="visitor-label" data-i18n="visitorUv">Visitors</span>
+            <span class="visitor-value"><span id="busuanzi_value_site_uv">--</span></span>
+        </div>
+        <div class="visitor-row" id="busuanzi_container_page_pv">
+            <span class="visitor-label" data-i18n="visitorPv">Views</span>
+            <span class="visitor-value"><span id="busuanzi_value_page_pv">--</span></span>
+        </div>
+    </div>
 
     <section class="hero" id="top">
         <div class="hero-inner">
@@ -933,6 +990,8 @@
                 heroSummary: "Ph.D. student at the State Key Laboratory of Millimeter Waves, Southeast University. My work focuses on SAR interference suppression and imaging, airborne weather radar echo simulation, and electromagnetic scattering modeling for complex meteorological targets.",
                 heroPublications: "Publications",
                 heroProjects: "Research Projects",
+                visitorUv: "Visitors",
+                visitorPv: "Views",
                 metricPapers: "papers and manuscripts",
                 metricProjects: "research projects",
                 metricRank: "master's program rank",
@@ -998,6 +1057,8 @@
                 heroSummary: "东南大学毫米波全国重点实验室电子信息博士研究生。研究方向包括 SAR 抗干扰成像、机载气象雷达回波仿真，以及复杂气象目标的电磁散射建模。",
                 heroPublications: "科研成果",
                 heroProjects: "科研项目",
+                visitorUv: "访问人数",
+                visitorPv: "浏览量",
                 metricPapers: "论文与投稿",
                 metricProjects: "科研项目",
                 metricRank: "硕士专业排名",
@@ -1560,8 +1621,19 @@
             move();
         }
 
+        function initVisitorCounter() {
+            const localHosts = ["localhost", "127.0.0.1", "::1"];
+            if (localHosts.includes(window.location.hostname)) return;
+
+            const script = document.createElement("script");
+            script.async = true;
+            script.src = "https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js";
+            document.body.appendChild(script);
+        }
+
         setLanguage("en");
         initCursorEffect();
+        initVisitorCounter();
     </script>
 </body>
 </html>
