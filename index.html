@@ -601,6 +601,18 @@
             line-height: 1.42;
         }
 
+        .paper-title a {
+            color: inherit;
+            text-decoration-color: rgba(10, 106, 92, 0.35);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
+        }
+
+        .paper-title a:hover {
+            color: var(--green-dark);
+            text-decoration-color: currentColor;
+        }
+
         .authors {
             margin: 7px 0 0;
             color: #465666;
@@ -1040,6 +1052,7 @@
                     underReview: "Under review",
                     published: "Published",
                     accepted: "Accepted",
+                    preprint: "Preprint",
                     new: "New",
                     arxiv: "arXiv",
                     first: "First author",
@@ -1107,6 +1120,7 @@
                     underReview: "在审",
                     published: "已发表",
                     accepted: "已录用",
+                    preprint: "预印本",
                     new: "新增",
                     arxiv: "arXiv",
                     first: "第一作者",
@@ -1134,10 +1148,12 @@
                 position: 1
             },
             {
-                title: "TransitionMatrices.jl: An Open-Source IITM-Based Framework for Electromagnetic Scattering Simulation of Nonspherical Atmospheric Particles and Microwave Remote-Sensing Forward Modeling",
+                title: "TransitionMatrices.jl: A High-Efficiency Open-Source Julia Framework for Electromagnetic Scattering and Polarimetric Remote Sensing of Nonspherical Atmospheric Particles",
                 authors: ["Y. Xiong", "Z. Wu"],
-                venue: "Submitted to Computer Physics Communications.",
-                tags: ["submitted", "first", "corresponding", "international"],
+                venue: "SSRN preprint, 2025.",
+                zhVenue: "SSRN 预印本，2025。",
+                url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5335549",
+                tags: ["preprint", "first", "corresponding", "international"],
                 position: 1
             },
             {
@@ -1165,9 +1181,10 @@
             {
                 title: "Fast Fourier Azimuthal Spectral Assembly for Invariant-Imbedding T-Matrix Simulations of Inhomogeneous Atmospheric Particles",
                 authors: ["Y. Xiong", "Z. Wu", "J. Guo"],
-                venue: "Under review at IEEE Geoscience and Remote Sensing Letters (GRSL).",
-                zhVenue: "IEEE Geoscience and Remote Sensing Letters (GRSL) 在审。",
-                tags: ["underReview", "first", "international"],
+                venue: "IEEE Geoscience and Remote Sensing Letters, published online Sep. 9, 2026.",
+                zhVenue: "IEEE Geoscience and Remote Sensing Letters，2026 年 9 月 9 日在线发表。",
+                url: "https://ieeexplore.ieee.org/document/11684798",
+                tags: ["published", "first", "international"],
                 position: 1
             },
             {
@@ -1180,7 +1197,8 @@
             {
                 title: "Simulation of Precipitation Echoes From Airborne Dual-Polarization Weather Radar Based on a Fast Algorithm for Invariant Imbedding T-Matrix",
                 authors: ["H. Li", "Y. Xiong", "B. Zhang", "Z. Wu"],
-                venue: "IEEE Transactions on Radar Systems, vol. 3, pp. 135-154, 2025.",
+                venue: "IEEE Transactions on Radar Systems, vol. 3, pp. 135-154; published online Dec. 13, 2024.",
+                url: "https://ieeexplore.ieee.org/document/10798627",
                 tags: ["published", "cofirstAdvisor", "international"],
                 position: 2
             },
@@ -1195,18 +1213,20 @@
                 title: "基于 Fourier-MLP 的双连续介质粒子建模及不变嵌入 T 矩阵加速计算方法",
                 enTitle: "Bicontinuous Medium Particle Modeling Based on Fourier-MLP and Accelerated Computation Method for Invariant Imbedding T-Matrix",
                 authors: ["J. Guo", "Y. Xiong", "H. Li", "Z. Wu", "Z. Sun"],
-                venue: "Submitted to Chinese Journal of Computational Physics.",
-                zhVenue: "已投稿《计算物理》。",
-                tags: ["submitted", "corresponding", "chinese"],
+                venue: "Chinese Journal of Computational Physics, published online Jun. 2, 2026. doi: 10.19596/j.cnki.1001-246x.2026-9262.",
+                zhVenue: "《计算物理》，2026 年 6 月 2 日在线发表。doi: 10.19596/j.cnki.1001-246x.2026-9262。",
+                url: "https://doi.org/10.19596/j.cnki.1001-246x.2026-9262",
+                tags: ["published", "corresponding", "chinese"],
                 position: 2
             },
             {
-                title: "Adaptive Sorting Method for Radar Signals Oriented to RF-Domain Interference Mitigation",
-                zhTitle: "一种面向射频域抗干扰的雷达信号自适应分选方法",
-                authors: ["J. Guo", "Y. Xiong"],
-                venue: "Under review at Modern Radar.",
-                zhVenue: "《现代雷达》在审。",
-                tags: ["underReview", "corresponding", "chinese"],
+                title: "An Adaptive Radar Signal Sorting Method for RF Masking Jamming",
+                zhTitle: "一种面向射频掩护干扰的雷达信号自适应分选方法",
+                authors: ["S. Li", "Y. Xiong", "J. Guo", "Z. Wu", "H. Luo"],
+                venue: "Modern Radar, published online Aug. 10, 2026. doi: 10.16592/j.cnki.1004-7859.2026228.",
+                zhVenue: "《现代雷达》，2026 年 8 月 10 日在线发表。doi: 10.16592/j.cnki.1004-7859.2026228。",
+                url: "https://doi.org/10.16592/j.cnki.1004-7859.2026228",
+                tags: ["published", "corresponding", "chinese"],
                 position: 2
             },
             {
@@ -1220,9 +1240,10 @@
             {
                 title: "Ground Clutter and Suppressive Interference Mitigation Method Based on SPCJS-PSTAP",
                 authors: ["J. Guo", "Y. Xiong", "H. Li", "S. Li", "X. Ai"],
-                venue: "Venue to be determined.",
-                zhVenue: "待定。",
-                tags: ["accepted", "corresponding", "international"],
+                venue: "IET Conference Proceedings, CP987, vol. 2026, no. 7, pp. 100-105, 2026.",
+                zhVenue: "IET Conference Proceedings，CP987，2026(7)：100-105。",
+                url: "https://doi.org/10.1049/icp.2026.2740",
+                tags: ["published", "corresponding", "international"],
                 position: 2
             },
             {
@@ -1234,17 +1255,21 @@
                 position: 3
             },
             {
-                title: "Simulation of Airborne Dual-Polarization Weather Radar Echoes from Inhomogeneous Ice-Phase Precipitation Particles Based on Monte Carlo Method",
-                authors: ["H. Li", "B. Zhang", "Y. Xiong", "R. Liang"],
-                venue: "IEEE Transactions on Geoscience and Remote Sensing.",
-                tags: ["accepted", "corresponding", "international"],
+                title: "Monte Carlo Simulation-Based Echo Modeling of Inhomogeneous Ice-Phase Precipitation Particles for Airborne Dual-Polarization Weather Radar",
+                authors: ["H. Li", "B. Zhang", "Y. Xiong", "R. Liang", "Z. Wu", "M. Jin"],
+                venue: "IEEE Transactions on Geoscience and Remote Sensing, published online Apr. 20, 2026.",
+                zhVenue: "IEEE Transactions on Geoscience and Remote Sensing，2026 年 4 月 20 日在线发表。",
+                url: "https://ieeexplore.ieee.org/document/11488260",
+                tags: ["published", "corresponding", "international"],
                 position: 3
             },
             {
-                title: "The Simulation of Airborne Weather Radar Echoes for Inhomogeneous Ice Crystals Based on the Bicontinuous Medium Approximation",
-                authors: ["H. Li", "B. Zhang", "Y. Xiong"],
-                venue: "2025 IEEE International Geoscience and Remote Sensing Symposium (IGARSS).",
-                tags: ["accepted", "international"],
+                title: "Simulation of Inhomogeneous Ice Crystal Echoes for Airborne Weather Radar Based on Bicontinuous Medium Approximation",
+                authors: ["H. Li", "B. Zhang", "Y. Xiong", "R. Liu"],
+                venue: "2025 IEEE International Geoscience and Remote Sensing Symposium (IGARSS), pp. 9029-9032.",
+                zhVenue: "2025 IEEE 国际地球科学与遥感研讨会（IGARSS），第 9029-9032 页。",
+                url: "https://ieeexplore.ieee.org/document/11242938",
+                tags: ["published", "international"],
                 position: 3
             },
             {
@@ -1308,8 +1333,10 @@
             {
                 title: "A Hybrid Domain Algorithm for High-Speed High-Squint SAR Imaging with Curved Trajectory via Fifth-Order FNCS Processing",
                 authors: ["K. Deng", "Y. Huang", "Z. Chen", "L. Zhang", "Y. Xiong", "B. Zhang"],
-                venue: "IEEE Transactions on Geoscience and Remote Sensing.",
-                tags: ["accepted", "international"],
+                venue: "IEEE Transactions on Geoscience and Remote Sensing, published online Apr. 14, 2026.",
+                zhVenue: "IEEE Transactions on Geoscience and Remote Sensing，2026 年 4 月 14 日在线发表。",
+                url: "https://ieeexplore.ieee.org/document/11480199",
+                tags: ["published", "international"],
                 position: 5
             },
             {
@@ -1517,6 +1544,9 @@
                 .map((paper) => {
                     const title = lang === "zh" ? (paper.zhTitle || paper.title) : paper.title;
                     const venue = lang === "zh" ? (paper.zhVenue || paper.venue) : paper.venue;
+                    const titleMarkup = paper.url
+                        ? `<a href="${paper.url}" target="_blank" rel="noopener">${title}</a>`
+                        : title;
                     const authors = paper.authors
                         .map((author) => author === "Y. Xiong" ? `<span class="highlight-name">${author}</span>` : author)
                         .join(", ");
@@ -1526,7 +1556,7 @@
                     return `
                         <article class="paper">
                             <div>
-                                <p class="paper-title">${title}</p>
+                                <p class="paper-title">${titleMarkup}</p>
                                 <p class="authors">${authors}</p>
                                 <p class="venue">${venue}</p>
                                 <div class="tag-row">${tags}</div>
