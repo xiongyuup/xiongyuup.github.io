@@ -156,6 +156,22 @@
             font-variant-numeric: tabular-nums;
         }
 
+        .visitor-retry {
+            margin-top: 7px;
+            padding: 2px 0;
+            border: 0;
+            background: transparent;
+            color: var(--blue);
+            font: inherit;
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .visitor-retry[hidden] {
+            display: none;
+        }
+
         .hero {
             position: relative;
             min-height: 92vh;
@@ -814,15 +830,16 @@
         <div class="cursor-dot" id="cursorDot"></div>
     </div>
     <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch language">中文</button>
-    <div class="visitor-counter" aria-label="Visitor statistics">
-        <div class="visitor-row" id="busuanzi_container_site_uv">
+    <div class="visitor-counter" id="visitorCounter" aria-label="Visitor statistics" aria-live="polite" aria-busy="true">
+        <div class="visitor-row">
             <span class="visitor-label" data-i18n="visitorUv">Visitors</span>
-            <span class="visitor-value"><span id="busuanzi_value_site_uv">--</span></span>
+            <span class="visitor-value" id="visitorUvValue">Loading...</span>
         </div>
-        <div class="visitor-row" id="busuanzi_container_page_pv">
+        <div class="visitor-row">
             <span class="visitor-label" data-i18n="visitorPv">Views</span>
-            <span class="visitor-value"><span id="busuanzi_value_page_pv">--</span></span>
+            <span class="visitor-value" id="visitorPvValue">Loading...</span>
         </div>
+        <button class="visitor-retry" id="visitorRetry" type="button" data-i18n="visitorRetry" hidden>Retry</button>
     </div>
 
     <section class="hero" id="top">
@@ -1004,6 +1021,10 @@
                 heroProjects: "Research Projects",
                 visitorUv: "Visitors",
                 visitorPv: "Views",
+                visitorLoading: "Loading...",
+                visitorUnavailable: "Unavailable",
+                visitorLocal: "Preview",
+                visitorRetry: "Retry",
                 metricPapers: "papers and manuscripts",
                 metricProjects: "research projects",
                 metricRank: "master's program rank",
@@ -1072,6 +1093,10 @@
                 heroProjects: "科研项目",
                 visitorUv: "访问人数",
                 visitorPv: "浏览量",
+                visitorLoading: "加载中",
+                visitorUnavailable: "暂不可用",
+                visitorLocal: "本地预览",
+                visitorRetry: "重试",
                 metricPapers: "论文与投稿",
                 metricProjects: "科研项目",
                 metricRank: "硕士专业排名",
@@ -1518,6 +1543,8 @@
         ];
 
         let currentLang = "en";
+        let visitorState = "loading";
+        let visitorCounts = null;
 
         function renderText(lang) {
             const t = translations[lang];
@@ -1533,6 +1560,7 @@
                 if (t[key]) node.innerHTML = t[key];
             });
             document.getElementById("publicationCount").textContent = t.pubCount;
+            renderVisitorCounter();
         }
 
         function renderPublications(lang) {
@@ -1651,16 +1679,59 @@
             move();
         }
 
-        function initVisitorCounter() {
-            const localHosts = ["localhost", "127.0.0.1", "::1"];
-            if (localHosts.includes(window.location.hostname)) return;
-
-            const script = document.createElement("script");
-            script.async = true;
-            script.src = "https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js";
-            document.body.appendChild(script);
+        function renderVisitorCounter() {
+            const t = translations[currentLang];
+            const status = visitorState === "local" ? t.visitorLocal
+                : visitorState === "error" ? t.visitorUnavailable : t.visitorLoading;
+            const formatter = new Intl.NumberFormat(currentLang === "zh" ? "zh-CN" : "en");
+            document.getElementById("visitorUvValue").textContent = visitorCounts
+                ? formatter.format(visitorCounts.uv) : status;
+            document.getElementById("visitorPvValue").textContent = visitorCounts
+                ? formatter.format(visitorCounts.pv) : status;
+            document.getElementById("visitorCounter").setAttribute("aria-busy", String(visitorState === "loading"));
+            document.getElementById("visitorRetry").hidden = visitorState !== "error";
         }
 
+        async function initVisitorCounter() {
+            const localHosts = ["localhost", "127.0.0.1", "::1", "[::1]"];
+            if (window.location.protocol === "file:" || localHosts.includes(window.location.hostname)) {
+                visitorState = "local";
+                renderVisitorCounter();
+                return;
+            }
+
+            visitorState = "loading";
+            renderVisitorCounter();
+            const controller = new AbortController();
+            const timeout = window.setTimeout(() => controller.abort(), 10000);
+            try {
+                // Match the provider's request format; omit query strings, fragments and referral history.
+                const response = await fetch("https://cdn.busuanzi.cc/api.php", {
+                    method: "POST",
+                    credentials: "omit",
+                    referrerPolicy: "no-referrer",
+                    signal: controller.signal,
+                    body: JSON.stringify({
+                        url: new URL(window.location.pathname, window.location.origin).href,
+                        referrer: ""
+                    })
+                });
+                if (!response.ok) throw new Error("Visitor statistics request failed");
+                const data = await response.json();
+                if (![data.busuanzi_site_uv, data.busuanzi_site_pv].every((value) => Number.isSafeInteger(value) && value >= 0)) {
+                    throw new Error("Invalid visitor statistics");
+                }
+                visitorCounts = { uv: data.busuanzi_site_uv, pv: data.busuanzi_site_pv };
+                visitorState = "ready";
+            } catch {
+                visitorState = "error";
+            } finally {
+                window.clearTimeout(timeout);
+                renderVisitorCounter();
+            }
+        }
+
+        document.getElementById("visitorRetry").addEventListener("click", initVisitorCounter);
         setLanguage("en");
         initCursorEffect();
         initVisitorCounter();
