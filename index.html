@@ -172,6 +172,12 @@
             display: none;
         }
 
+        .visitor-note {
+            margin: 7px 0 0;
+            color: var(--muted);
+            font-size: 0.7rem;
+        }
+
         .hero {
             position: relative;
             min-height: 92vh;
@@ -839,6 +845,7 @@
             <span class="visitor-label" data-i18n="visitorPv">Views</span>
             <span class="visitor-value" id="visitorPvValue">Loading...</span>
         </div>
+        <p class="visitor-note" id="visitorNote"></p>
         <button class="visitor-retry" id="visitorRetry" type="button" data-i18n="visitorRetry" hidden>Retry</button>
     </div>
 
@@ -1025,6 +1032,9 @@
                 visitorUnavailable: "Unavailable",
                 visitorLocal: "Preview",
                 visitorRetry: "Retry",
+                visitorHistory: "Includes earlier visits",
+                visitorCached: "Last recorded totals",
+                visitorHistoryDetail: "Includes 19 earlier visitors and 45 views. Visitors are an estimate: repeat visitors across services cannot be deduplicated.",
                 metricPapers: "papers and manuscripts",
                 metricProjects: "research projects",
                 metricRank: "master's program rank",
@@ -1097,6 +1107,9 @@
                 visitorUnavailable: "暂不可用",
                 visitorLocal: "本地预览",
                 visitorRetry: "重试",
+                visitorHistory: "含历史记录",
+                visitorCached: "上次记录（含历史）",
+                visitorHistoryDetail: "含历史 19 位访客、45 次浏览；跨服务的重复访客无法去重，累计访客数为估算值。",
                 metricPapers: "论文与投稿",
                 metricProjects: "科研项目",
                 metricRank: "硕士专业排名",
@@ -1545,6 +1558,9 @@
         let currentLang = "en";
         let visitorState = "loading";
         let visitorCounts = null;
+        // Historical totals confirmed by the site owner on 2026-10-06, before the service migration.
+        const visitorHistory = Object.freeze({ uv: 19, pv: 45 });
+        const visitorCacheKey = "visitor-counts:busuanzi.cc:2026-10-06";
 
         function renderText(lang) {
             const t = translations[lang];
@@ -1685,11 +1701,23 @@
                 : visitorState === "error" ? t.visitorUnavailable : t.visitorLoading;
             const formatter = new Intl.NumberFormat(currentLang === "zh" ? "zh-CN" : "en");
             document.getElementById("visitorUvValue").textContent = visitorCounts
-                ? formatter.format(visitorCounts.uv) : status;
+                ? formatter.format(visitorHistory.uv + visitorCounts.uv)
+                : visitorState === "local" ? status : `≥ ${formatter.format(visitorHistory.uv)}`;
             document.getElementById("visitorPvValue").textContent = visitorCounts
-                ? formatter.format(visitorCounts.pv) : status;
+                ? formatter.format(visitorHistory.pv + visitorCounts.pv)
+                : visitorState === "local" ? status : `≥ ${formatter.format(visitorHistory.pv)}`;
+            const note = document.getElementById("visitorNote");
+            note.textContent = visitorState === "error" && !visitorCounts
+                ? `${t.visitorHistory} · ${t.visitorUnavailable}`
+                : visitorCounts && visitorState !== "ready" ? t.visitorCached : t.visitorHistory;
+            note.title = t.visitorHistoryDetail;
+            document.getElementById("visitorUvValue").title = t.visitorHistoryDetail;
             document.getElementById("visitorCounter").setAttribute("aria-busy", String(visitorState === "loading"));
             document.getElementById("visitorRetry").hidden = visitorState !== "error";
+        }
+
+        function validVisitorCounts(counts) {
+            return counts && [counts.uv, counts.pv].every((value) => Number.isSafeInteger(value) && value >= 0);
         }
 
         async function initVisitorCounter() {
@@ -1700,6 +1728,14 @@
                 return;
             }
 
+            if (!visitorCounts) {
+                try {
+                    const cached = JSON.parse(window.localStorage.getItem(visitorCacheKey));
+                    if (validVisitorCounts(cached)) visitorCounts = { uv: cached.uv, pv: cached.pv };
+                } catch {
+                    // Storage can be unavailable in private or restricted browsing.
+                }
+            }
             visitorState = "loading";
             renderVisitorCounter();
             const controller = new AbortController();
@@ -1718,11 +1754,20 @@
                 });
                 if (!response.ok) throw new Error("Visitor statistics request failed");
                 const data = await response.json();
-                if (![data.busuanzi_site_uv, data.busuanzi_site_pv].every((value) => Number.isSafeInteger(value) && value >= 0)) {
+                const counts = { uv: data.busuanzi_site_uv, pv: data.busuanzi_site_pv };
+                if (!validVisitorCounts(counts)) {
                     throw new Error("Invalid visitor statistics");
                 }
-                visitorCounts = { uv: data.busuanzi_site_uv, pv: data.busuanzi_site_pv };
+                if (visitorCounts && (counts.uv < visitorCounts.uv || counts.pv < visitorCounts.pv)) {
+                    throw new Error("Visitor statistics decreased; retain the last recorded totals");
+                }
+                visitorCounts = counts;
                 visitorState = "ready";
+                try {
+                    window.localStorage.setItem(visitorCacheKey, JSON.stringify({ ...counts, savedAt: new Date().toISOString() }));
+                } catch {
+                    // A failed cache write must not hide a successful statistics response.
+                }
             } catch {
                 visitorState = "error";
             } finally {
