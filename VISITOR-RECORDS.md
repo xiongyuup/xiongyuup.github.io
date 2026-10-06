@@ -39,3 +39,15 @@ Complete long-term retention of new visits needs a database under the site
 owner's control, with scheduled backups and a tested restore procedure.
 GitHub Pages serves static files; browser caching and third-party counters alone
 cannot guarantee retention of every visit.
+
+## Owned Database Preparation
+
+On 2026-10-06, the owner requested migration to an owned Cloudflare Worker and D1
+database with encrypted daily GitHub backups. Code, migration, backup and restore
+checks are in `counter/`; setup and completion checks are in `counter/README.md`.
+The confirmed 19/45 baseline is also seeded idempotently in the SQL migration.
+
+Cloudflare registration and authentication, the remote deployment, the final
+busuanzi.cc raw-count import and the first remote backup must happen before
+cutover. Until those checks pass, `visitorApi` stays empty and the current live
+counter continues operating. Do not describe local tests as an active deployment.

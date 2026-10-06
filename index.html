@@ -1560,7 +1560,11 @@
         let visitorCounts = null;
         // Historical totals confirmed by the site owner on 2026-10-06, before the service migration.
         const visitorHistory = Object.freeze({ uv: 19, pv: 45 });
-        const visitorCacheKey = "visitor-counts:busuanzi.cc:2026-10-06";
+        // Set only after the owned database has been deployed and the existing totals imported.
+        const visitorApi = "";
+        const visitorCacheKey = visitorApi ? `visitor-counts:d1:${visitorApi}` : "visitor-counts:busuanzi.cc:2026-10-06";
+        let visitorEventId = null;
+        let visitorIdentifier = null;
 
         function renderText(lang) {
             const t = translations[lang];
@@ -1700,11 +1704,12 @@
             const status = visitorState === "local" ? t.visitorLocal
                 : visitorState === "error" ? t.visitorUnavailable : t.visitorLoading;
             const formatter = new Intl.NumberFormat(currentLang === "zh" ? "zh-CN" : "en");
+            const history = visitorApi ? { uv: 0, pv: 0 } : visitorHistory;
             document.getElementById("visitorUvValue").textContent = visitorCounts
-                ? formatter.format(visitorHistory.uv + visitorCounts.uv)
+                ? formatter.format(history.uv + visitorCounts.uv)
                 : visitorState === "local" ? status : `≥ ${formatter.format(visitorHistory.uv)}`;
             document.getElementById("visitorPvValue").textContent = visitorCounts
-                ? formatter.format(visitorHistory.pv + visitorCounts.pv)
+                ? formatter.format(history.pv + visitorCounts.pv)
                 : visitorState === "local" ? status : `≥ ${formatter.format(visitorHistory.pv)}`;
             const note = document.getElementById("visitorNote");
             note.textContent = visitorState === "error" && !visitorCounts
@@ -1718,6 +1723,22 @@
 
         function validVisitorCounts(counts) {
             return counts && [counts.uv, counts.pv].every((value) => Number.isSafeInteger(value) && value >= 0);
+        }
+
+        function ownedVisitPayload() {
+            visitorEventId ||= crypto.randomUUID();
+            if (!visitorIdentifier) {
+                const key = "homepage-visitor-id:v1";
+                try {
+                    const saved = window.localStorage.getItem(key);
+                    if (/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(saved || "")) visitorIdentifier = saved;
+                } catch {}
+                visitorIdentifier ||= crypto.randomUUID();
+                try {
+                    window.localStorage.setItem(key, visitorIdentifier);
+                } catch {}
+            }
+            return { visitorId: visitorIdentifier, eventId: visitorEventId };
         }
 
         async function initVisitorCounter() {
@@ -1742,19 +1763,21 @@
             const timeout = window.setTimeout(() => controller.abort(), 10000);
             try {
                 // Match the provider's request format; omit query strings, fragments and referral history.
-                const response = await fetch("https://cdn.busuanzi.cc/api.php", {
+                const response = await fetch(visitorApi ? `${visitorApi}/visit` : "https://cdn.busuanzi.cc/api.php", {
                     method: "POST",
+                    ...(visitorApi ? { headers: { "Content-Type": "application/json" } } : {}),
                     credentials: "omit",
                     referrerPolicy: "no-referrer",
                     signal: controller.signal,
-                    body: JSON.stringify({
+                    body: JSON.stringify(visitorApi ? ownedVisitPayload() : {
                         url: new URL(window.location.pathname, window.location.origin).href,
                         referrer: ""
                     })
                 });
                 if (!response.ok) throw new Error("Visitor statistics request failed");
                 const data = await response.json();
-                const counts = { uv: data.busuanzi_site_uv, pv: data.busuanzi_site_pv };
+                if (visitorApi && data.includesHistory !== true) throw new Error("History missing from statistics response");
+                const counts = visitorApi ? { uv: data.uv, pv: data.pv } : { uv: data.busuanzi_site_uv, pv: data.busuanzi_site_pv };
                 if (!validVisitorCounts(counts)) {
                     throw new Error("Invalid visitor statistics");
                 }

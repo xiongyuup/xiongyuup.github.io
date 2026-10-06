@@ -1,0 +1,8 @@
+counter/node_modules/
+counter/.wrangler/
+counter/.dev.vars*
+counter/.env*
+counter/wrangler.local.json
+counter-backups/*.sql
+counter-backups/*.sqlite*
+counter-backups/*.db*

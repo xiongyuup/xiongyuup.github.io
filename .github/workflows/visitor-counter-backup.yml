@@ -1,0 +1,39 @@
+name: Back Up Visitor Database
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 18 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: visitor-database-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    if: vars.VISITOR_BACKUP_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Export, encrypt and verify database
+        run: node counter/scripts/backup.mjs
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_DATABASE_ID: ${{ vars.CLOUDFLARE_DATABASE_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_D1_BACKUP_TOKEN }}
+          VISITOR_BACKUP_KEY: ${{ secrets.VISITOR_BACKUP_KEY }}
+      - name: Keep encrypted backups in Git history
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add counter-backups/*.sql.enc counter-backups/*.json
+          git commit -m 'Back up visitor database [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
