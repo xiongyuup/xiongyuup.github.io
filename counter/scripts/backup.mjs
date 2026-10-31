@@ -39,6 +39,20 @@ for (let attempt = 0; attempt < 60; attempt++) {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 }
 if (!sql) throw new Error("Database export timed out");
+// Filtered D1 exports omit triggers; retrieve the live counting trigger separately.
+const triggerResponse = await fetch(endpoint.replace(/\/export$/, "/query"), {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ sql: "SELECT sql FROM sqlite_master WHERE type='trigger' AND name='count_new_view'" }),
+    signal: AbortSignal.timeout(30000)
+});
+if (!triggerResponse.ok) throw new Error("Could not retrieve counting schema");
+const triggerData = await triggerResponse.json();
+const triggerSql = triggerData.result?.[0]?.results?.[0]?.sql;
+if (!triggerData.success || typeof triggerSql !== "string" || !triggerSql.startsWith("CREATE TRIGGER")) {
+    throw new Error("Live counting trigger is missing");
+}
+sql += "\nDROP TRIGGER IF EXISTS count_new_view;\n" + triggerSql + ";\n";
 // Keep IP/device details out of permanent archives; restore an empty detail table.
 sql += "\n" + await readFile(new URL("../migrations/0002_visit_details.sql", import.meta.url), "utf8");
 
