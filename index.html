@@ -1126,6 +1126,9 @@
                 visitorHistory: "Includes earlier visits",
                 visitorCached: "Last recorded totals",
                 visitorSnapshot: "Latest backed-up totals",
+                visitorSending: "Recording this visit...",
+                visitorRecorded: "This visit recorded",
+                visitorUnconfirmed: "Visit not confirmed",
                 visitorHistoryDetail: "Includes 19 earlier visitors and 45 views. Visitors are estimated from browser identifiers; blocked requests cannot be counted. Backup totals are not live counts.",
                 metricPapers: "papers and manuscripts",
                 metricProjects: "research projects",
@@ -1211,6 +1214,9 @@
                 visitorHistory: "含历史记录",
                 visitorCached: "上次记录（含历史）",
                 visitorSnapshot: "最近备份总数",
+                visitorSending: "本次访问上报中",
+                visitorRecorded: "本次访问已记录",
+                visitorUnconfirmed: "本次访问未确认",
                 visitorHistoryDetail: "含历史 19 位访客、45 次浏览；访客数按浏览器标识估算，网络拦截的请求无法计入，备份总数不是实时统计。",
                 metricPapers: "论文与投稿",
                 metricProjects: "科研项目",
@@ -1677,6 +1683,7 @@
         let visitorEventId = null;
         let visitorIdentifier = null;
         let visitorSnapshotAt = null;
+        let visitorRequestActive = false;
 
         function renderText(lang) {
             const t = translations[lang];
@@ -1824,7 +1831,11 @@
                 ? formatter.format(history.pv + visitorCounts.pv)
                 : visitorState === "local" ? status : `≥ ${formatter.format(visitorHistory.pv)}`;
             const note = document.getElementById("visitorNote");
-            note.textContent = visitorState === "error" && !visitorCounts
+            note.textContent = visitorApi && visitorState === "loading" ? t.visitorSending
+                : visitorApi && visitorState === "ready" ? t.visitorRecorded
+                : visitorApi && ["error", "snapshot"].includes(visitorState)
+                    ? `${t.visitorUnconfirmed} · ${visitorState === "snapshot" ? t.visitorSnapshot : visitorCounts ? t.visitorCached : t.visitorHistory}`
+                : visitorState === "error" && !visitorCounts
                 ? `${t.visitorHistory} · ${t.visitorUnavailable}`
                 : visitorState === "snapshot" ? t.visitorSnapshot
                 : visitorCounts && visitorState !== "ready" ? t.visitorCached : t.visitorHistory;
@@ -1855,15 +1866,24 @@
             visitorState = "snapshot";
         }
 
+        function randomVisitId() {
+            if (typeof crypto.randomUUID === "function") return crypto.randomUUID();
+            const bytes = crypto.getRandomValues(new Uint8Array(16));
+            bytes[6] = (bytes[6] & 15) | 64;
+            bytes[8] = (bytes[8] & 63) | 128;
+            const hex = Array.from(bytes, value => value.toString(16).padStart(2, "0")).join("");
+            return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+        }
+
         function ownedVisitPayload() {
-            visitorEventId ||= crypto.randomUUID();
+            visitorEventId ||= randomVisitId();
             if (!visitorIdentifier) {
                 const key = "homepage-visitor-id:v1";
                 try {
                     const saved = window.localStorage.getItem(key);
                     if (/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(saved || "")) visitorIdentifier = saved;
                 } catch {}
-                visitorIdentifier ||= crypto.randomUUID();
+                visitorIdentifier ||= randomVisitId();
                 try {
                     window.localStorage.setItem(key, visitorIdentifier);
                 } catch {}
@@ -1872,6 +1892,7 @@
         }
 
         async function initVisitorCounter() {
+            if (visitorRequestActive) return;
             const localHosts = ["localhost", "127.0.0.1", "::1", "[::1]"];
             if (window.location.protocol === "file:" || localHosts.includes(window.location.hostname)) {
                 visitorState = "local";
@@ -1888,6 +1909,7 @@
                 }
             }
             visitorState = "loading";
+            visitorRequestActive = true;
             renderVisitorCounter();
             const controller = new AbortController();
             const timeout = window.setTimeout(() => controller.abort(), 10000);
@@ -1925,12 +1947,16 @@
                 visitorState = "error";
                 try { await loadVisitorSnapshot(); } catch {}
             } finally {
+                visitorRequestActive = false;
                 window.clearTimeout(timeout);
                 renderVisitorCounter();
             }
         }
 
         document.getElementById("visitorRetry").addEventListener("click", initVisitorCounter);
+        window.addEventListener("online", () => {
+            if (["error", "snapshot"].includes(visitorState)) initVisitorCounter();
+        });
         setLanguage("en");
         initCursorEffect();
         initVisitorCounter();

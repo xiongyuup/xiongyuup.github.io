@@ -7,7 +7,7 @@ import vm from "node:vm";
 const source = readFileSync(new URL("../../index.html", import.meta.url), "utf8").match(/<script>\s*([\s\S]*?)<\/script>/)[1];
 const flush = () => new Promise((resolve) => setImmediate(resolve));
 
-function page({ api = "", cached, fetchImpl, storageBlocked = false }) {
+function page({ api = "", cached, fetchImpl, storageBlocked = false, legacyCrypto = false }) {
     const nodes = new Map();
     const storage = new Map(cached || []);
     const requests = [];
@@ -22,6 +22,7 @@ function page({ api = "", cached, fetchImpl, storageBlocked = false }) {
     const context = vm.createContext({
         document: { documentElement: {}, getElementById: node, querySelector: () => null, querySelectorAll: () => [] },
         window: {
+            addEventListener() {},
             location: new URL("https://xiongyuup.github.io/?query=1#publications"),
             matchMedia: () => ({ matches: false }), setTimeout, clearTimeout,
             localStorage: {
@@ -29,7 +30,7 @@ function page({ api = "", cached, fetchImpl, storageBlocked = false }) {
                 setItem(key, value) { if (storageBlocked) throw new Error("Blocked"); storage.set(key, value); }
             }
         },
-        crypto: webcrypto, URL, Intl, AbortController, AbortSignal, Date,
+        crypto: legacyCrypto ? { getRandomValues: webcrypto.getRandomValues.bind(webcrypto) } : webcrypto, URL, Intl, AbortController, AbortSignal, Date,
         fetch: async (url, options) => { requests.push({ url, options }); return fetchImpl(url, options); }
     });
     vm.runInContext(source.replace(/const visitorApi = "[^"]*";/, `const visitorApi = ${JSON.stringify(api)};`), context);
@@ -72,7 +73,7 @@ test("D1 keeps cached totals on outage and works without browser storage", async
     const offline = page({ api, cached: [[`visitor-counts:d1:${api}`, JSON.stringify({ uv: 30, pv: 80 })]], fetchImpl: async () => { throw new Error("Offline"); } });
     await flush();
     assert.equal(offline.node("visitorPvValue").textContent, "80");
-    assert.equal(offline.node("visitorNote").textContent, "Last recorded totals");
+    assert.equal(offline.node("visitorNote").textContent, "Visit not confirmed · Last recorded totals");
     const blocked = page({ api, storageBlocked: true, fetchImpl: async () => ({ ok: true, json: async () => ({ uv: 31, pv: 81, includesHistory: true }) }) });
     await flush();
     assert.equal(blocked.node("visitorPvValue").textContent, "81");
@@ -87,10 +88,18 @@ test("D1 falls back to verified same-site backup totals without double-adding hi
     await flush();
     assert.equal(result.node("visitorUvValue").textContent, "24");
     assert.equal(result.node("visitorPvValue").textContent, "60");
-    assert.equal(result.node("visitorNote").textContent, "Latest backed-up totals");
+    assert.equal(result.node("visitorNote").textContent, "Visit not confirmed · Latest backed-up totals");
     assert.equal(result.node("visitorRetry").hidden, false);
     vm.runInContext('setLanguage("zh")', result.context);
-    assert.equal(result.node("visitorNote").textContent, "最近备份总数");
+    assert.equal(result.node("visitorNote").textContent, "本次访问未确认 · 最近备份总数");
+});
+
+test("older embedded browsers generate valid UUIDs without randomUUID", async () => {
+    const result = page({ api: "https://counter.example", legacyCrypto: true, fetchImpl: async () => ({ ok: true, json: async () => ({ uv: 20, pv: 46, includesHistory: true }) }) });
+    await flush();
+    const ids = JSON.parse(result.requests[0].options.body);
+    for (const id of Object.values(ids)) assert.match(id, /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/);
+    assert.equal(result.node("visitorNote").textContent, "This visit recorded");
 });
 
 test("D1 rejects wrong-source and lower snapshot totals", async () => {
