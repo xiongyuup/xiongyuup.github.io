@@ -1120,7 +1120,8 @@
                 visitorRetry: "Retry",
                 visitorHistory: "Includes earlier visits",
                 visitorCached: "Last recorded totals",
-                visitorHistoryDetail: "Includes 19 earlier visitors and 45 views. Visitors are an estimate: repeat visitors across services cannot be deduplicated.",
+                visitorSnapshot: "Latest backed-up totals",
+                visitorHistoryDetail: "Includes 19 earlier visitors and 45 views. Visitors are estimated from browser identifiers; blocked requests cannot be counted. Backup totals are not live counts.",
                 metricPapers: "papers and manuscripts",
                 metricProjects: "research projects",
                 metricRank: "master's program rank",
@@ -1201,7 +1202,8 @@
                 visitorRetry: "重试",
                 visitorHistory: "含历史记录",
                 visitorCached: "上次记录（含历史）",
-                visitorHistoryDetail: "含历史 19 位访客、45 次浏览；跨服务的重复访客无法去重，累计访客数为估算值。",
+                visitorSnapshot: "最近备份总数",
+                visitorHistoryDetail: "含历史 19 位访客、45 次浏览；访客数按浏览器标识估算，网络拦截的请求无法计入，备份总数不是实时统计。",
                 metricPapers: "论文与投稿",
                 metricProjects: "科研项目",
                 metricRank: "硕士专业排名",
@@ -1658,11 +1660,12 @@
         let visitorCounts = null;
         // Historical totals confirmed by the site owner on 2026-10-06, before the service migration.
         const visitorHistory = Object.freeze({ uv: 19, pv: 45 });
-        // Set only after the owned database has been deployed and the existing totals imported.
-        const visitorApi = "";
+        // The owned database includes the confirmed history; do not add it again.
+        const visitorApi = "https://xiongyu-homepage-counter.xiongyu-homepage-counter.workers.dev";
         const visitorCacheKey = visitorApi ? `visitor-counts:d1:${visitorApi}` : "visitor-counts:busuanzi.cc:2026-10-06";
         let visitorEventId = null;
         let visitorIdentifier = null;
+        let visitorSnapshotAt = null;
 
         function renderText(lang) {
             const t = translations[lang];
@@ -1812,15 +1815,33 @@
             const note = document.getElementById("visitorNote");
             note.textContent = visitorState === "error" && !visitorCounts
                 ? `${t.visitorHistory} · ${t.visitorUnavailable}`
+                : visitorState === "snapshot" ? t.visitorSnapshot
                 : visitorCounts && visitorState !== "ready" ? t.visitorCached : t.visitorHistory;
-            note.title = t.visitorHistoryDetail;
+            note.title = visitorState === "snapshot" && visitorSnapshotAt
+                ? `${t.visitorHistoryDetail} ${visitorSnapshotAt}` : t.visitorHistoryDetail;
             document.getElementById("visitorUvValue").title = t.visitorHistoryDetail;
             document.getElementById("visitorCounter").setAttribute("aria-busy", String(visitorState === "loading"));
-            document.getElementById("visitorRetry").hidden = visitorState !== "error";
+            document.getElementById("visitorRetry").hidden = !["error", "snapshot"].includes(visitorState);
         }
 
         function validVisitorCounts(counts) {
-            return counts && [counts.uv, counts.pv].every((value) => Number.isSafeInteger(value) && value >= 0);
+            return counts && [counts.uv, counts.pv].every((value) => Number.isSafeInteger(value) && value >= 0) && counts.pv >= counts.uv;
+        }
+
+        async function loadVisitorSnapshot() {
+            if (!visitorApi) return;
+            const response = await fetch("visitor-totals.json", {
+                credentials: "omit", cache: "no-store", signal: AbortSignal.timeout(5000)
+            });
+            if (!response.ok) throw new Error("Visitor snapshot unavailable");
+            const snapshot = await response.json();
+            if (snapshot.api !== visitorApi || snapshot.includesHistory !== true || !validVisitorCounts(snapshot)
+                || snapshot.uv < visitorHistory.uv || snapshot.pv < visitorHistory.pv
+                || !Number.isFinite(Date.parse(snapshot.updatedAt))) throw new Error("Invalid visitor snapshot");
+            if (visitorCounts && (snapshot.uv < visitorCounts.uv || snapshot.pv < visitorCounts.pv)) return;
+            visitorCounts = { uv: snapshot.uv, pv: snapshot.pv };
+            visitorSnapshotAt = snapshot.updatedAt;
+            visitorState = "snapshot";
         }
 
         function ownedVisitPayload() {
@@ -1891,6 +1912,7 @@
                 }
             } catch {
                 visitorState = "error";
+                try { await loadVisitorSnapshot(); } catch {}
             } finally {
                 window.clearTimeout(timeout);
                 renderVisitorCounter();

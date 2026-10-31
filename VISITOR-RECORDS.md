@@ -68,3 +68,21 @@ counter continues operating. Do not describe local tests as an active deployment
 - The old provider returned HTTP 502 during migration checks. Its current raw
   counts could not be recovered; do not treat the 19/45 baseline as a complete
   record of visits after 2026-10-06.
+
+## Cutover On 2026-10-31
+
+- The first manual GitHub backup workflow run succeeded:
+  https://github.com/xiongyuup/xiongyuup.github.io/actions/runs/41185637047
+- Its encrypted backup was fetched and independently decrypted and restored on
+  the owner's computer: 19 UV / 45 PV, matching the confirmed baseline.
+- Automatic encrypted backups are enabled daily at 02:30 Asia/Shanghai.
+- The read-only endpoint health check passed from GitHub's runner. The current
+  local network still cannot reach workers.dev; no network setting was changed.
+- The homepage now uses the owned API. It does not add 19/45 a second time.
+- If that API is unreachable, the page can show `visitor-totals.json` or a newer
+  local cached value. This fallback does not record blocked visits. The public
+  snapshot can be older than the latest encrypted backup while Pages publication
+  is pending. The backup workflow explicitly requests that publication after
+  pushing its bot commit.
+- The last confirmed old-provider baseline is the only history imported. No
+  unverified later provider totals have been invented or added.

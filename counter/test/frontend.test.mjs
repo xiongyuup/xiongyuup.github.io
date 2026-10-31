@@ -29,10 +29,10 @@ function page({ api = "", cached, fetchImpl, storageBlocked = false }) {
                 setItem(key, value) { if (storageBlocked) throw new Error("Blocked"); storage.set(key, value); }
             }
         },
-        crypto: webcrypto, URL, Intl, AbortController, Date,
+        crypto: webcrypto, URL, Intl, AbortController, AbortSignal, Date,
         fetch: async (url, options) => { requests.push({ url, options }); return fetchImpl(url, options); }
     });
-    vm.runInContext(source.replace('const visitorApi = "";', `const visitorApi = ${JSON.stringify(api)};`), context);
+    vm.runInContext(source.replace(/const visitorApi = "[^"]*";/, `const visitorApi = ${JSON.stringify(api)};`), context);
     return { node, requests, storage, context };
 }
 
@@ -48,12 +48,14 @@ test("owned totals include history once; retries reuse identifiers and language 
     await result.node("visitorRetry").handlers.click();
     assert.equal(result.node("visitorUvValue").textContent, "25");
     assert.equal(result.node("visitorPvValue").textContent, "62");
-    assert.equal(result.requests[0].options.body, result.requests[1].options.body);
-    assert.equal(result.requests[1].url, "https://counter.example/visit");
-    assert.equal(result.requests[1].options.headers["Content-Type"], "application/json");
+    const visits = result.requests.filter((request) => request.url.endsWith("/visit"));
+    assert.equal(visits.length, 2);
+    assert.equal(visits[0].options.body, visits[1].options.body);
+    assert.equal(visits[1].url, "https://counter.example/visit");
+    assert.equal(visits[1].options.headers["Content-Type"], "application/json");
     assert.ok(result.storage.get("homepage-visitor-id:v1"));
     vm.runInContext('setLanguage("zh")', result.context);
-    assert.equal(result.requests.length, 2);
+    assert.equal(result.requests.filter((request) => request.url.endsWith("/visit")).length, 2);
     assert.equal(result.node("visitorPvValue").textContent, "62");
 });
 
@@ -74,4 +76,35 @@ test("D1 keeps cached totals on outage and works without browser storage", async
     const blocked = page({ api, storageBlocked: true, fetchImpl: async () => ({ ok: true, json: async () => ({ uv: 31, pv: 81, includesHistory: true }) }) });
     await flush();
     assert.equal(blocked.node("visitorPvValue").textContent, "81");
+});
+
+test("D1 falls back to verified same-site backup totals without double-adding history", async () => {
+    const api = "https://counter.example";
+    const result = page({ api, fetchImpl: async (url) => {
+        if (url !== "visitor-totals.json") throw new Error("API blocked");
+        return { ok: true, json: async () => ({ uv: 24, pv: 60, api, includesHistory: true, updatedAt: "2026-10-31T08:41:48.536Z" }) };
+    } });
+    await flush();
+    assert.equal(result.node("visitorUvValue").textContent, "24");
+    assert.equal(result.node("visitorPvValue").textContent, "60");
+    assert.equal(result.node("visitorNote").textContent, "Latest backed-up totals");
+    assert.equal(result.node("visitorRetry").hidden, false);
+    vm.runInContext('setLanguage("zh")', result.context);
+    assert.equal(result.node("visitorNote").textContent, "最近备份总数");
+});
+
+test("D1 rejects wrong-source and lower snapshot totals", async () => {
+    for (const snapshot of [
+        { uv: 40, pv: 100, api: "https://wrong.example" },
+        { uv: 20, pv: 50, api: "https://counter.example" }
+    ]) {
+        const api = "https://counter.example";
+        const result = page({ api, cached: [[`visitor-counts:d1:${api}`, JSON.stringify({ uv: 30, pv: 80 })]], fetchImpl: async (url) => {
+            if (url !== "visitor-totals.json") throw new Error("Blocked");
+            return { ok: true, json: async () => ({ ...snapshot, includesHistory: true, updatedAt: "2026-10-31T08:41:48.536Z" }) };
+        } });
+        await flush();
+        assert.equal(result.node("visitorUvValue").textContent, "30");
+        assert.equal(result.node("visitorPvValue").textContent, "80");
+    }
 });

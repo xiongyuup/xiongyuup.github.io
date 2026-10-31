@@ -1,13 +1,14 @@
 # Owned Visitor Counter
 
 Status (2026-10-31): the owner completed device authorization. The Worker and D1
-database have been deployed, the 19/45 baseline has been seeded, and a first
-remote SQL export has been encrypted and restore-verified. The current network
-cannot reach the workers.dev endpoint, so the homepage has NOT switched to D1;
-`visitorApi` in `index.html` remains empty. Production visit counting and public
-endpoint checks are still pending. GitHub resource variables and the encryption
-secret are configured, but automatic backups remain disabled until the scoped
-Cloudflare backup token and a successful first workflow run are verified.
+database have been deployed and the 19/45 baseline has been seeded. The GitHub
+endpoint health check and first scheduled-workflow manual backup run both passed.
+The encrypted backup was pulled back to the owner's computer and decrypted and
+restore-verified using the separately stored recovery key. Automatic daily backups
+are enabled. The homepage now uses the owned API. Where workers.dev cannot be
+reached, it shows cached or same-site backup totals and offers retry. Such visits
+are NOT recorded by the database until a request actually reaches it; the snapshot
+is a display fallback, not an alternative write endpoint.
 
 ## Data
 
@@ -61,6 +62,14 @@ checks integrity and row counts, verifies the counting trigger, encrypts it,
 decrypts it and repeats the restore check. Only verified encrypted SQL and its
 manifest enter Git. Plain SQL and identities are never committed. The repository
 can be public because the dump uses authenticated AES-256-GCM encryption.
+
+After verification, the backup workflow also updates `visitor-totals.json` with
+only aggregate UV/PV, a timestamp and the API origin. GitHub Pages serves this
+file as a read-only fallback when the browser cannot reach the API. It contains
+no visitor identifiers. Because an Actions bot commit does not automatically
+trigger another Pages build, the workflow explicitly requests a Pages build after
+pushing the snapshot. Publication can still be delayed or fail independently of
+the stored backup; the frontend labels it as backup totals, never as live data.
 
 In repository Settings > Secrets and variables > Actions configure:
 

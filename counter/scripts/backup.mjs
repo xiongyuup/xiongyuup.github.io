@@ -48,4 +48,11 @@ const directory = fileURLToPath(new URL("../../counter-backups/", import.meta.ur
 await mkdir(directory, { recursive: true });
 await writeFile(path.join(directory, `${name}.sql.enc`), encrypted.ciphertext, { flag: "wx" });
 await writeFile(path.join(directory, `${name}.json`), JSON.stringify({ ...encrypted.metadata, createdAt, totals }, null, 2) + "\n", { flag: "wx" });
+const api = process.env.VISITOR_COUNTER_URL;
+if (api) {
+    const url = new URL(api);
+    if (url.protocol !== "https:" || url.origin !== api) throw new Error("VISITOR_COUNTER_URL must be an HTTPS origin");
+    const snapshot = { ...totals, includesHistory: true, updatedAt: createdAt, api };
+    await writeFile(fileURLToPath(new URL("../../visitor-totals.json", import.meta.url)), JSON.stringify(snapshot, null, 2) + "\n");
+}
 console.log(`Backup verified and encrypted: ${name}; visitors=${totals.uv}, views=${totals.pv}`);
