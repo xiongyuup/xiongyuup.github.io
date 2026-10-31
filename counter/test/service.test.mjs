@@ -21,6 +21,10 @@ test("academic service lists only the six confirmed venues, with full names and 
     assert.equal((section.match(/<li>/g) || []).length, 6);
     assert.match(html, /href="#service" data-i18n="navService"/);
     assert.match(section, /aria-labelledby="serviceTitle"/);
+    const sections = [...html.matchAll(/<section[^>]+id="([^"]+)"/g)].map((match) => match[1]);
+    assert.equal(sections[sections.indexOf("service") + 1], "education");
+    const navigation = html.match(/<nav[\s\S]*?<\/nav>/)[0];
+    assert.ok(navigation.indexOf('href="#service"') < navigation.indexOf('href="#education"'));
 });
 
 test("academic service navigation and section labels are available in both languages", () => {
