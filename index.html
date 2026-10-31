@@ -389,6 +389,7 @@
             width: var(--wrap);
             min-height: 60px;
             margin: 0 auto;
+            padding-right: 148px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -713,6 +714,53 @@
             margin: 8px 0;
         }
 
+        .service-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 28px 56px;
+        }
+
+        .service-group {
+            min-width: 0;
+        }
+
+        .service-group h3 {
+            margin: 0 0 16px;
+            font-size: 1.1rem;
+        }
+
+        .service-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .service-list li {
+            margin: 0;
+            padding: 16px 0;
+            border-top: 1px solid rgba(16, 42, 61, 0.14);
+        }
+
+        .service-list a {
+            color: var(--navy);
+            font-weight: 650;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
+        }
+
+        .service-list a:hover,
+        .service-list a:focus-visible {
+            color: var(--copper);
+        }
+
+        .service-list abbr {
+            color: var(--muted);
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
         .skill-grid {
             display: grid;
             grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -785,6 +833,7 @@
             .timeline,
             .paper-list,
             .project-grid,
+            .service-grid,
             .skill-grid {
                 grid-template-columns: 1fr;
             }
@@ -804,7 +853,7 @@
             .nav-inner {
                 align-items: flex-start;
                 flex-direction: column;
-                padding: 12px 0;
+                padding: 12px 84px 12px 0;
             }
 
             .nav-links {
@@ -817,6 +866,7 @@
             }
 
             .visitor-counter {
+                position: absolute;
                 top: 60px;
                 right: 12px;
                 width: 148px;
@@ -890,6 +940,7 @@
                 <a href="#education" data-i18n="navEducation">Education</a>
                 <a href="#publications" data-i18n="navPublications">Publications</a>
                 <a href="#projects" data-i18n="navProjects">Projects</a>
+                <a href="#service" data-i18n="navService">Academic Service</a>
                 <a href="#skills" data-i18n="navSkills">Skills</a>
             </div>
         </div>
@@ -978,6 +1029,36 @@
         </div>
     </section>
 
+    <section class="band" id="service" aria-labelledby="serviceTitle">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="kicker" data-i18n="serviceKicker">Service</p>
+                <div>
+                    <h2 id="serviceTitle" data-i18n="serviceTitle">Academic Service</h2>
+                    <p class="lead" data-i18n="serviceLead">Peer reviewer for the following journals and conferences.</p>
+                </div>
+            </div>
+            <div class="service-grid">
+                <div class="service-group">
+                    <h3 data-i18n="serviceJournals">Journal Reviewer</h3>
+                    <ul class="service-list">
+                        <li><a href="https://www.grss-ieee.org/publications/transactions-on-geoscience-remote-sensing/" target="_blank" rel="noopener">IEEE Transactions on Geoscience and Remote Sensing</a> <abbr title="IEEE Transactions on Geoscience and Remote Sensing">(TGRS)</abbr></li>
+                        <li><a href="https://ieee-aess.org/publications/taes" target="_blank" rel="noopener">IEEE Transactions on Aerospace and Electronic Systems</a> <abbr title="IEEE Transactions on Aerospace and Electronic Systems">(TAES)</abbr></li>
+                        <li><a href="https://www.grss-ieee.org/publications/geoscience-and-remote-sensing-letters/" target="_blank" rel="noopener">IEEE Geoscience and Remote Sensing Letters</a> <abbr title="IEEE Geoscience and Remote Sensing Letters">(GRSL)</abbr></li>
+                        <li><a href="https://ieee-sensors.org/ieee-sensors-journal/" target="_blank" rel="noopener">IEEE Sensors Journal</a></li>
+                    </ul>
+                </div>
+                <div class="service-group">
+                    <h3 data-i18n="serviceConferences">Conference Reviewer</h3>
+                    <ul class="service-list">
+                        <li><a href="https://ieee-sensors.org/conferences/" target="_blank" rel="noopener">IEEE SENSORS Conference</a></li>
+                        <li><a href="https://ieeeicassp.org/" target="_blank" rel="noopener">IEEE International Conference on Acoustics, Speech, and Signal Processing</a> <abbr title="IEEE International Conference on Acoustics, Speech, and Signal Processing">(ICASSP)</abbr></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="band dark" id="skills">
         <div class="wrap">
             <div class="section-head">
@@ -1042,6 +1123,7 @@
                 navEducation: "Education",
                 navPublications: "Publications",
                 navProjects: "Projects",
+                navService: "Academic Service",
                 navSkills: "Skills",
                 profileKicker: "Profile",
                 profileTitle: "Radar algorithms shaped by physics, data, and deployable systems.",
@@ -1068,6 +1150,11 @@
                 projectsTitle: "Research Projects",
                 projectsLead: "Representative research and engineering experiences, including classified projects shown with the original confidential placeholders.",
                 skillsKicker: "Toolbox",
+                serviceKicker: "Service",
+                serviceTitle: "Academic Service",
+                serviceLead: "Peer reviewer for the following journals and conferences.",
+                serviceJournals: "Journal Reviewer",
+                serviceConferences: "Conference Reviewer",
                 skillsTitle: "Skills",
                 skillsLead: "Programming, scientific computing, radar simulation, embedded hardware, and signal/image processing.",
                 skill1Title: "Programming",
@@ -1117,6 +1204,7 @@
                 navEducation: "教育经历",
                 navPublications: "科研成果",
                 navProjects: "项目经历",
+                navService: "学术服务",
                 navSkills: "专业技能",
                 profileKicker: "个人简介",
                 profileTitle: "面向物理机理、数据建模与工程落地的雷达算法研究。",
@@ -1143,6 +1231,11 @@
                 projectsTitle: "项目经历",
                 projectsLead: "覆盖仿真建模、信号处理、平台部署与工程验证的代表性经历，涉密项目保留原始 XXXX 占位表述。",
                 skillsKicker: "专业能力",
+                serviceKicker: "学术服务",
+                serviceTitle: "审稿经历",
+                serviceLead: "担任以下学术期刊与国际会议的审稿人。",
+                serviceJournals: "期刊审稿",
+                serviceConferences: "会议审稿",
                 skillsTitle: "技能",
                 skillsLead: "涵盖编程、科学计算、雷达仿真、嵌入式硬件与图像/信号处理。",
                 skill1Title: "编程语言",
