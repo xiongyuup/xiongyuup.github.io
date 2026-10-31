@@ -51,3 +51,20 @@ Cloudflare registration and authentication, the remote deployment, the final
 busuanzi.cc raw-count import and the first remote backup must happen before
 cutover. Until those checks pass, `visitorApi` stays empty and the current live
 counter continues operating. Do not describe local tests as an active deployment.
+
+## Deployment Progress On 2026-10-31
+
+- Device-code OAuth completed successfully, without a localhost callback.
+- The owner account's D1 database and Worker were created and deployed.
+- The remote database contains the confirmed 19 UV / 45 PV baseline.
+- A first remote SQL export was encrypted and restored in memory successfully.
+  Its encrypted dump and manifest are retained in `counter-backups/`.
+- The recovery encryption key is retained separately on the owner's computer,
+  outside this repository, and configured as a GitHub Actions secret.
+- GitHub account/database variables are configured. Scheduled backups remain
+  disabled until a scoped Cloudflare token is supplied and the first run passes.
+- `visitorApi` is still empty: requests to the workers.dev endpoint fail from the
+  current network. A reachable endpoint must be verified before changing the site.
+- The old provider returned HTTP 502 during migration checks. Its current raw
+  counts could not be recovered; do not treat the 19/45 baseline as a complete
+  record of visits after 2026-10-06.

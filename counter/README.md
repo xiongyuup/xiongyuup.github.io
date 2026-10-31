@@ -1,9 +1,13 @@
 # Owned Visitor Counter
 
-Status: implemented and tested locally. Not deployed until the owner registers
-and signs in to Cloudflare. The homepage continues to use its existing provider
-while `visitorApi` in `index.html` is empty. Automatic backups stay disabled until
-all credentials and settings below have been configured and verified.
+Status (2026-10-31): the owner completed device authorization. The Worker and D1
+database have been deployed, the 19/45 baseline has been seeded, and a first
+remote SQL export has been encrypted and restore-verified. The current network
+cannot reach the workers.dev endpoint, so the homepage has NOT switched to D1;
+`visitorApi` in `index.html` remains empty. Production visit counting and public
+endpoint checks are still pending. GitHub resource variables and the encryption
+secret are configured, but automatic backups remain disabled until the scoped
+Cloudflare backup token and a successful first workflow run are verified.
 
 ## Data
 
@@ -21,8 +25,13 @@ all credentials and settings below have been configured and verified.
 ## Deploy After Account Registration
 
 Run commands in `counter/`. Register and verify the account in the owner's own
-browser, then run `npx wrangler login --browser=false --scopes account:read user:read workers:write workers_scripts:write d1:write` and open its authorization
-URL in that same browser. Do not send passwords, OTPs or API tokens in chat.
+browser, then run `npx wrangler login --device --browser=false --scopes account:read user:read workers:write workers_scripts:write d1:write`.
+Open the printed Cloudflare verification URL in that same browser and enter the
+short device code. Keep Wrangler running until it confirms success. This flow
+does not redirect to localhost and avoids refused connections when a local
+callback listener is unreachable or has timed out. If the device code expires,
+start a new login; do not reuse the old code. Do not send passwords, email OTPs
+or API tokens in chat.
 
 1. `npm ci`
 2. `npx wrangler whoami`
@@ -77,6 +86,13 @@ their manifests as well.
 
 The initial deployment is incomplete until the remote database, imported
 baseline, first backup, and restore check have all been verified.
+
+The optional `Check Visitor Counter` workflow checks `/stats` from GitHub without
+creating page views. Set the repository variable `VISITOR_COUNTER_URL` to the
+verified API origin to enable it. It runs daily at 03:15 Asia/Shanghai and can
+also be dispatched manually. Check Actions notifications for failures; a
+successful check from GitHub does not prove that every visitor's network can
+reach the endpoint.
 
 ## Restore Without Overwriting Production
 

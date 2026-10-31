@@ -1,0 +1,32 @@
+name: Check Visitor Counter
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 19 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  health:
+    if: vars.VISITOR_COUNTER_URL != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Check read-only counter endpoint
+        env:
+          COUNTER_URL: ${{ vars.VISITOR_COUNTER_URL }}
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          const url = new URL('/stats', process.env.COUNTER_URL);
+          assert.equal(url.protocol, 'https:');
+          const response = await fetch(url, { signal: AbortSignal.timeout(30000) });
+          assert.equal(response.status, 200, 'Counter must return HTTP 200');
+          const data = await response.json();
+          assert.equal(data.includesHistory, true);
+          assert.ok(Number.isSafeInteger(data.uv) && data.uv >= 19);
+          assert.ok(Number.isSafeInteger(data.pv) && data.pv >= 45 && data.pv >= data.uv);
+          console.log(`Counter healthy: visitors=${data.uv}, views=${data.pv}`);
+          NODE
