@@ -2,7 +2,9 @@
   "name": "xiongyu-homepage-counter",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22.13.0" },
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "scripts": {
     "test": "node --test test/*.test.mjs",
     "dev": "wrangler dev",
@@ -10,5 +12,10 @@
     "backup": "node scripts/backup.mjs",
     "restore-check": "node scripts/restore-check.mjs"
   },
-  "devDependencies": { "wrangler": "4.147.0" }
+  "devDependencies": {
+    "wrangler": "4.147.0"
+  },
+  "dependencies": {
+    "bowser": "2.12.1"
+  }
 }

@@ -1,3 +1,5 @@
+import { adminResponse, visitDetails, purgeDetails } from "./admin.mjs";
+
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 const TOTALS_SQL = `SELECT
@@ -27,8 +29,12 @@ async function hashVisitor(identifier) {
 }
 
 export default {
+    async scheduled(event, env) {
+        await purgeDetails(env);
+    },
     async fetch(request, env) {
         const path = new URL(request.url).pathname;
+        if (path === "/admin" || path.startsWith("/admin/")) return adminResponse(request, env);
         const origin = request.headers.get("Origin");
         if (origin && origin !== env.SITE_ORIGIN) return response({ error: "Origin not allowed" }, 403);
         const cors = origin === env.SITE_ORIGIN ? origin : null;
@@ -62,13 +68,17 @@ export default {
                 return response({ error: "Invalid visit identifier" }, 400, cors);
             }
             const visitorKey = await hashVisitor(body.visitorId);
+            const details = visitDetails(request);
+            const now = new Date().toISOString();
             // The insert, trigger and returned totals share one transaction; retrying an event is harmless.
             const results = await env.DB.batch([
                 env.DB.prepare("INSERT OR IGNORE INTO page_views (event_id, visitor_key, created_at) VALUES (?, ?, ?)")
-                    .bind(body.eventId.toLowerCase(), visitorKey, new Date().toISOString()),
+                    .bind(body.eventId.toLowerCase(), visitorKey, now),
+                env.DB.prepare("INSERT OR IGNORE INTO visit_details (event_id, created_at, ip_mask, device, os, browser, country) VALUES (?, ?, ?, ?, ?, ?, ?)")
+                    .bind(body.eventId.toLowerCase(), now, details.ip, details.device, details.os, details.browser, details.country),
                 env.DB.prepare(TOTALS_SQL)
             ]);
-            return response({ ...results[1].results[0], includesHistory: true }, 200, cors);
+            return response({ ...results[2].results[0], includesHistory: true }, 200, cors);
         } catch {
             return response({ error: "Statistics temporarily unavailable" }, 503, cors);
         }

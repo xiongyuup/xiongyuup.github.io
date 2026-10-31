@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { backupKey, decryptSql, encryptSql, validateSql } from "./backup-lib.mjs";
@@ -18,7 +18,9 @@ for (let attempt = 0; attempt < 60; attempt++) {
     const response = await fetch(endpoint, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-        body: JSON.stringify({ output_format: "polling", ...(bookmark ? { current_bookmark: bookmark } : {}) }),
+        body: JSON.stringify({ output_format: "polling", dump_options: {
+            tables: ["historical_counts", "visitors", "page_views", "counters"]
+        }, ...(bookmark ? { current_bookmark: bookmark } : {}) }),
         signal: AbortSignal.timeout(30000)
     });
     if (!response.ok) throw new Error(`Database export failed (${response.status})`);
@@ -37,6 +39,8 @@ for (let attempt = 0; attempt < 60; attempt++) {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 }
 if (!sql) throw new Error("Database export timed out");
+// Keep IP/device details out of permanent archives; restore an empty detail table.
+sql += "\n" + await readFile(new URL("../migrations/0002_visit_details.sql", import.meta.url), "utf8");
 
 const totals = validateSql(sql);
 const encrypted = encryptSql(sql, key);

@@ -14,8 +14,9 @@ is a display fallback, not an alternative write endpoint.
 
 - D1 owns the durable counters and anonymous browser identities.
 - The initial migration seeds exactly 19 visitors and 45 views, once.
-- Browser identities are random UUIDs. The database stores SHA-256 hashes, not IP
-  addresses or user-agent strings. Clearing browser storage or using another
+- Browser identities are random UUIDs. The database stores SHA-256 hashes, plus
+  separate short-lived masked IP ranges and parsed device details, never full IP
+  addresses or raw user-agent strings. Clearing browser storage or using another
   device creates a new visitor. Historical cross-provider UV remains an estimate.
 - Each page load gets an event UUID. Retry sends the same UUID and cannot count
   the visit twice. Refreshing the page creates a new event and increases PV.
@@ -57,11 +58,16 @@ or API tokens in chat.
 
 ## Independent Daily Backups
 
-The GitHub Actions workflow exports the full D1 SQL, restores it in memory,
+The GitHub Actions workflow exports durable counting tables, restores them in memory,
 checks integrity and row counts, verifies the counting trigger, encrypts it,
 decrypts it and repeats the restore check. Only verified encrypted SQL and its
 manifest enter Git. Plain SQL and identities are never committed. The repository
 can be public because the dump uses authenticated AES-256-GCM encryption.
+
+IP/device rows in `visit_details` are explicitly excluded from export. The
+backup adds that table's empty schema, so recovery preserves lifetime counting
+but does not recover IP/device history. Cloudflare's own short Time Travel
+window is independent of this Git backup policy and may retain earlier states.
 
 After verification, the backup workflow also updates `visitor-totals.json` with
 only aggregate UV/PV, a timestamp and the API origin. GitHub Pages serves this
@@ -134,3 +140,26 @@ npm run dev
 
 Reference: https://developers.cloudflare.com/d1/reference/time-travel/
 Reference: https://developers.cloudflare.com/api/resources/d1/subresources/database/methods/export/
+
+## Owner Dashboard
+
+The Worker serves `/admin`; `/admin/api` requires the `ADMIN_TOKEN` Worker secret.
+It is a cryptographically random access key, not an API token from Cloudflare or
+GitHub. Never commit it, put it in a URL, or send screenshots showing it. The
+browser keeps it only in memory and clears it on logout or refresh. The dashboard
+is same-origin, has no third-party scripts, sends no CORS allowance for admin
+data, and disallows framing. To rotate it, use `wrangler secret put ADMIN_TOKEN
+--config wrangler.local.json` and securely retain the new random key separately.
+
+For this deployment, the owner's local key file is outside the repository in
+`C:/Users/xiongyu/.codex/visitor-counter-recovery/admin-key.txt`. It is not the
+backup encryption key. The homepage footer links to the protected dashboard.
+
+New visits record time, masked IPv4 /24 or IPv6 /48, browser family, OS family,
+device category and country code. These are approximate client/network signals,
+not a way to identify a person. Previous visits have no backfilled details. A
+daily Worker cron clears IP/device detail rows older than 30 days; time filters
+never expose older rows. Lifetime anonymized event/visitor rows and cumulative
+totals are preserved. The public homepage discloses this policy. The default
+workers.dev hostname can still be inaccessible on some networks, including the
+current owner's network; neither login nor counting can bypass that limitation.

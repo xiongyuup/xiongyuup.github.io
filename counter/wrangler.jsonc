@@ -4,6 +4,7 @@
   "main": "src/worker.mjs",
   "compatibility_date": "2026-10-06",
   "workers_dev": true,
+  "triggers": { "crons": ["45 19 * * *"] },
   "vars": {
     "SITE_ORIGIN": "https://xiongyuup.github.io"
   },

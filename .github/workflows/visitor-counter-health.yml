@@ -29,4 +29,11 @@ jobs:
           assert.ok(Number.isSafeInteger(data.uv) && data.uv >= 19);
           assert.ok(Number.isSafeInteger(data.pv) && data.pv >= 45 && data.pv >= data.uv);
           console.log(`Counter healthy: visitors=${data.uv}, views=${data.pv}`);
+          const locked = await fetch(new URL('/admin/api', url), { signal: AbortSignal.timeout(30000) });
+          assert.equal(locked.status, 401, 'Admin data must require authentication');
+          assert.equal(locked.headers.get('Access-Control-Allow-Origin'), null);
+          const admin = await fetch(new URL('/admin', url), { signal: AbortSignal.timeout(30000) });
+          assert.equal(admin.status, 200);
+          assert.ok(admin.headers.get('Content-Security-Policy')?.includes("frame-ancestors 'none'"));
+          console.log('Admin page available; anonymous data access denied.');
           NODE

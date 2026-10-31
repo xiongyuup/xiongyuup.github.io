@@ -5,17 +5,20 @@ import { readFileSync } from "node:fs";
 import { randomBytes, randomUUID } from "node:crypto";
 import worker from "../src/worker.mjs";
 import { decryptSql, encryptSql, validateSql } from "../scripts/backup-lib.mjs";
+import { maskedIp, purgeDetails } from "../src/admin.mjs";
 
 const schema = readFileSync(new URL("../migrations/0001_counter.sql", import.meta.url), "utf8");
 
 function database() {
     const sqlite = new DatabaseSync(":memory:");
     sqlite.exec(schema);
+    sqlite.exec(readFileSync(new URL("../migrations/0002_visit_details.sql", import.meta.url), "utf8"));
     const prepare = (sql) => {
         let args = [];
         return {
             bind(...values) { args = values; return this; },
             async first() { return sqlite.prepare(sql).get(...args); },
+            async run() { return this.execute(); },
             execute() {
                 const stmt = sqlite.prepare(sql);
                 if (sql.trim().startsWith("SELECT")) return { results: stmt.all(...args) };
@@ -125,5 +128,56 @@ test("encrypted backup restores real records; tampering and missing history fail
         assert.throws(() => decryptSql(damaged, encrypted.metadata, key));
         assert.throws(() => validateSql("CREATE TABLE unrelated (id INTEGER)"));
         assert.throws(() => validateSql(sql + "\nUPDATE counters SET pv = 99;"));
+    } finally { db.sqlite.close(); }
+});
+
+test("admin data is private, input is bounded, and page has a restrictive CSP", async () => {
+    const db = database();
+    const env = { DB: db, SITE_ORIGIN: origin, ADMIN_TOKEN: "a".repeat(48) };
+    try {
+        const anonymous = await worker.fetch(new Request("https://counter.example/admin/api"), env);
+        assert.equal(anonymous.status, 401);
+        assert.equal(anonymous.headers.get("Access-Control-Allow-Origin"), null);
+        const request = (suffix = "", key = env.ADMIN_TOKEN, requestOrigin) => worker.fetch(new Request("https://counter.example/admin/api" + suffix, {
+            headers: { Authorization: "Bearer " + key, ...(requestOrigin ? { Origin: requestOrigin } : {}) }
+        }), env);
+        assert.equal((await request("", "wrong")).status, 401);
+        assert.equal((await request("?page=-1")).status, 400);
+        assert.equal((await request("?days=365")).status, 400);
+        assert.equal((await request("", env.ADMIN_TOKEN, "https://attacker.example")).status, 403);
+        const valid = await request();
+        assert.equal(valid.status, 200);
+        const data = await valid.json();
+        assert.deepEqual(data.totals, { uv: 19, pv: 45 });
+        assert.deepEqual(data.rows, []);
+        const html = await worker.fetch(new Request("https://counter.example/admin"), env);
+        assert.match(html.headers.get("Content-Security-Policy"), /frame-ancestors 'none'/);
+        assert.equal(html.headers.get("Cache-Control"), "no-store");
+        assert.ok(!(await html.text()).includes(env.ADMIN_TOKEN));
+    } finally { db.sqlite.close(); }
+});
+
+test("details redact IPs, parse devices, deduplicate, and expire without changing totals", async () => {
+    const db = database();
+    try {
+        assert.equal(maskedIp("192.0.2.54"), "192.0.2.0/24");
+        assert.equal(maskedIp("2001:db8:abcd:1234::1"), "2001:db8:abcd::/48");
+        assert.equal(maskedIp("::1"), "0:0:0::/48");
+        assert.equal(maskedIp("not-an-ip"), "Unknown");
+        const body = JSON.stringify({ visitorId: randomUUID(), eventId: randomUUID() });
+        const request = () => new Request("https://counter.example/visit", { method: "POST", headers: {
+            Origin: origin, "Content-Type": "application/json", "CF-Connecting-IP": "192.0.2.54",
+            "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1"
+        }, body });
+        for (let i = 0; i < 2; i++) assert.equal((await worker.fetch(request(), { DB: db, SITE_ORIGIN: origin })).status, 200);
+        const detail = db.sqlite.prepare("SELECT * FROM visit_details").get();
+        assert.equal(detail.ip_mask, "192.0.2.0/24");
+        assert.equal(detail.device, "mobile");
+        assert.equal(detail.os, "iOS");
+        assert.equal(db.sqlite.prepare("SELECT COUNT(*) AS n FROM visit_details").get().n, 1);
+        db.sqlite.prepare("UPDATE visit_details SET created_at=?").run(new Date(Date.now() - 31 * 86400000).toISOString());
+        await purgeDetails({ DB: db });
+        assert.equal(db.sqlite.prepare("SELECT COUNT(*) AS n FROM visit_details").get().n, 0);
+        assert.equal(db.sqlite.prepare("SELECT pv FROM counters").get().pv, 1);
     } finally { db.sqlite.close(); }
 });
