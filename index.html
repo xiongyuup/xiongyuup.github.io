@@ -426,6 +426,7 @@
         .band {
             padding: 86px 0;
             overflow: hidden;
+            scroll-margin-top: 80px;
         }
 
         .band.alt {
@@ -811,6 +812,10 @@
         }
 
         @media (max-width: 760px) {
+            .band {
+                scroll-margin-top: 220px;
+            }
+
             :root {
                 --wrap: min(100vw - 28px, 1440px);
             }
