@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "algorithm": "aes-256-gcm",
+  "iv": "L6tDcWwrPXDqV7oP",
+  "tag": "01k0eAOi21JwRxZ3Xla77g==",
+  "sha256": "e0089d8ae21eebe77b73deaa0119f87123737c8e4b0224f1db964eab4472c908",
+  "createdAt": "2026-11-28T01:33:57.868Z",
+  "totals": {
+    "uv": 20,
+    "pv": 54
+  }
+}
